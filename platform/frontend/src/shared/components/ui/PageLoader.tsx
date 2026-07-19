@@ -1,10 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { PaxoraMark } from './PaxoraMark';
+import { UpholdMark } from './UpholdMark';
 
 /**
- * App-wide page loader — the animated PAXORA wordmark on the app background.
+ * App-wide page loader — the animated UPHOLD wordmark on the app background.
  * Used as the Next.js route-level Suspense fallback (loading.tsx) for every page,
  * and as the initial app-boot state, replacing per-page skeletons/spinners.
  *
@@ -19,7 +19,7 @@ export function PageLoader() {
       transition={{ duration: 0.3, ease: 'easeOut' }}
       className="flex min-h-[100dvh] w-full items-center justify-center bg-background"
     >
-      <PaxoraMark size="lg" />
+      <UpholdMark size="lg" />
     </motion.div>
   );
 }

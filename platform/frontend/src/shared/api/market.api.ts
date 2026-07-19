@@ -249,7 +249,7 @@ async function fetchForexFallback(): Promise<NormalizedAsset[]> {
 
 // ── Consumer helpers ──────────────────────────────────────────────────
 
-const CACHE_PREFIX = 'paxora_market_';
+const CACHE_PREFIX = 'uphold_market_';
 const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
 function getCached<T>(key: string): T | null {

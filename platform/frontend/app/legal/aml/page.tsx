@@ -25,7 +25,7 @@ export default function AMLPage() {
             </button>
             <div>
               <Link href="/onboarding" className="inline-block text-xl sm:text-2xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] hover:opacity-90 transition-opacity">
-                PAXORA
+                UPHOLD
               </Link>
               <h1 className="text-xl sm:text-2xl font-black text-foreground leading-tight mt-1" style={{ fontFamily: 'var(--font-outfit)' }}>
                 Anti-Money Laundering Policy
@@ -40,12 +40,12 @@ export default function AMLPage() {
 
             <div className="space-y-5 sm:space-y-6 text-sm sm:text-[15px] text-muted-foreground leading-[1.65] sm:leading-relaxed">
               <p>
-                Paxora Premium (&ldquo;Paxora,&rdquo; &ldquo;the Platform,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to the highest standards of anti-money laundering (AML) and counter-terrorist financing (CTF) compliance. This Anti-Money Laundering Policy (&ldquo;AML Policy&rdquo;) sets forth our comprehensive framework for detecting, preventing, and reporting money laundering and terrorist financing activities in accordance with applicable laws and international standards.
+                UPHOLD Trading (&ldquo;UPHOLD,&rdquo; &ldquo;the Platform,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo; or &ldquo;our&rdquo;) is committed to the highest standards of anti-money laundering (AML) and counter-terrorist financing (CTF) compliance. This Anti-Money Laundering Policy (&ldquo;AML Policy&rdquo;) sets forth our comprehensive framework for detecting, preventing, and reporting money laundering and terrorist financing activities in accordance with applicable laws and international standards.
               </p>
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>1. Policy Statement & Commitment</h2>
-                <p>Paxora Premium maintains a zero-tolerance policy toward money laundering, terrorist financing, and any form of financial crime. We are fully committed to:</p>
+                <p>UPHOLD Trading maintains a zero-tolerance policy toward money laundering, terrorist financing, and any form of financial crime. We are fully committed to:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Complying with all applicable AML/CFT laws, regulations, and guidance in every jurisdiction where we operate</li>
                   <li>Implementing robust internal controls, policies, and procedures to mitigate money laundering and terrorist financing risks</li>
@@ -58,17 +58,17 @@ export default function AMLPage() {
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>2. Scope & Applicability</h2>
                 <p>This AML Policy applies to:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
-                  <li>All directors, officers, employees, and contractors of Paxora Premium</li>
-                  <li>All products, services, and activities offered through the Paxora Premium platform</li>
+                  <li>All directors, officers, employees, and contractors of UPHOLD Trading</li>
+                  <li>All products, services, and activities offered through the UPHOLD Trading platform</li>
                   <li>All users, customers, and counterparties accessing or using our services</li>
-                  <li>All geographic locations and jurisdictions in which Paxora Premium operates or provides services</li>
+                  <li>All geographic locations and jurisdictions in which UPHOLD Trading operates or provides services</li>
                 </ul>
                 <p className="mt-2">This Policy is supplementary to and does not replace any applicable local laws or regulatory requirements. Where local requirements are more stringent, those shall prevail.</p>
               </section>
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>3. AML Compliance Officer & Governance</h2>
-                <p>Paxora Premium has appointed a designated AML Compliance Officer (&ldquo;AMLCO&rdquo;) who holds ultimate responsibility for the implementation and oversight of this AML Policy. The AMLCO reports directly to senior management and the Board of Directors.</p>
+                <p>UPHOLD Trading has appointed a designated AML Compliance Officer (&ldquo;AMLCO&rdquo;) who holds ultimate responsibility for the implementation and oversight of this AML Policy. The AMLCO reports directly to senior management and the Board of Directors.</p>
                 <p className="mt-2">The responsibilities of the AMLCO include, but are not limited to:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Developing, implementing, and maintaining AML/CFT policies, procedures, and internal controls</li>
@@ -82,7 +82,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>4. Customer Due Diligence (CDD)</h2>
-                <p>Paxora Premium implements risk-based Customer Due Diligence procedures for all customers. CDD is conducted at the time of account opening and on an ongoing basis as required.</p>
+                <p>UPHOLD Trading implements risk-based Customer Due Diligence procedures for all customers. CDD is conducted at the time of account opening and on an ongoing basis as required.</p>
                 <p className="mt-2"><strong className="text-foreground">Standard CDD Requirements:</strong></p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Full legal name, date of birth, and nationality</li>
@@ -116,7 +116,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>6. Politically Exposed Persons (PEPs)</h2>
-                <p>Paxora Premium maintains a robust framework for the identification and management of Politically Exposed Persons. Our PEP procedures include:</p>
+                <p>UPHOLD Trading maintains a robust framework for the identification and management of Politically Exposed Persons. Our PEP procedures include:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Screening of all customers against reputable PEP databases at onboarding and on an ongoing basis</li>
                   <li>Application of EDD measures for all identified PEPs, their immediate family members, and close associates</li>
@@ -128,7 +128,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>7. Transaction Monitoring & Surveillance</h2>
-                <p>Paxora Premium operates a comprehensive transaction monitoring system designed to detect and flag potentially suspicious activity in real time and on a post-transaction basis.</p>
+                <p>UPHOLD Trading operates a comprehensive transaction monitoring system designed to detect and flag potentially suspicious activity in real time and on a post-transaction basis.</p>
                 <p className="mt-2"><strong className="text-foreground">Monitoring Parameters:</strong></p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Transaction velocity and volume thresholds</li>
@@ -140,7 +140,7 @@ export default function AMLPage() {
                   <li>Geographic inconsistencies (transactions originating from unexpected locations)</li>
                 </ul>
                 <p className="mt-2"><strong className="text-foreground">Blockchain Analytics:</strong></p>
-                <p>For cryptocurrency transactions, Paxora Premium utilizes advanced blockchain analytics tools to trace the provenance of funds and identify exposure to:</p>
+                <p>For cryptocurrency transactions, UPHOLD Trading utilizes advanced blockchain analytics tools to trace the provenance of funds and identify exposure to:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Mixing services and tumblers</li>
                   <li>Darknet markets and illicit activity</li>
@@ -152,7 +152,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>8. Suspicious Activity Reporting (SAR)</h2>
-                <p>Any employee or officer of Paxora Premium who becomes aware of any activity that may indicate money laundering, terrorist financing, or other financial crime must immediately report their concerns to the AMLCO.</p>
+                <p>Any employee or officer of UPHOLD Trading who becomes aware of any activity that may indicate money laundering, terrorist financing, or other financial crime must immediately report their concerns to the AMLCO.</p>
                 <p className="mt-2"><strong className="text-foreground">Reporting Process:</strong></p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>All potentially suspicious activities are documented and escalated to the AMLCO within 24 hours</li>
@@ -162,12 +162,12 @@ export default function AMLPage() {
                   <li>Records of all SARs and related documentation are maintained for a minimum of 5 years</li>
                 </ul>
                 <p className="mt-2"><strong className="text-foreground">Protection for Reporting Persons:</strong></p>
-                <p>Paxora Premium prohibits any form of retaliation, discrimination, or adverse action against any employee who reports suspicious activity in good faith. Reports may be made anonymously through our whistleblower channel.</p>
+                <p>UPHOLD Trading prohibits any form of retaliation, discrimination, or adverse action against any employee who reports suspicious activity in good faith. Reports may be made anonymously through our whistleblower channel.</p>
               </section>
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>9. Record Keeping & Data Retention</h2>
-                <p>Paxora Premium maintains comprehensive records in accordance with applicable legal and regulatory requirements:</p>
+                <p>UPHOLD Trading maintains comprehensive records in accordance with applicable legal and regulatory requirements:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li><strong className="text-foreground">CDD Records:</strong> All customer identification documents, verification records, and risk assessments are retained for at least 5 years after the closure of the business relationship</li>
                   <li><strong className="text-foreground">Transaction Records:</strong> Complete records of all transactions, including amounts, counterparties, timestamps, IP addresses, and wallet addresses, are retained for a minimum of 5 years</li>
@@ -179,7 +179,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>10. Sanctions Compliance</h2>
-                <p>Paxora Premium is committed to full compliance with applicable economic sanctions and trade embargoes administered by:</p>
+                <p>UPHOLD Trading is committed to full compliance with applicable economic sanctions and trade embargoes administered by:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>The United Nations Security Council (UNSC)</li>
                   <li>The United States Office of Foreign Assets Control (OFAC)</li>
@@ -199,7 +199,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>11. Training & Awareness</h2>
-                <p>Paxora Premium is committed to ensuring that all employees and relevant contractors receive appropriate AML/CFT training commensurate with their roles and responsibilities.</p>
+                <p>UPHOLD Trading is committed to ensuring that all employees and relevant contractors receive appropriate AML/CFT training commensurate with their roles and responsibilities.</p>
                 <p className="mt-2"><strong className="text-foreground">Training Program Components:</strong></p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li><strong className="text-foreground">Initial Training:</strong> All new employees complete mandatory AML/CFT training as part of their onboarding process within 14 days of commencement</li>
@@ -212,7 +212,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>12. Risk Assessment Framework</h2>
-                <p>Paxora Premium conducts a comprehensive enterprise-wide risk assessment at least annually, or more frequently if significant changes occur in our business, customer base, or regulatory environment.</p>
+                <p>UPHOLD Trading conducts a comprehensive enterprise-wide risk assessment at least annually, or more frequently if significant changes occur in our business, customer base, or regulatory environment.</p>
                 <p className="mt-2"><strong className="text-foreground">Risk Assessment Factors:</strong></p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li><strong className="text-foreground">Geographic Risk:</strong> Countries and regions associated with higher levels of corruption, financial crime, or inadequate AML frameworks</li>
@@ -226,7 +226,7 @@ export default function AMLPage() {
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>13. Third-Party & Correspondent Relationships</h2>
-                <p>Paxora Premium exercises caution and due diligence in all relationships with third parties, including:</p>
+                <p>UPHOLD Trading exercises caution and due diligence in all relationships with third parties, including:</p>
                 <ul className="list-disc pl-5 space-y-1 mt-2">
                   <li>Liquidity providers and trading counterparties</li>
                   <li>Custodians and wallet service providers</li>
@@ -266,7 +266,7 @@ export default function AMLPage() {
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>15. Violations & Disciplinary Measures</h2>
                 <p>Violations of this AML Policy, whether by act or omission, are taken seriously and may result in disciplinary action up to and including termination of employment or business relationship. Disciplinary measures are applied regardless of whether the violation resulted in actual money laundering or terrorist financing.</p>
-                <p className="mt-2">Customers found to have violated AML/CFT requirements may have their accounts suspended or terminated, funds frozen pending investigation, and relevant authorities notified. Paxora Premium reserves the right to report any suspicious activity to appropriate authorities without prior notice to the customer.</p>
+                <p className="mt-2">Customers found to have violated AML/CFT requirements may have their accounts suspended or terminated, funds frozen pending investigation, and relevant authorities notified. UPHOLD Trading reserves the right to report any suspicious activity to appropriate authorities without prior notice to the customer.</p>
               </section>
 
               <section>
@@ -274,7 +274,7 @@ export default function AMLPage() {
                 <p>For inquiries regarding this AML Policy or to report suspicious activity, please contact our AML Compliance Officer:</p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@paxorapremiumlab.com</span><br />
-                  Address: Paxora Capital Ltd., Gibraltar<br />
+                  Address: UPHOLD Trading Ltd., Gibraltar<br />
                   Attention: AML Compliance Officer
                 </p>
                 <p className="mt-2">Whistleblower reports may be submitted anonymously through our dedicated channel at <span className="text-primary font-bold">Info@paxorapremiumlab.com</span>.</p>

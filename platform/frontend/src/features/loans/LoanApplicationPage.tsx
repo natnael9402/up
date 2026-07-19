@@ -70,7 +70,7 @@ function useApplyLoan() {
 }
 
 export function LoanApplicationPage() {
-  useDocumentTitle('Apply for Loan · Paxora Capital');
+  useDocumentTitle('Apply for Loan · UPHOLD Trading');
   const router = useRouter();
   const toast = useToast();
   const apply = useApplyLoan();

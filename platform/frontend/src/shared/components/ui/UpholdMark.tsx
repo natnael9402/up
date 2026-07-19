@@ -4,15 +4,15 @@ import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
 /** Dark-mode brand gold (matches --primary in dark theme). */
-const PAXORA_GOLD = '#D4AF37';
-const PAXORA_LETTERS = ['P', 'A', 'X', 'O', 'R', 'A'];
+const UPHOLD_GOLD = '#D4AF37';
+const UPHOLD_LETTERS = ['U', 'P', 'H', 'O', 'L', 'D'];
 
 /**
- * Animated PAXORA wordmark. Each letter flips up with a staggered 3D entrance and
+ * Animated UPHOLD wordmark. Each letter flips up with a staggered 3D entrance and
  * rides a continuous shimmer wave over a soft pulsing glow. Shared by the chart
  * loader and the app-wide page (Suspense) loader so the brand motion is consistent.
  */
-export function PaxoraMark({ size = 'md', className }: { size?: 'md' | 'lg'; className?: string }) {
+export function UpholdMark({ size = 'md', className }: { size?: 'md' | 'lg'; className?: string }) {
   const fontClass = size === 'lg' ? 'text-5xl md:text-7xl' : 'text-3xl md:text-4xl';
   return (
     <div
@@ -27,11 +27,11 @@ export function PaxoraMark({ size = 'md', className }: { size?: 'md' | 'lg'; cla
         animate={{ opacity: [0.2, 0.5, 0.2], scale: [0.82, 1.18, 0.82] }}
         transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
       />
-      {PAXORA_LETTERS.map((ch, i) => (
+      {UPHOLD_LETTERS.map((ch, i) => (
         <motion.span
           key={i}
           className={cn('relative select-none font-black', fontClass)}
-          style={{ color: PAXORA_GOLD, textShadow: '0 0 22px rgba(212,175,55,0.5), 0 0 2px rgba(212,175,55,0.85)' }}
+          style={{ color: UPHOLD_GOLD, textShadow: '0 0 22px rgba(212,175,55,0.5), 0 0 2px rgba(212,175,55,0.85)' }}
           initial={{ opacity: 1, y: 20, rotateX: -90 }}
           animate={{ opacity: [1, 0.6, 1], y: 0, rotateX: 0 }}
           transition={{

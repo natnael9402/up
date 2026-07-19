@@ -25,7 +25,7 @@ export default function TermsPage() {
             </button>
             <div>
               <Link href="/onboarding" className="inline-block text-xl sm:text-2xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] hover:opacity-90 transition-opacity">
-                PAXORA
+                UPHOLD
               </Link>
               <h1 className="text-xl sm:text-2xl font-black text-foreground leading-tight mt-1" style={{ fontFamily: 'var(--font-outfit)' }}>
                 Terms of Service
@@ -40,13 +40,13 @@ export default function TermsPage() {
 
             <div className="space-y-5 sm:space-y-6 text-sm sm:text-[15px] text-muted-foreground leading-[1.65] sm:leading-relaxed">
               <p>
-                These Terms of Service (&quot;Terms&quot;) govern your access to and use of the Paxora Capital platform, website, and related services. By creating an account or using our services, you agree to be bound by these Terms.
+                These Terms of Service (&quot;Terms&quot;) govern your access to and use of the UPHOLD Trading platform, website, and related services. By creating an account or using our services, you agree to be bound by these Terms.
               </p>
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>1. Acceptance</h2>
                 <p>
-                  By registering for or using the Paxora platform, you acknowledge that you have read, understood, and agree to be bound by these Terms, our Privacy Policy, and any additional terms incorporated by reference. If you do not agree, you must not use our services.
+                  By registering for or using the UPHOLD platform, you acknowledge that you have read, understood, and agree to be bound by these Terms, our Privacy Policy, and any additional terms incorporated by reference. If you do not agree, you must not use our services.
                 </p>
               </section>
 
@@ -73,7 +73,7 @@ export default function TermsPage() {
                 <div className="space-y-2">
                   <p><strong className="text-foreground">Trading Risk:</strong> Trading financial instruments carries substantial risk. Prices can fluctuate significantly, and past performance is not indicative of future results. You may lose some or all of your invested capital.</p>
                   <p><strong className="text-foreground">Arbitrage & Mining Risk:</strong> Returns from arbitrage hosting and mining activities depend on market conditions, network difficulty, and other factors that are inherently unpredictable.</p>
-                  <p><strong className="text-foreground">No Guarantees:</strong> Paxora does not guarantee any specific return, profit, or performance. All investments and trading decisions are made at your own risk.</p>
+                  <p><strong className="text-foreground">No Guarantees:</strong> UPHOLD Trading does not guarantee any specific return, profit, or performance. All investments and trading decisions are made at your own risk.</p>
                   <p><strong className="text-foreground">Professional Advice:</strong> The information provided on our platform does not constitute financial, legal, or investment advice. Consult a qualified professional before making financial decisions.</p>
                 </div>
               </section>
@@ -81,7 +81,7 @@ export default function TermsPage() {
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>5. Fees & Transactions</h2>
                 <p>
-                  All applicable fees are displayed at the time of transaction. Paxora reserves the right to modify fee schedules with reasonable notice. You are responsible for any network fees (gas fees, blockchain transaction fees) associated with your activities.
+                  All applicable fees are displayed at the time of transaction. UPHOLD Trading reserves the right to modify fee schedules with reasonable notice. You are responsible for any network fees (gas fees, blockchain transaction fees) associated with your activities.
                 </p>
               </section>
 
@@ -108,14 +108,14 @@ export default function TermsPage() {
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>8. Limitation of Liability</h2>
                 <p>
-                  To the maximum extent permitted by law, Paxora Capital, its affiliates, directors, and employees shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or goodwill, arising from your use of the platform.
+                  To the maximum extent permitted by law, UPHOLD Trading, its affiliates, directors, and employees shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or goodwill, arising from your use of the platform.
                 </p>
               </section>
 
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>9. Intellectual Property</h2>
                 <p>
-                  The Paxora name, logo, platform design, and all related intellectual property are owned by Paxora Capital. You may not reproduce, distribute, or create derivative works without our prior written consent.
+                  The UPHOLD name, logo, platform design, and all related intellectual property are owned by UPHOLD Trading. You may not reproduce, distribute, or create derivative works without our prior written consent.
                 </p>
               </section>
 
@@ -140,7 +140,7 @@ export default function TermsPage() {
                 </p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@paxorapremiumlab.com</span><br />
-                  Address: Paxora Capital Ltd., Gibraltar
+                  Address: UPHOLD Trading Ltd., Gibraltar
                 </p>
               </section>
             </div>

@@ -56,7 +56,7 @@ export function BottomNav() {
       <div className="hidden md:flex items-start justify-between px-4 mb-10">
         <div className="flex items-start gap-0.5">
           <span className="text-2xl font-black text-primary tracking-widest text-primary-glow">
-            PAXORA
+            UPHOLD
           </span>
           <span className="text-[8px] font-bold text-primary mt-0.5 opacity-80">TM</span>
         </div>

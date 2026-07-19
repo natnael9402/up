@@ -191,7 +191,7 @@ function EmptyChat({ onStart }: { onStart: () => void }) {
 type ChatState = 'loading' | 'empty' | 'ready' | 'error';
 
 export function ChatPage() {
-  useDocumentTitle('Support · Paxora Capital');
+  useDocumentTitle('Support · UPHOLD Trading');
   const router = useRouter();
   const { user } = useAuth();
 
@@ -326,7 +326,7 @@ export function ChatPage() {
 
       notifyHubspot({
         userName: user?.name || 'Guest',
-        userEmail: user?.email || 'guest@system.paxora',
+        userEmail: user?.email || 'guest@system.uphold',
         message: text,
         subject: text,
         priority: 'medium',
@@ -372,7 +372,7 @@ export function ChatPage() {
 
       notifyHubspot({
         userName: user?.name || 'Guest',
-        userEmail: user?.email || 'guest@system.paxora',
+        userEmail: user?.email || 'guest@system.uphold',
         message: text,
         subject: ticket?.subject || text,
         priority: ticket?.priority || 'medium',

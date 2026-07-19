@@ -17,7 +17,7 @@ import { Captcha } from '../../shared/components/ui/Captcha';
 import { CountrySelect } from './components/CountrySelect';
 
 export function SignupPage() {
-  useDocumentTitle('Sign Up · Paxora Premium');
+  useDocumentTitle('Sign Up · UPHOLD Trading');
   const router = useRouter();
   const { signup } = useAuth();
   const toast = useToast();
@@ -74,10 +74,10 @@ export function SignupPage() {
       <div className="w-full max-w-md p-6 sm:p-8 rounded-3xl bg-surface border border-white/5 shadow-2xl animate-in fade-in zoom-in-95 duration-500">
         <div className="mb-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] mb-4">
-            PAXORA
+            UPHOLD
           </h1>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Create an account</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Join Paxora Premium today</p>
+          <p className="mt-2 text-sm text-muted-foreground">Join UPHOLD Trading today</p>
         </div>
 
         <form onSubmit={handle} className="space-y-6">

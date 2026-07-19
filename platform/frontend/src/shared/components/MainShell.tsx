@@ -27,7 +27,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
           <div className="flex justify-start">
             {!hideLogo ? (
               <div className="flex items-start gap-0.5">
-                <span className="text-xl font-black text-primary tracking-widest text-primary-glow">PAXORA</span>
+                <span className="text-xl font-black text-primary tracking-widest text-primary-glow">UPHOLD</span>
                 <span className="text-[6px] font-bold text-primary mt-0.5 opacity-80">TM</span>
               </div>
             ) : showBack ? <BackButton /> : null}
@@ -35,8 +35,8 @@ export function MainShell({ children }: { children: React.ReactNode }) {
           <div className="flex justify-center">
             {pathname === '/home' && (
               <div className="flex flex-col items-center gap-0.5">
-                <span className="text-base font-black text-[#D4AF37] tracking-[0.2em]">PAXORA</span>
-                <span className="text-[6px] font-semibold dark:text-white text-black tracking-[0.15em] uppercase whitespace-nowrap">Welcome to Premium</span>
+                <span className="text-base font-black text-[#D4AF37] tracking-[0.2em]">UPHOLD</span>
+                <span className="text-[6px] font-semibold dark:text-white text-black tracking-[0.15em] uppercase whitespace-nowrap">Welcome to Trading</span>
               </div>
             )}
           </div>
@@ -48,12 +48,12 @@ export function MainShell({ children }: { children: React.ReactNode }) {
       </div>
       {showBack && <div className="fixed top-6 left-[calc(16rem+1.5rem)] z-50 hidden md:block"><BackButton /></div>}
 
-      {/* Paxora brand — top center on home page */}
+      {/* UPHOLD brand — top center on home page */}
       {pathname === '/home' && (
         <div className="fixed top-1 left-1/2 -translate-x-1/2 z-50 hidden md:block">
           <div className="flex flex-col items-center gap-0.5">
-            <span className="text-base font-black text-[#D4AF37] tracking-[0.2em]">PAXORA</span>
-            <span className="text-[6px] font-semibold dark:text-white text-black tracking-[0.15em] uppercase whitespace-nowrap">Welcome to Premium</span>
+            <span className="text-base font-black text-[#D4AF37] tracking-[0.2em]">UPHOLD</span>
+            <span className="text-[6px] font-semibold dark:text-white text-black tracking-[0.15em] uppercase whitespace-nowrap">Welcome to Trading</span>
           </div>
         </div>
       )}

@@ -16,7 +16,7 @@ function GuestHeader() {
     <header className="mb-8">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="text-xl font-black tracking-widest text-primary text-primary-glow">PAXORA</span>
+          <span className="text-xl font-black tracking-widest text-primary text-primary-glow">UPHOLD</span>
           <span className="mt-0.5 text-[6px] font-bold text-primary opacity-80">TM</span>
         </div>
         <div className="flex items-center gap-2">

@@ -29,7 +29,7 @@ function useDepositMutation() {
 }
 
 export function DepositPage() {
-  useDocumentTitle('Make a Deposit · Paxora');
+  useDocumentTitle('Make a Deposit · UPHOLD Trading');
   const router = useRouter();
   const toast = useToast();
 

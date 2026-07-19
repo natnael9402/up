@@ -40,7 +40,7 @@ function useSubmitVerification() {
 }
 
 export function VerificationPage() {
-  useDocumentTitle('Verification · Paxora Capital');
+  useDocumentTitle('Verification · UPHOLD Trading');
   const router = useRouter();
   const { data } = useVerificationStatus();
   const [open, setOpen] = useState(false);

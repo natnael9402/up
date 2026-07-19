@@ -35,7 +35,7 @@ function useSubmitKyc() {
 }
 
 export function KycVerificationPage() {
-  useDocumentTitle('Verify Identity · Paxora');
+  useDocumentTitle('Verify Identity · UPHOLD Trading');
   const router = useRouter();
   const toast = useToast();
   const { user, clearNewSignup, refresh } = useAuth();

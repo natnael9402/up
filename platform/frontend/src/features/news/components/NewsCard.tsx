@@ -54,7 +54,7 @@ export function NewsCard({ article, featured }: NewsCardProps) {
                 ? 'bg-info-muted text-info'
                 : 'bg-success-muted text-success'
             )}>
-              {article.source === 'external' ? 'Crypto News' : 'PAXORA Premium'}
+              {article.source === 'external' ? 'Crypto News' : 'UPHOLD Trading'}
             </span>
             <span className="text-[10px] text-muted-foreground font-medium">
               {formatDate(article.published_at)}

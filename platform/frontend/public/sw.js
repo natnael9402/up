@@ -1,4 +1,4 @@
-const CACHE_NAME = 'paxora-onboarding-v1';
+const CACHE_NAME = 'uphold-onboarding-v1';
 const URLS_TO_CACHE = [
     'https://images.unsplash.com/photo-1642790106117-e829e14a795f?q=80&w=3000&auto=format&fit=crop',
     'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=3000&auto=format&fit=crop',

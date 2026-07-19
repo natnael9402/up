@@ -4,7 +4,7 @@ import { useRef, useEffect, useMemo, useState } from 'react';
 import { createChart, AreaSeries, CandlestickSeries, ColorType, CrosshairMode, type IChartApi, type ISeriesApi, type SeriesOptionsMap, type Time } from 'lightweight-charts';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
-import { PaxoraMark } from './PaxoraMark';
+import { UpholdMark } from './UpholdMark';
 import { LineChart, CandlestickChart as CandlesIcon } from 'lucide-react';
 
 function ChartLoader({ height }: { height: number | string }) {
@@ -17,7 +17,7 @@ function ChartLoader({ height }: { height: number | string }) {
       className="absolute inset-0 z-20 flex items-center justify-center overflow-hidden rounded-none md:rounded-2xl"
       style={{ height, background: 'radial-gradient(130% 130% at 50% 45%, #12222e 0%, #0d1520 68%)' }}
     >
-      <PaxoraMark size="md" />
+      <UpholdMark size="md" />
     </motion.div>
   );
 }
@@ -171,7 +171,7 @@ export function AssetChart({ data, height = '25vh', trend, defaultMode = 'candle
       <div ref={wrapperRef} style={{ width: '100%', height, visibility: hasData ? 'visible' : 'hidden' }} />
 
       <AnimatePresence>
-        {!hasData && <ChartLoader key="paxora-loader" height={height} />}
+        {!hasData && <ChartLoader key="uphold-loader" height={height} />}
       </AnimatePresence>
 
       {hasData && (

@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Paxora Capital',
+  title: 'UPHOLD Trading',
   description: 'Your Smart Trading Companion',
 };
 

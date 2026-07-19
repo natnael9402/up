@@ -14,7 +14,7 @@ import { useTheme } from '../../shared/contexts/ThemeContext';
 import { cn, displayName, initials, formatCurrency } from '../../shared/lib/utils';
 
 export function ProfilePage() {
-  useDocumentTitle('Profile · Paxora Premium');
+  useDocumentTitle('Profile · UPHOLD Trading');
   const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
   const [pwOpen, setPwOpen] = useState(false);

@@ -52,7 +52,7 @@ const MODES = [
 ];
 
 export function TradePage() {
-  useDocumentTitle('Trade · Paxora Premium');
+  useDocumentTitle('Trade · UPHOLD Trading');
   const router = useRouter();
   const toast = useToast();
   const qc = useQueryClient();

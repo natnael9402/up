@@ -25,7 +25,7 @@ export default function PrivacyPage() {
             </button>
             <div>
               <Link href="/onboarding" className="inline-block text-xl sm:text-2xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] hover:opacity-90 transition-opacity">
-                PAXORA
+                UPHOLD
               </Link>
               <h1 className="text-xl sm:text-2xl font-black text-foreground leading-tight mt-1" style={{ fontFamily: 'var(--font-outfit)' }}>
                 Privacy Policy
@@ -40,7 +40,7 @@ export default function PrivacyPage() {
 
             <div className="space-y-5 sm:space-y-6 text-sm sm:text-[15px] text-muted-foreground leading-[1.65] sm:leading-relaxed">
               <p>
-                Paxora Capital (&quot;Paxora,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform, website, and services.
+                UPHOLD Trading (&quot;UPHOLD,&quot; &quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform, website, and services.
               </p>
 
               <section>
@@ -131,7 +131,7 @@ export default function PrivacyPage() {
                 </p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@paxorapremiumlab.com</span><br />
-                  Address: Paxora Capital Ltd., Gibraltar
+                  Address: UPHOLD Trading Ltd., Gibraltar
                 </p>
               </section>
             </div>

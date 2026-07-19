@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     };
 
     const contactProps: Record<string, string> = {};
-    if (userEmail && userEmail !== 'guest@system.paxora') {
+    if (userEmail && userEmail !== 'guest@system.uphold') {
       contactProps.email = userEmail;
     }
     if (userName) {
@@ -73,7 +73,7 @@ export async function POST(req: NextRequest) {
     const ticketSubject = `${priorityLabel}New message from ${userName || 'User'} — ${subjectLabel}`;
 
     const ticketBody = [
-      `From: ${userName || 'Unknown'}${userEmail && userEmail !== 'guest@system.paxora' ? ` (${userEmail})` : ''}`,
+      `From: ${userName || 'Unknown'}${userEmail && userEmail !== 'guest@system.uphold' ? ` (${userEmail})` : ''}`,
       subject ? `Ticket: ${subject}` : '',
       priority ? `Priority: ${String(priority).toUpperCase()}` : '',
       '',

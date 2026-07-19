@@ -22,7 +22,7 @@ import { cn, formatCurrency } from '../../shared/lib/utils';
 import { OPTION_TRADE_RULES, TIME_INTERVALS, type AssetOption, type TradeDirection, type TradeDuration } from './logic/tradeMath';
 
 export function TradeOptionPage() {
-  useDocumentTitle('Binary Option · Paxora Premium');
+  useDocumentTitle('Binary Option · UPHOLD Trading');
   const toast = useToast();
   const queryClient = useQueryClient();
   const balances = useTradeBalances();

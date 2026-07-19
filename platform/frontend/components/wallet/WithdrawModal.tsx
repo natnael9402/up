@@ -82,7 +82,7 @@ export function WithdrawModal({ isOpen, onClose, onSuccess, maxBalance }: Withdr
                         {/* Branding */}
                         <div className="absolute top-6 left-6 z-10 flex items-start gap-0.5 pointer-events-none">
                             <span className="text-xl font-black font-heading text-primary tracking-widest">
-                                PAXORA
+                                UPHOLD
                             </span>
                             <span className="text-[8px] font-bold text-primary mt-0.5 opacity-80">TM</span>
                         </div>

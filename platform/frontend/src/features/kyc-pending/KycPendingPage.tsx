@@ -8,7 +8,7 @@ import { useAuth } from '../../shared/contexts/AuthContext';
 import { Clock, LogOut, HeadphonesIcon } from 'lucide-react';
 
 export function KycPendingPage() {
-  useDocumentTitle('Verification Pending · Paxora');
+  useDocumentTitle('Verification Pending · UPHOLD Trading');
   const router = useRouter();
   const { user, logout, refresh } = useAuth();
 

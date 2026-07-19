@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { memo } from 'react';
 import type { ComponentType } from 'react';
-import { PaxoraMark } from './PaxoraMark';
+import { UpholdMark } from './UpholdMark';
 
 const PriceChartLoader: ComponentType<{
   data: { time: number; price: number }[];
@@ -15,7 +15,7 @@ const PriceChartLoader: ComponentType<{
   ssr: false,
   loading: () => (
     <div className="flex h-40 w-full items-center justify-center rounded-xl bg-surface/50">
-      <PaxoraMark size="md" />
+      <UpholdMark size="md" />
     </div>
   ),
 });

@@ -46,7 +46,7 @@ const INVESTMENT_GOALS = [
 ];
 
 export function OnboardPage() {
-  useDocumentTitle('Tell Us About Yourself · PAXORA Premium');
+  useDocumentTitle('Tell Us About Yourself · UPHOLD Trading');
   const router = useRouter();
   const { user } = useAuth();
   const toast = useToast();
@@ -61,7 +61,7 @@ export function OnboardPage() {
     { title: 'Income Source', description: 'Where does your income come from?' },
     { title: 'Annual Income', description: 'What is your yearly income range?' },
     { title: 'Employment', description: 'What is your employment status?' },
-    { title: 'Investment Goal', description: 'What brings you to PAXORA?' },
+    { title: 'Investment Goal', description: 'What brings you to UPHOLD?' },
   ];
 
   const canContinue = () => {
@@ -83,7 +83,7 @@ export function OnboardPage() {
         employment_status: employmentStatus,
         investment_goal: investmentGoal || undefined,
       });
-      toast.success('Welcome to PAXORA Premium!');
+      toast.success('Welcome to UPHOLD Trading!');
       router.push('/kyc-verification');
     } catch (err: any) {
       toast.error(err.message || 'Something went wrong');
@@ -97,7 +97,7 @@ export function OnboardPage() {
       <div className="w-full max-w-lg p-6 sm:p-8 rounded-3xl bg-surface border border-white/5 shadow-2xl animate-in fade-in zoom-in-95 duration-500">
         <div className="mb-8 text-center">
           <h1 className="text-3xl sm:text-4xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] mb-3">
-            PAXORA
+            UPHOLD
           </h1>
           <h2 className="text-xl font-bold tracking-tight text-foreground">{steps[step].title}</h2>
           <p className="mt-1 text-sm text-muted-foreground">{steps[step].description}</p>

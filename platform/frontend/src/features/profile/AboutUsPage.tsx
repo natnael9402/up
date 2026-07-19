@@ -47,7 +47,7 @@ const CORE_VALUES = [
 ];
 
 const MILESTONES = [
-  { year: '2024', event: 'Platform Launch', description: 'Paxora Premium goes live with spot and futures trading.' },
+  { year: '2024', event: 'Platform Launch', description: 'UPHOLD Trading goes live with spot and futures trading.' },
   { year: '2025', event: 'Fast Trade Release', description: 'Introduced binary options with up to 40% returns.' },
   { year: '2025', event: 'Global Expansion', description: 'Expanded to 50+ countries with multi-currency support.' },
   { year: '2026', event: 'Version 2.0', description: 'Complete platform redesign with premium features.' },
@@ -76,7 +76,7 @@ function SectionLabel({ icon: Icon, text }: { icon: React.ComponentType<{ size?:
 }
 
 export function AboutUsPage() {
-  useDocumentTitle('About Us · Paxora Premium');
+  useDocumentTitle('About Us · UPHOLD Trading');
 
   return (
     <div className="pb-24 md:pb-12 md:max-w-4xl md:mx-auto">
@@ -86,7 +86,7 @@ export function AboutUsPage() {
         </div>
         <PageHeader
           title="About Us"
-          subtitle="The story behind Paxora Premium"
+          subtitle="The story behind UPHOLD Trading"
           action={
             <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20">
               <Star size={18} className="text-[#D4AF37]" />
@@ -108,7 +108,7 @@ export function AboutUsPage() {
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#D4AF37]">Version 2.0</span>
               </div>
               <h1 className="text-3xl sm:text-4xl font-black text-white tracking-widest drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] mb-4">
-                PAXORA PREMIUM
+                UPHOLD TRADING
               </h1>
               <p className="text-sm text-white/60 max-w-md mx-auto leading-relaxed">
                 A next-generation trading platform built for serious investors. 
@@ -147,7 +147,7 @@ export function AboutUsPage() {
                   <Award size={18} className="text-[#D4AF37]" />
                 </div>
                 <div>
-                  <p className="text-sm font-black text-foreground">Paxora Premium</p>
+                  <p className="text-sm font-black text-foreground">UPHOLD Trading</p>
                   <p className="text-[11px] text-muted-foreground">Founded 2024</p>
                 </div>
               </div>

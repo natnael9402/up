@@ -21,7 +21,7 @@ import { TIME_INTERVALS, type AssetOption, type TradeDirection } from './logic/t
 import type { UserAsset } from '../../shared/types';
 
 export function TradeSpotPage() {
-  useDocumentTitle('Spot · Paxora Premium');
+  useDocumentTitle('Spot · UPHOLD Trading');
   const queryClient = useQueryClient();
   const balances = useTradeBalances();
   const portfolio = useQuery<UserAsset[]>({

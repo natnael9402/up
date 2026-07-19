@@ -1,4 +1,4 @@
-const GUEST_KEY = 'paxora_guest_id';
+const GUEST_KEY = 'uphold_guest_id';
 
 export function getGuestSessionId(): string {
   if (typeof window === 'undefined') return '';

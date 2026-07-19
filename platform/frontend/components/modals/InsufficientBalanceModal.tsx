@@ -47,7 +47,7 @@ export function InsufficientBalanceModal({ isOpen, onClose, needed, current }: I
                                 <div className="mb-6 scale-90">
                                     <div className="flex items-start gap-0.5">
                                         <span className="text-2xl font-black font-heading text-primary tracking-widest drop-shadow-[0_0_10px_rgba(16,185,129,0.4)]">
-                                            PAXORA
+                                            UPHOLD
                                         </span>
                                         <span className="text-[8px] font-bold text-primary mt-0.5 opacity-80">TM</span>
                                     </div>

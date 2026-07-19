@@ -18,7 +18,7 @@ import { storage } from '../../shared/lib/storage';
 import { CountrySelect } from './components/CountrySelect';
 
 export function LoginPage() {
-  useDocumentTitle('Sign In · Paxora Premium');
+  useDocumentTitle('Sign In · UPHOLD Trading');
   const router = useRouter();
   const { login } = useAuth();
   const toast = useToast();
@@ -53,7 +53,7 @@ export function LoginPage() {
       <div className="w-full max-w-md p-6 sm:p-8 rounded-3xl bg-surface border border-white/5 shadow-2xl animate-in fade-in zoom-in-95 duration-500">
         <div className="mb-8 text-center">
           <h1 className="text-4xl sm:text-5xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] mb-4">
-            PAXORA
+            UPHOLD
           </h1>
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">Welcome to Premium</h2>
           <p className="mt-2 text-sm text-muted-foreground">Sign in to your account</p>

@@ -7,7 +7,7 @@ import { SkeletonList } from '../../shared/components/ui/Skeleton';
 import { PageHeader } from '../../shared/components/ui/PageHeader';
 
 export function NewsPage() {
-  useDocumentTitle('News · Paxora Capital');
+  useDocumentTitle('News · UPHOLD Trading');
   const { data, isLoading } = useNewsList({ limit: 50 });
 
   const articles = data?.items ?? [];
