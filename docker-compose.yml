@@ -1,0 +1,97 @@
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: robin-npm
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - npm-data:/data
+      - npm-letsencrypt:/etc/letsencrypt
+    environment:
+      DISABLE_IPV6: "true"
+    networks:
+      - proxy
+    depends_on:
+      - frontend
+      - admin
+      - ol
+
+  db:
+    image: postgres:16-alpine
+    container_name: robin-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: base_trade_prod
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - proxy
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d base_trade_prod"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  ol:
+    build:
+      context: .
+      dockerfile: Dockerfile.ol
+    container_name: robin-ol
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://postgres:${DB_PASSWORD:-postgres}@db:5432/base_trade_prod
+      DIRECT_URL: postgresql://postgres:${DB_PASSWORD:-postgres}@db:5432/base_trade_prod
+      PORT: 4000
+    networks:
+      - proxy
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
+        NEXT_PUBLIC_HUBSPOT_API_KEY: ${NEXT_PUBLIC_HUBSPOT_API_KEY:-}
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
+    container_name: robin-frontend
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
+    networks:
+      - proxy
+    depends_on:
+      - ol
+
+  admin:
+    build:
+      context: .
+      dockerfile: Dockerfile.admin
+      args:
+        NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
+    container_name: robin-admin
+    restart: unless-stopped
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
+    networks:
+      - proxy
+    depends_on:
+      - ol
+
+networks:
+  proxy:
+    driver: bridge
+
+volumes:
+  pgdata:
+  npm-data:
+  npm-letsencrypt:
