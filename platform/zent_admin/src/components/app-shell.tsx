@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import {
   LayoutDashboard,
@@ -254,18 +254,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           <span className="font-extrabold tracking-tight text-foreground">Zent Admin</span>
         </button>
         <div className="flex items-center gap-1">
-          <ThemeToggle />
-          <button
-            onClick={() => setMobileOpen(true)}
-            aria-label="Open menu"
+          <Link
+            href="/chat"
             className="relative rounded-xl p-2 text-foreground transition-colors hover:bg-surface-hover"
           >
-            <Menu size={22} />
+            <MessageCircle size={22} />
             {unread > 0 && (
               <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-white ring-2 ring-surface">
                 {unread > 99 ? '99+' : unread}
               </span>
             )}
+          </Link>
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileOpen(true)}
+            aria-label="Open menu"
+            className="rounded-xl p-2 text-foreground transition-colors hover:bg-surface-hover"
+          >
+            <Menu size={22} />
           </button>
         </div>
       </header>
@@ -303,7 +309,18 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Content */}
       <div className={cn('pb-4 transition-[padding] duration-300 ease-out lg:pb-0', contentOffset)}>
         {/* Desktop floating theme toggle */}
-        <div className="fixed right-6 top-5 z-30 hidden lg:block">
+        <div className="fixed right-6 top-5 z-30 hidden lg:flex items-center gap-1">
+          <Link
+            href="/chat"
+            className="relative rounded-xl p-2 text-foreground transition-colors hover:bg-surface-hover shadow-glass"
+          >
+            <MessageCircle size={20} />
+            {unread > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-[10px] font-bold text-white ring-2 ring-surface">
+                {unread > 99 ? '99+' : unread}
+              </span>
+            )}
+          </Link>
           <ThemeToggle className="shadow-glass" />
         </div>
         {children}
