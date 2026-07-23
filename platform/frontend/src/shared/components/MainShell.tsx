@@ -35,7 +35,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
           <div className="flex justify-center">
             {pathname === '/home' && (
               <div className="flex flex-col items-center gap-0.5">
-                <span className="text-base font-black text-[#D4AF37] tracking-[0.2em]">UPHOLD</span>
+                <span className="text-base font-black text-[#3B82F6] tracking-[0.2em]">UPHOLD</span>
                 <span className="text-[6px] font-semibold dark:text-white text-black tracking-[0.15em] uppercase whitespace-nowrap">Welcome to Trading</span>
               </div>
             )}
@@ -52,7 +52,7 @@ export function MainShell({ children }: { children: React.ReactNode }) {
       {pathname === '/home' && (
         <div className="fixed top-1 left-1/2 -translate-x-1/2 z-50 hidden md:block">
           <div className="flex flex-col items-center gap-0.5">
-            <span className="text-base font-black text-[#D4AF37] tracking-[0.2em]">UPHOLD</span>
+            <span className="text-base font-black text-[#3B82F6] tracking-[0.2em]">UPHOLD</span>
             <span className="text-[6px] font-semibold dark:text-white text-black tracking-[0.15em] uppercase whitespace-nowrap">Welcome to Trading</span>
           </div>
         </div>

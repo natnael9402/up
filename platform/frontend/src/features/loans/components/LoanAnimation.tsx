@@ -73,7 +73,7 @@ export function LoanAnimation() {
 
     return (
         <div ref={rootRef} className="relative w-[140px] h-[140px] flex items-center justify-center shrink-0 my-4">
-            <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+            <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
                 <circle ref={glowRef} cx="12" cy="12" r="14" fill="currentColor" />
                 <line ref={baseRef} x1="3" x2="21" y1="22" y2="22" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" pathLength="100" />
                 <line ref={pillar1Ref} x1="6" x2="6" y1="18" y2="11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" pathLength="100" />

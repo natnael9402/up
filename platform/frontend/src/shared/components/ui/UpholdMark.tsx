@@ -3,8 +3,8 @@
 import { motion } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
-/** Dark-mode brand gold (matches --primary in dark theme). */
-const UPHOLD_GOLD = '#D4AF37';
+/** Dark-mode brand blue (matches --primary in dark theme). */
+const UPHOLD_BLUE = '#3B82F6';
 const UPHOLD_LETTERS = ['U', 'P', 'H', 'O', 'L', 'D'];
 
 /**
@@ -23,7 +23,7 @@ export function UpholdMark({ size = 'md', className }: { size?: 'md' | 'lg'; cla
       <motion.div
         aria-hidden
         className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-        style={{ background: 'rgba(212,175,55,0.16)' }}
+        style={{ background: 'rgba(59,130,246,0.16)' }}
         animate={{ opacity: [0.2, 0.5, 0.2], scale: [0.82, 1.18, 0.82] }}
         transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
       />
@@ -31,7 +31,7 @@ export function UpholdMark({ size = 'md', className }: { size?: 'md' | 'lg'; cla
         <motion.span
           key={i}
           className={cn('relative select-none font-black', fontClass)}
-          style={{ color: UPHOLD_GOLD, textShadow: '0 0 22px rgba(212,175,55,0.5), 0 0 2px rgba(212,175,55,0.85)' }}
+          style={{ color: UPHOLD_BLUE, textShadow: '0 0 22px rgba(59,130,246,0.5), 0 0 2px rgba(59,130,246,0.85)' }}
           initial={{ opacity: 1, y: 20, rotateX: -90 }}
           animate={{ opacity: [1, 0.6, 1], y: 0, rotateX: 0 }}
           transition={{

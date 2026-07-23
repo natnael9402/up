@@ -24,7 +24,7 @@ export default function PrivacyPage() {
               <span>Back</span>
             </button>
             <div>
-              <Link href="/onboarding" className="inline-block text-xl sm:text-2xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] hover:opacity-90 transition-opacity">
+              <Link href="/onboarding" className="inline-block text-xl sm:text-2xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:opacity-90 transition-opacity">
                 UPHOLD
               </Link>
               <h1 className="text-xl sm:text-2xl font-black text-foreground leading-tight mt-1" style={{ fontFamily: 'var(--font-outfit)' }}>

@@ -50,7 +50,7 @@ function StatCard({ label, value, sub, positive, gold, mono, expanded, onClick }
             'font-black truncate',
             expanded ? 'text-2xl' : 'text-lg',
             mono && 'font-mono',
-            gold ? 'text-[#D4AF37]' : positive === true ? 'text-green-600 dark:text-green-400' : positive === false ? 'text-red-600 dark:text-red-400' : 'text-foreground',
+            gold ? 'text-[#3B82F6]' : positive === true ? 'text-green-600 dark:text-green-400' : positive === false ? 'text-red-600 dark:text-red-400' : 'text-foreground',
           )}>
             {value}
           </p>
@@ -464,7 +464,7 @@ export function TradeHistoryPage() {
             className={cn(
               'shrink-0 rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all',
               filters.type === tab.key
-                ? 'bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/30 shadow-[0_0_12px_rgba(212,175,55,0.1)]'
+                ? 'bg-[#3B82F6]/20 text-[#3B82F6] border border-[#3B82F6]/30 shadow-[0_0_12px_rgba(59,130,246,0.1)]'
                 : 'bg-surface text-foreground/60 border border-border hover:bg-surface-hover hover:text-foreground/80',
             )}
           >
@@ -526,7 +526,7 @@ export function TradeHistoryPage() {
               className={cn(
                 'flex h-9 w-9 items-center justify-center rounded-xl text-sm font-bold transition-all',
                 page === pagination.current_page
-                  ? 'bg-[#D4AF37]/20 text-[#D4AF37] border border-[#D4AF37]/30'
+                  ? 'bg-[#3B82F6]/20 text-[#3B82F6] border border-[#3B82F6]/30'
                   : 'border border-border bg-surface text-foreground/60 hover:bg-surface-hover',
               )}
             >

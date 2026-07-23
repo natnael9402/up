@@ -67,7 +67,7 @@ export function VerificationMotionGraphic() {
 
     return (
         <div ref={rootRef} className="relative w-[140px] h-[140px] flex items-center justify-center shrink-0 my-4">
-            <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+            <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
                 <circle ref={glowRef} cx="12" cy="12" r="14" fill="currentColor" />
                 <path
                     ref={shieldRef}

@@ -75,7 +75,7 @@ export function ProfilePage() {
             <div className="relative shrink-0">
               <img src="/pp.png" alt="Avatar" className="h-20 w-20 shrink-0 object-cover" />
               {isVerified && (
-                <div className="absolute bottom-0 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#0a0a0f] bg-[#D4AF37] shadow-[0_0_12px_rgba(212,175,55,0.5)]">
+                <div className="absolute bottom-0 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#0a0a0f] bg-[#3B82F6] shadow-[0_0_12px_rgba(59,130,246,0.5)]">
                   <Shield className="h-2.5 w-2.5 text-black" />
                 </div>
               )}
@@ -122,9 +122,9 @@ export function ProfilePage() {
               </button>
               <button
                 onClick={() => setShowValues((v) => !v)}
-                className="shrink-0 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 p-2 transition-all hover:bg-[#D4AF37]/20 hover:border-[#D4AF37]/40 hover:shadow-[0_0_16px_rgba(212,175,55,0.15)]"
+                className="shrink-0 rounded-full border border-[#3B82F6]/20 bg-[#3B82F6]/10 p-2 transition-all hover:bg-[#3B82F6]/20 hover:border-[#3B82F6]/40 hover:shadow-[0_0_16px_rgba(59,130,246,0.15)]"
               >
-                {showValues ? <EyeOff className="h-3.5 w-3.5 text-[#D4AF37]" /> : <Eye className="h-3.5 w-3.5 text-[#D4AF37]/70" />}
+                {showValues ? <EyeOff className="h-3.5 w-3.5 text-[#3B82F6]" /> : <Eye className="h-3.5 w-3.5 text-[#3B82F6]/70" />}
               </button>
             </div>
           </div>

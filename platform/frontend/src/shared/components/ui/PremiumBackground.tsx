@@ -13,8 +13,8 @@ function PremiumBackgroundBase() {
   return (
     <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
       {/* Deep ambient glow orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-amber-200/30 dark:bg-primary/10 blur-[120px]" />
-      <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] rounded-full bg-amber-200/30 dark:bg-primary/10 blur-[150px]" />
+      <div className="absolute top-[-10%] left-[-10%] w-[60vw] h-[60vw] rounded-full bg-blue-200/30 dark:bg-primary/10 blur-[120px]" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] rounded-full bg-blue-200/30 dark:bg-primary/10 blur-[150px]" />
 
       {/* 
         The "Astrolabe" - Complex Magical Rings 
@@ -26,9 +26,9 @@ function PremiumBackgroundBase() {
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-0 rounded-full border border-amber-300/40 dark:border-primary/20"
+          className="absolute inset-0 rounded-full border border-blue-300/40 dark:border-primary/20"
           style={{
-            background: 'conic-gradient(from 0deg, transparent 0%, rgba(212, 175, 55, 0.05) 50%, transparent 100%)',
+            background: 'conic-gradient(from 0deg, transparent 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%)',
             maskImage: 'radial-gradient(transparent 65%, black 66%)',
             WebkitMaskImage: 'radial-gradient(transparent 65%, black 66%)'
           }}
@@ -38,26 +38,26 @@ function PremiumBackgroundBase() {
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 180, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-[10%] rounded-full border-[1.5px] border-dashed border-amber-300/50 dark:border-primary/50 shadow-[0_0_30px_-5px_var(--primary-glow)]"
+          className="absolute inset-[10%] rounded-full border-[1.5px] border-dashed border-blue-300/50 dark:border-primary/50 shadow-[0_0_30px_-5px_var(--primary-glow)]"
         />
 
         {/* Inner dotted tracking ring */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 90, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-[22%] rounded-full border border-dotted border-amber-400/50 dark:border-primary/70"
+          className="absolute inset-[22%] rounded-full border border-dotted border-blue-400/50 dark:border-primary/70"
           style={{ clipPath: 'polygon(0 0, 100% 0, 100% 50%, 0 50%)' }}
         />
 
         {/* Core glowing aura */}
-        <div className="absolute inset-[35%] rounded-full bg-amber-200/40 dark:bg-primary/5 blur-3xl shadow-[0_0_80px_var(--primary-glow)]" />
+        <div className="absolute inset-[35%] rounded-full bg-blue-200/40 dark:bg-primary/5 blur-3xl shadow-[0_0_80px_var(--primary-glow)]" />
       </div>
 
       {/* Secondary abstract arc on the bottom left */}
       <motion.div
         animate={{ rotate: 180 }}
         transition={{ duration: 250, repeat: Infinity, ease: 'linear' }}
-        className="absolute bottom-[-30%] left-[-20%] w-[120vw] max-w-[900px] aspect-square rounded-full border-2 border-amber-200/30 dark:border-primary/20"
+        className="absolute bottom-[-30%] left-[-20%] w-[120vw] max-w-[900px] aspect-square rounded-full border-2 border-blue-200/30 dark:border-primary/20"
         style={{ clipPath: 'polygon(0 50%, 100% 50%, 100% 100%, 0 100%)' }}
       />
 
@@ -85,7 +85,7 @@ function PremiumBackgroundBase() {
         ].map((s, i) => (
           <motion.div
             key={i}
-            className="absolute w-1.5 h-1.5 rounded-full bg-amber-400 dark:bg-primary shadow-[0_0_12px_var(--primary-glow)]"
+            className="absolute w-1.5 h-1.5 rounded-full bg-blue-400 dark:bg-primary shadow-[0_0_12px_var(--primary-glow)]"
             style={{
               top: `${s.top}%`,
               left: `${s.left}%`,

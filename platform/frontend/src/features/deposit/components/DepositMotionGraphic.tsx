@@ -88,7 +88,7 @@ export function DepositMotionGraphic() {
 
     return (
         <div ref={rootRef} className="relative w-full max-w-[72px] mx-auto aspect-square flex items-center justify-center shrink-0 my-1">
-            <svg viewBox="0 0 24 24" className="w-full h-full overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+            <svg viewBox="0 0 24 24" className="w-full h-full overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
                 <circle ref={glowRef} cx="12" cy="12" r="10" fill="currentColor" />
 
                 <path ref={walletOpeningRef} d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" pathLength="100" />

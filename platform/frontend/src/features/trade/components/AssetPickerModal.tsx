@@ -20,7 +20,7 @@ interface Props {
 const TYPE_BADGE: Record<string, { label: string; className: string }> = {
   crypto: { label: 'C', className: 'bg-blue-500/20 text-blue-400' },
   stock: { label: 'S', className: 'bg-emerald-500/20 text-emerald-400' },
-  metal: { label: 'M', className: 'bg-amber-500/20 text-amber-400' },
+  metal: { label: 'M', className: 'bg-blue-500/20 text-blue-400' },
 };
 
 function AssetIcon({ asset }: { asset: AssetOption }) {
@@ -53,7 +53,7 @@ const FILTERS: { key: string; label: string; icon: string }[] = [
 const FILTER_COLORS: Record<string, string> = {
   crypto: 'text-blue-400 border-blue-500/40 bg-blue-500/10',
   stock: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10',
-  metal: 'text-amber-400 border-amber-500/40 bg-amber-500/10',
+  metal: 'text-blue-400 border-blue-500/40 bg-blue-500/10',
 };
 
 export function AssetPickerModal({ open, onClose, assets, selectedId, onSelect }: Props) {

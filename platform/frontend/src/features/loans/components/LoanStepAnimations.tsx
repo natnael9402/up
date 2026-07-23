@@ -42,7 +42,7 @@ export function WelcomeAnimation() {
 
   return (
     <div ref={rootRef} className="relative w-[140px] h-[140px] flex items-center justify-center shrink-0 my-2">
-      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
         <circle ref={glowRef} cx="12" cy="12" r="10" fill="currentColor" />
         <circle ref={coinOuterRef} cx="12" cy="12" r="7" fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 0px 5px currentColor)' }} />
         <circle ref={coinInnerRef} cx="12" cy="12" r="5.2" fill="none" stroke="currentColor" strokeWidth="0.8" strokeOpacity="0.35" />
@@ -98,7 +98,7 @@ export function LoanDetailsAnimation() {
 
   return (
     <div ref={rootRef} className="relative w-[140px] h-[140px] flex items-center justify-center shrink-0 my-2">
-      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
         <circle ref={ring2Ref} cx="12" cy="12" r="11" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="3 3" />
         <circle ref={ring1Ref} cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" strokeWidth="0.5" strokeDasharray="2 4" />
         <circle ref={coinOuterRef} cx="12" cy="12" r="7" fill="currentColor" fillOpacity="0.15" stroke="currentColor" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 0px 4px currentColor)' }} />
@@ -146,7 +146,7 @@ export function IdentityAnimation() {
 
   return (
     <div ref={rootRef} className="relative w-[140px] h-[140px] flex items-center justify-center shrink-0 my-2">
-      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
         <circle ref={glowRef} cx="12" cy="12" r="10" fill="currentColor" />
         <rect ref={cardRef} x="2" y="5" width="20" height="14" rx="2.5" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" pathLength="120" style={{ filter: 'drop-shadow(0px 0px 3px currentColor)' }} />
         <rect ref={chipRef} x="5" y="9" width="4" height="3" rx="0.8" fill="currentColor" fillOpacity="0.3" stroke="currentColor" strokeWidth="0.6" />
@@ -196,7 +196,7 @@ export function DocumentsAnimation() {
 
   return (
     <div ref={rootRef} className="relative w-[140px] h-[140px] flex items-center justify-center shrink-0 my-2">
-      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+      <svg viewBox="0 0 24 24" className="w-20 h-20 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
         <circle ref={glowRef} cx="12" cy="12" r="10" fill="currentColor" />
         <rect ref={docRef} x="3" y="3" width="18" height="18" rx="3" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" pathLength="100" style={{ filter: 'drop-shadow(0px 0px 3px currentColor)' }} />
         <line ref={line1Ref} x1="7" y1="8" x2="17" y2="8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeOpacity="0.4" />
@@ -252,7 +252,7 @@ export function ReviewAnimation() {
 
   return (
     <div ref={rootRef} className="relative w-[120px] h-[120px] flex items-center justify-center shrink-0 my-2">
-      <svg viewBox="0 0 24 24" className="w-16 h-16 overflow-visible text-[#B8860B] dark:text-[#D4AF37]">
+      <svg viewBox="0 0 24 24" className="w-16 h-16 overflow-visible text-[#2563EB] dark:text-[#3B82F6]">
         <circle ref={glowRef} cx="12" cy="12" r="10" fill="currentColor" />
         <g ref={orbitTopRef} style={{ transformOrigin: '12px 12px' }}>
           <circle cx="12" cy="3" r="1.2" className="fill-primary/60" />

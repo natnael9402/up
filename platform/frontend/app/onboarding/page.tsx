@@ -50,8 +50,8 @@ function AnimStat({ stat, index, animate }: { stat: typeof STATS_SET_1[number]; 
       )}
       style={{ transitionDelay: `${200 + index * 150}ms` }}
     >
-      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#D4AF37]/[0.05] to-transparent" />
-      <div className="relative flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4AF37] to-[#B8860B] shadow-[0_0_20px_rgba(212,175,55,0.2)] group-hover:shadow-[0_0_32px_rgba(212,175,55,0.35)] transition-shadow duration-500">
+      <div className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#3B82F6]/[0.05] to-transparent" />
+      <div className="relative flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#3B82F6] to-[#2563EB] shadow-[0_0_20px_rgba(59,130,246,0.2)] group-hover:shadow-[0_0_32px_rgba(59,130,246,0.35)] transition-shadow duration-500">
         <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
       </div>
       <div className="relative min-w-0">
@@ -92,7 +92,7 @@ export default function OnboardingPage() {
           <div className="shrink-0 px-5 pb-8 pt-4 space-y-3">
             <button
               onClick={goNext}
-              className="w-full rounded-2xl bg-[#b48608] py-3.5 text-sm font-bold text-black transition-all active:scale-[0.98] hover:shadow-[0_0_24px_rgba(180,134,8,0.3)]"
+              className="w-full rounded-2xl bg-[#2563EB] py-3.5 text-sm font-bold text-white transition-all active:scale-[0.98] hover:shadow-[0_0_24px_rgba(37,99,235,0.3)]"
             >
               Get Started
             </button>
@@ -117,19 +117,19 @@ export default function OnboardingPage() {
             <div className={cn(
               'inline-flex items-center gap-1.5 rounded-full border px-3 py-1 mb-4 transition-all duration-500 delay-100',
               step === 1
-                ? 'border-[#D4AF37]/20 bg-[#D4AF37]/10'
+                ? 'border-[#3B82F6]/20 bg-[#3B82F6]/10'
                 : 'border-emerald-500/20 bg-emerald-500/10',
             )}>
               <span className={cn(
                 'text-[9px] font-black uppercase tracking-[0.15em]',
-                step === 1 ? 'text-[#D4AF37]' : 'text-emerald-400',
+                step === 1 ? 'text-[#3B82F6]' : 'text-emerald-400',
               )}>
                 {step === 1 ? 'Proven Track Record' : 'Performance'}
               </span>
             </div>
             <h2 className="text-2xl sm:text-[1.7rem] font-black tracking-tight leading-tight">
               {step === 1 ? (
-                <>Trusted by<br /><span className="text-[#b48608]">hundreds of thousands</span></>
+                <>Trusted by<br /><span className="text-[#2563EB]">hundreds of thousands</span></>
               ) : (
                 <>Numbers that<br /><span className="bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">speak for themselves</span></>
               )}
@@ -149,7 +149,7 @@ export default function OnboardingPage() {
           <div className="shrink-0 px-5 pb-8 pt-2 space-y-3">
             <button
               onClick={step === 1 ? goNext : () => router.push('/signup')}
-              className="w-full flex items-center justify-center gap-2 rounded-2xl bg-[#b48608] py-3.5 text-sm font-bold text-black transition-all active:scale-[0.98] hover:shadow-[0_0_24px_rgba(180,134,8,0.3)]"
+              className="w-full flex items-center justify-center gap-2 rounded-2xl bg-[#2563EB] py-3.5 text-sm font-bold text-white transition-all active:scale-[0.98] hover:shadow-[0_0_24px_rgba(37,99,235,0.3)]"
             >
               {step === 1 ? 'Continue' : 'Get Started'}
               <ArrowRight className="h-4 w-4" />
@@ -160,7 +160,7 @@ export default function OnboardingPage() {
                   key={i}
                   className={cn(
                     'h-1 rounded-full transition-all duration-500',
-                    step === i ? 'w-8 bg-[#b48608]' : 'w-3 bg-black/15',
+                    step === i ? 'w-8 bg-[#2563EB]' : 'w-3 bg-black/15',
                   )}
                 />
               ))}

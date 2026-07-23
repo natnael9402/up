@@ -40,9 +40,9 @@ const CORE_VALUES = [
     icon: Zap,
     title: 'Lightning Fast',
     description: 'Sub-second order execution with zero slippage on all trade types.',
-    color: 'text-amber-400',
-    bg: 'bg-amber-500/10',
-    border: 'border-amber-500/20',
+    color: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/20',
   },
 ];
 
@@ -88,8 +88,8 @@ export function AboutUsPage() {
           title="About Us"
           subtitle="The story behind UPHOLD Trading"
           action={
-            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20">
-              <Star size={18} className="text-[#D4AF37]" />
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#3B82F6]/10 border border-[#3B82F6]/20">
+              <Star size={18} className="text-[#3B82F6]" />
             </div>
           }
         />
@@ -99,15 +99,15 @@ export function AboutUsPage() {
 
         {/* Hero */}
         <Section>
-          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-[#0a0a0f] to-[#111118] border border-[#D4AF37]/10 p-8 shadow-[0_20px_60px_-20px_rgba(212,175,55,0.15)]">
-            <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-[#D4AF37]/5 blur-[100px]" />
-            <div className="pointer-events-none absolute -bottom-20 -left-20 h-44 w-44 rounded-full bg-[#D4AF37]/5 blur-[80px]" />
+          <div className="relative overflow-hidden rounded-3xl bg-linear-to-br from-[#0a0a0f] to-[#111118] border border-[#3B82F6]/10 p-8 shadow-[0_20px_60px_-20px_rgba(59,130,246,0.15)]">
+            <div className="pointer-events-none absolute -top-24 -right-24 h-56 w-56 rounded-full bg-[#3B82F6]/5 blur-[100px]" />
+            <div className="pointer-events-none absolute -bottom-20 -left-20 h-44 w-44 rounded-full bg-[#3B82F6]/5 blur-[80px]" />
             <div className="relative text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#D4AF37]/20 bg-[#D4AF37]/10 px-4 py-1.5 mb-6">
-                <Sparkles size={12} className="text-[#D4AF37]" />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#D4AF37]">Version 2.0</span>
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#3B82F6]/20 bg-[#3B82F6]/10 px-4 py-1.5 mb-6">
+                <Sparkles size={12} className="text-[#3B82F6]" />
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#3B82F6]">Version 2.0</span>
               </div>
-              <h1 className="text-3xl sm:text-4xl font-black text-white tracking-widest drop-shadow-[0_0_20px_rgba(212,175,55,0.3)] mb-4">
+              <h1 className="text-3xl sm:text-4xl font-black text-white tracking-widest drop-shadow-[0_0_20px_rgba(59,130,246,0.3)] mb-4">
                 UPHOLD TRADING
               </h1>
               <p className="text-sm text-white/60 max-w-md mx-auto leading-relaxed">
@@ -122,7 +122,7 @@ export function AboutUsPage() {
                   { value: '$2B+', label: 'Volume' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
-                    <p className="text-xl font-black text-[#D4AF37]" style={{ textShadow: '0 0 12px rgba(212,175,55,0.4)' }}>{stat.value}</p>
+                    <p className="text-xl font-black text-[#3B82F6]" style={{ textShadow: '0 0 12px rgba(59,130,246,0.4)' }}>{stat.value}</p>
                     <p className="text-[10px] font-bold uppercase tracking-wider text-white/40">{stat.label}</p>
                   </div>
                 ))}
@@ -143,8 +143,8 @@ export function AboutUsPage() {
                 navigate global markets with confidence."
               </blockquote>
               <div className="mt-6 flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 flex items-center justify-center">
-                  <Award size={18} className="text-[#D4AF37]" />
+                <div className="h-10 w-10 rounded-full bg-[#3B82F6]/10 border border-[#3B82F6]/20 flex items-center justify-center">
+                  <Award size={18} className="text-[#3B82F6]" />
                 </div>
                 <div>
                   <p className="text-sm font-black text-foreground">UPHOLD Trading</p>
@@ -192,7 +192,7 @@ export function AboutUsPage() {
             <div className="space-y-3">
               {[
                 { icon: TrendingUp, title: 'Spot & Futures Trading', desc: 'Trade crypto, metals, stocks with up to 125× leverage', color: 'text-primary' },
-                { icon: Zap, title: 'Fast Trade Options', desc: '30–700 second binary options with up to 40% returns', color: 'text-amber-400' },
+                { icon: Zap, title: 'Fast Trade Options', desc: '30–700 second binary options with up to 40% returns', color: 'text-blue-400' },
                 { icon: Lock, title: 'Secure Wallets', desc: 'Three dedicated accounts: Spot, Trading, and Fast Trade', color: 'text-blue-400' },
                 { icon: Globe, title: 'Multi-Network Support', desc: 'Deposit and withdraw via TRC20, ERC20, BEP20, and SOL', color: 'text-violet-400' },
                 { icon: Users, title: 'Referral Program', desc: 'Earn 10% commission from every qualified referral', color: 'text-emerald-400' },
@@ -262,9 +262,9 @@ export function AboutUsPage() {
         {/* Contact */}
         <Section delay={0.4}>
           <SectionLabel icon={ArrowUpRight} text="Get in Touch" />
-          <div className="rounded-[24px] border border-[#D4AF37]/20 bg-[#D4AF37]/5 backdrop-blur-xl p-6 text-center">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 mx-auto mb-4">
-              <Globe size={24} className="text-[#D4AF37]" />
+          <div className="rounded-[24px] border border-[#3B82F6]/20 bg-[#3B82F6]/5 backdrop-blur-xl p-6 text-center">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#3B82F6]/10 border border-[#3B82F6]/20 mx-auto mb-4">
+              <Globe size={24} className="text-[#3B82F6]" />
             </div>
             <h3 className="text-lg font-black text-foreground mb-2">upholdtrade.com</h3>
             <p className="text-[12px] text-muted-foreground mb-2 max-w-sm mx-auto">
@@ -273,14 +273,14 @@ export function AboutUsPage() {
             </p>
             <a
               href="mailto:Info@upholdtrade.com"
-              className="text-[12px] font-bold text-[#D4AF37] mb-4 inline-block hover:underline"
+              className="text-[12px] font-bold text-[#3B82F6] mb-4 inline-block hover:underline"
             >
               Info@upholdtrade.com
             </a>
             <div>
               <a
                 href="mailto:Info@upholdtrade.com"
-                className="inline-flex items-center gap-2 rounded-2xl bg-[#D4AF37] px-6 py-3 text-sm font-black text-black transition-all hover:bg-[#D4AF37]/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)]"
+                className="inline-flex items-center gap-2 rounded-2xl bg-[#3B82F6] px-6 py-3 text-sm font-black text-black transition-all hover:bg-[#3B82F6]/90 hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]"
               >
                 Contact Support
                 <ChevronRight size={16} />

@@ -183,7 +183,7 @@ function ArbitrageCheckoutModal({ plan, onClose }: { plan: ArbitragePlan | null;
             </div>
           </div>
 
-          <Button variant="lime" size="xl" fullWidth loading={start.isPending} onClick={handleSubmit} className="text-lg shadow-[0_0_20px_rgba(180,134,8,0.3)]">
+          <Button variant="lime" size="xl" fullWidth loading={start.isPending} onClick={handleSubmit} className="text-lg shadow-[0_0_20px_rgba(37,99,235,0.3)]">
             Deploy Engine <ChevronRight className="w-5 h-5 ml-1" />
           </Button>
         </div>

@@ -96,7 +96,7 @@ export function ReferralPage() {
         ) : (
           <>
             {/* Hero */}
-            <div className="relative mb-5 overflow-hidden rounded-3xl bg-gradient-to-br from-[#E5C158] via-[#D4AF37] to-[#B8860B] p-[2px] shadow-lg">
+            <div className="relative mb-5 overflow-hidden rounded-3xl bg-gradient-to-br from-[#60A5FA] via-[#3B82F6] to-[#2563EB] p-[2px] shadow-lg">
               <div className="relative z-10 rounded-[calc(1.5rem-2px)] bg-background px-6 pb-6 pt-7">
                 <div className="mb-1 flex items-center justify-between">
                   <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export function ReferralPage() {
 
                 {data.inviteCode ? (
                   <div className="mb-4 text-center">
-                    <div className="mb-3 inline-block rounded-2xl bg-gradient-to-br from-[#E5C158]/20 via-[#D4AF37]/15 to-[#B8860B]/20 px-8 py-4 ring-1 ring-[#D4AF37]/20">
+                    <div className="mb-3 inline-block rounded-2xl bg-gradient-to-br from-[#60A5FA]/20 via-[#3B82F6]/15 to-[#2563EB]/20 px-8 py-4 ring-1 ring-[#3B82F6]/20">
                       <code className="select-all text-3xl font-black tracking-[0.15em] text-foreground md:text-4xl">
                         {data.inviteCode}
                       </code>

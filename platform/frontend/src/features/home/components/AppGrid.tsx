@@ -41,7 +41,7 @@ function AppGridBase() {
             onClick={() => router.push(app.href)}
             className="group flex flex-col items-center gap-3 transition-transform duration-300 active:scale-95"
           >
-            <div className="relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-linear-to-br from-[#E5C158] to-[#B8860B] transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_12px_30px_-8px_var(--primary-glow)] ring-1 ring-[#D4AF37]/30">
+            <div className="relative flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full bg-linear-to-br from-[#60A5FA] to-[#2563EB] transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-[0_12px_30px_-8px_var(--primary-glow)] ring-1 ring-[#3B82F6]/30">
               <Icon className="h-6 w-6 text-[#08110A] transition-transform duration-300 group-hover:scale-110" strokeWidth={2} />
             </div>
             

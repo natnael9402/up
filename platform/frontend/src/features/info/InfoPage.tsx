@@ -273,11 +273,11 @@ export function InfoPage() {
 
           {/* Withdrawal Fee */}
           <div className="relative overflow-hidden rounded-[24px] border border-white/[0.06] bg-surface/60 backdrop-blur-xl p-5 mb-3">
-            <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-amber-500/8 blur-3xl" />
+            <div className="pointer-events-none absolute -right-10 -top-10 h-28 w-28 rounded-full bg-blue-500/8 blur-3xl" />
             <div className="relative">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/20">
-                  <ArrowUpRight size={18} className="text-amber-400" />
+                <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-500/10 border border-amber-500/20">
+                  <ArrowUpRight size={18} className="text-blue-400" />
                 </div>
                 <div>
                   <h3 className="text-[15px] font-black text-foreground">Withdrawal Fee</h3>
@@ -299,8 +299,8 @@ export function InfoPage() {
                   ))}
                 </div>
               </div>
-              <div className="flex items-start gap-2 rounded-xl bg-amber-500/5 border border-amber-500/10 px-3 py-2.5">
-                <InfoIcon size={12} className="mt-0.5 shrink-0 text-amber-400" />
+              <div className="flex items-start gap-2 rounded-xl bg-amber-500/5 border border-blue-500/10 px-3 py-2.5">
+                <InfoIcon size={12} className="mt-0.5 shrink-0 text-blue-400" />
                 <p className="text-[11px] text-muted-foreground">0.05% only on amounts over <span className="font-bold text-foreground">$100</span></p>
               </div>
             </div>
@@ -442,8 +442,8 @@ export function InfoPage() {
               {/* Leverage */}
               <div className="rounded-[24px] border border-white/[0.06] bg-surface/60 backdrop-blur-xl p-5">
                 <div className="flex items-center gap-2.5 mb-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-amber-500/10 border border-amber-500/15">
-                    <Layers size={16} className="text-amber-400" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/10 border border-blue-500/15">
+                    <Layers size={16} className="text-blue-400" />
                   </div>
                   <h3 className="text-[13px] font-black text-foreground">Leverage</h3>
                 </div>
@@ -454,8 +454,8 @@ export function InfoPage() {
                     </div>
                   ))}
                 </div>
-                <div className="mt-2.5 flex items-start gap-1.5 rounded-lg bg-amber-500/5 border border-amber-500/10 px-2.5 py-2">
-                  <ShieldCheck size={11} className="mt-0.5 shrink-0 text-amber-400" />
+                <div className="mt-2.5 flex items-start gap-1.5 rounded-lg bg-amber-500/5 border border-blue-500/10 px-2.5 py-2">
+                  <ShieldCheck size={11} className="mt-0.5 shrink-0 text-blue-400" />
                   <p className="text-[10px] text-muted-foreground">125× = <span className="font-bold text-destructive">0.8% move</span> liquidates you</p>
                 </div>
               </div>

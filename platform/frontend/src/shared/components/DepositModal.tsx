@@ -296,23 +296,23 @@ export function DepositModal({ open, onClose, onSuccess, prefillAmount }: Deposi
                     {numAmount > 0 && (
                       <>
                         {numAmount >= 5000 ? (
-                          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#E5C158] via-[#D4AF37] to-[#B8860B] p-[2px] shadow-[0_0_30px_-4px_var(--primary-glow)]">
-                            <div className="rounded-[calc(1rem-2px)] bg-gradient-to-br from-[#D4AF37]/[0.12] via-[#E5C158]/[0.06] to-[#B8860B]/[0.12] px-4 py-3 ring-1 ring-inset ring-[#D4AF37]/20">
+                          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#60A5FA] via-[#3B82F6] to-[#2563EB] p-[2px] shadow-[0_0_30px_-4px_var(--primary-glow)]">
+                            <div className="rounded-[calc(1rem-2px)] bg-gradient-to-br from-[#3B82F6]/[0.12] via-[#60A5FA]/[0.06] to-[#2563EB]/[0.12] px-4 py-3 ring-1 ring-inset ring-[#3B82F6]/20">
                               <div className="flex items-center gap-3">
-                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#D4AF37]/30 to-[#E5C158]/20 ring-1 ring-[#D4AF37]/40 shadow-[0_0_12px_var(--primary-glow)]">
+                                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#3B82F6]/30 to-[#60A5FA]/20 ring-1 ring-[#3B82F6]/40 shadow-[0_0_12px_var(--primary-glow)]">
                                   <Gift size={16} className="text-primary" />
                                 </div>
                                 <div>
                                   <p className="text-sm font-black text-foreground">+${formatCurrency(numAmount * 0.1)} bonus</p>
-                                  <p className="text-[10px] font-semibold text-[#D4AF37]">10% on your deposit</p>
+                                  <p className="text-[10px] font-semibold text-[#3B82F6]">10% on your deposit</p>
                                 </div>
                               </div>
                             </div>
                           </div>
                         ) : (
-                          <div className="flex items-center gap-2.5 rounded-2xl border border-[#D4AF37]/20 bg-gradient-to-r from-[#D4AF37]/[0.03] to-transparent px-4 py-2.5">
-                            <Gift size={14} className="shrink-0 text-[#D4AF37]/50" />
-                            <p className="text-[10px] font-medium text-[#D4AF37]/60">
+                          <div className="flex items-center gap-2.5 rounded-2xl border border-[#3B82F6]/20 bg-gradient-to-r from-[#3B82F6]/[0.03] to-transparent px-4 py-2.5">
+                            <Gift size={14} className="shrink-0 text-[#3B82F6]/50" />
+                            <p className="text-[10px] font-medium text-[#3B82F6]/60">
                               {numAmount > 0
                                 ? `Add $${formatCurrency(5000 - numAmount)} more to unlock 10% bonus`
                                 : 'Drop $5k+ · Get 10% back'}

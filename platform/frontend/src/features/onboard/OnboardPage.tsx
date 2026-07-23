@@ -96,7 +96,7 @@ export function OnboardPage() {
     <div className="flex min-h-screen items-center justify-center px-4 bg-background">
       <div className="w-full max-w-lg p-6 sm:p-8 rounded-3xl bg-surface border border-white/5 shadow-2xl animate-in fade-in zoom-in-95 duration-500">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl sm:text-4xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(180,134,8,0.3)] mb-3">
+          <h1 className="text-3xl sm:text-4xl font-black text-primary tracking-widest drop-shadow-[0_0_20px_rgba(37,99,235,0.3)] mb-3">
             UPHOLD
           </h1>
           <h2 className="text-xl font-bold tracking-tight text-foreground">{steps[step].title}</h2>
