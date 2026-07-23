@@ -27,7 +27,9 @@ export function TransactionDetailsModal({
   const icon = isDeposit ? <ArrowDownLeft className="w-8 h-8" /> : isTransfer ? <Repeat className="w-8 h-8" /> : <ArrowUpRight className="w-8 h-8" />;
   const iconBg = isDeposit ? 'bg-success/10 text-success ring-success/5' : isTransfer ? 'bg-primary/10 text-primary ring-primary/20' : 'bg-surface-hover text-foreground ring-border/20';
   const prefix = isDeposit ? '+' : isTransfer ? '' : '-';
-  const dateStr = new Date(tx.created_at ?? tx.createdAt).toLocaleString(undefined, {
+  const rawDate = tx.created_at ?? tx.createdAt;
+  const parsedDate = new Date(rawDate?.includes('T') ? rawDate : rawDate?.replace(' ', 'T') + 'Z');
+  const dateStr = isNaN(parsedDate.getTime()) ? '—' : parsedDate.toLocaleString(undefined, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

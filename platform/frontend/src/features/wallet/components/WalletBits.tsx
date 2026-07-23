@@ -168,7 +168,7 @@ function TransactionRowBase({ tx, onClick }: TxRowProps) {
         <div>
           <div className="font-bold text-foreground text-[15px] capitalize tracking-tight">{tx.type}</div>
           <div className="text-[12px] font-medium text-muted-foreground mt-0.5">
-            {new Date(tx.created_at ?? tx.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })} · {tx.network ?? (isTransfer ? 'Internal Transfer' : 'Transfer')}
+            {(() => { const d = tx.created_at ?? tx.createdAt; const dt = new Date(d?.includes('T') ? d : d?.replace(' ', 'T') + 'Z'); return isNaN(dt.getTime()) ? '—' : dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric' }); })()} · {tx.network ?? (isTransfer ? 'Internal Transfer' : 'Transfer')}
           </div>
         </div>
       </div>
