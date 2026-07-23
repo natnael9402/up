@@ -31,7 +31,7 @@ export function NewsForm({ defaultValues, articleId, isEditing }: NewsFormProps)
     title: defaultValues?.title || '',
     slug: defaultValues?.slug || '',
     excerpt: defaultValues?.excerpt || '',
-    author: 'PAXORA Premium',
+    author: 'Uphold Trading',
     image_url: defaultValues?.image_url || '',
     is_published: defaultValues?.is_published ?? false,
     content: defaultValues?.content || '',

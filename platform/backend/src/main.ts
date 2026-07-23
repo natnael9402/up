@@ -17,8 +17,8 @@ async function bootstrap() {
   app.use(cookieParser());
   app.enableCors({
     origin: [
-      'https://paxorapremiumlab.com',
-      'https://admin.paxorapremiumlab.com',
+      'https://upholdtrading.com',
+      'https://admin.upholdtrading.com',
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:3002',

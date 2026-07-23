@@ -93,7 +93,7 @@ export default function PrivacyPage() {
                   <li>Data portability — receive your data in a structured, machine-readable format</li>
                   <li>Withdraw consent at any time where processing is based on consent</li>
                 </ul>
-                <p className="mt-2">To exercise these rights, contact us at <span className="text-primary font-bold">Info@paxorapremiumlab.com</span>. We will respond within 30 days.</p>
+                <p className="mt-2">To exercise these rights, contact us at <span className="text-primary font-bold">Info@upholdtrading.com</span>. We will respond within 30 days.</p>
               </section>
 
               <section>
@@ -130,7 +130,7 @@ export default function PrivacyPage() {
                   For questions, concerns, or data requests, contact our Data Protection Officer:
                 </p>
                 <p className="mt-2 text-foreground">
-                  Email: <span className="text-primary font-bold">Info@paxorapremiumlab.com</span><br />
+                  Email: <span className="text-primary font-bold">Info@upholdtrading.com</span><br />
                   Address: UPHOLD Trading Ltd., Gibraltar
                 </p>
               </section>

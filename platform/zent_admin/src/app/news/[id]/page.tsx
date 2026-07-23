@@ -53,7 +53,7 @@ export default function EditNewsPage() {
         title: article.title,
         slug: article.slug,
         excerpt: article.excerpt || '',
-        author: 'PAXORA Premium',
+        author: 'Uphold Trading',
         image_url: article.image_url || '',
         is_published: article.is_published ?? false,
         content: article.content || '',

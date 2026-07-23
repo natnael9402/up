@@ -1,7 +1,7 @@
 services:
   npm:
     image: jc21/nginx-proxy-manager:latest
-    container_name: robin-npm
+    container_name: uphold-npm
     restart: unless-stopped
     ports:
       - "80:80"
@@ -21,7 +21,7 @@ services:
 
   db:
     image: postgres:16-alpine
-    container_name: robin-db
+    container_name: uphold-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: base_trade_prod
@@ -41,7 +41,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.ol
-    container_name: robin-ol
+    container_name: uphold-ol
     restart: unless-stopped
     env_file: .env
     environment:
@@ -59,13 +59,11 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
       args:
-        NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
+        NEXT_PUBLIC_API_URL: https://api.upholdtrading.com/api
         NEXT_PUBLIC_HUBSPOT_API_KEY: ${NEXT_PUBLIC_HUBSPOT_API_KEY:-}
         NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
-    container_name: robin-frontend
+    container_name: uphold-frontend
     restart: unless-stopped
-    environment:
-      NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
     networks:
       - proxy
     depends_on:
@@ -76,12 +74,10 @@ services:
       context: .
       dockerfile: Dockerfile.admin
       args:
-        NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
+        NEXT_PUBLIC_API_URL: https://api.upholdtrading.com/api
         NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
-    container_name: robin-admin
+    container_name: uphold-admin
     restart: unless-stopped
-    environment:
-      NEXT_PUBLIC_API_URL: https://api.paxorapremiumlab.com/api
     networks:
       - proxy
     depends_on:

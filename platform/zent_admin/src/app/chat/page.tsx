@@ -192,7 +192,7 @@ export default function AdminChatPage() {
   };
 
   const ticketName = (t: Ticket) => {
-    const isGuest = t.user?.email === 'guest@system.paxora';
+    const isGuest = t.user?.email === 'guest@system.uphold';
     if (isGuest) {
       const sid = t.subject?.match(/\[guest:([^\]]+)\]/)?.[1];
       return `Guest${sid ? ` (${sid.slice(0, 8)}…)` : ''}`;
@@ -230,7 +230,7 @@ export default function AdminChatPage() {
                     <div className="min-w-0 flex-1">
                       <div className="mb-0.5 flex items-baseline justify-between gap-2">
                         <span className={`truncate text-sm ${unread ? 'font-bold text-foreground' : 'font-medium text-foreground'}`}>{ticketName(t)}</span>
-                        {t.user?.email === 'guest@system.paxora' && (
+                        {t.user?.email === 'guest@system.uphold' && (
                           <span className="shrink-0 rounded-full bg-amber-500/15 px-1.5 py-0.5 text-[8px] font-bold text-amber-600 dark:text-amber-400 uppercase">Guest</span>
                         )}
                         <span className="shrink-0 text-[10px] text-muted-foreground">{t.lastReplyAt ? formatDate(t.lastReplyAt) : ''}</span>
