@@ -249,6 +249,13 @@ export function AboutUsPage() {
               London, W1W 8DH<br />
               United Kingdom
             </p>
+            <div className="mt-4 pt-4 border-t border-white/[0.06]">
+              <h3 className="text-[13px] font-black text-foreground mb-2">Canada Office</h3>
+              <p className="text-[12px] text-muted-foreground leading-relaxed">
+                6th Floor, 905 West Pender Street<br />
+                Vancouver, BC, Canada V6C 1L6
+              </p>
+            </div>
           </div>
         </Section>
 

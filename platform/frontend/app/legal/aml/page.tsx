@@ -275,6 +275,7 @@ export default function AMLPage() {
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@upholdtrade.com</span><br />
                   Address: Uphold Europe Limited, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH, United Kingdom<br />
+                  Canada Office: 6th Floor, 905 West Pender Street, Vancouver, BC, Canada V6C 1L6<br />
                   Attention: AML Compliance Officer
                 </p>
                 <p className="mt-2">Whistleblower reports may be submitted anonymously through our dedicated channel at <span className="text-primary font-bold">Info@upholdtrade.com</span>.</p>

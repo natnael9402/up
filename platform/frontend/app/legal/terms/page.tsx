@@ -140,7 +140,8 @@ export default function TermsPage() {
                 </p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@upholdtrade.com</span><br />
-                  Address: Uphold Europe Limited, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH, United Kingdom
+                  Address: Uphold Europe Limited, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH, United Kingdom<br />
+                  Canada Office: 6th Floor, 905 West Pender Street, Vancouver, BC, Canada V6C 1L6
                 </p>
               </section>
             </div>
