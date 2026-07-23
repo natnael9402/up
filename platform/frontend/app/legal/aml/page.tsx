@@ -185,7 +185,7 @@ export default function AMLPage() {
                   <li>The United States Office of Foreign Assets Control (OFAC)</li>
                   <li>The European Union (EU)</li>
                   <li>The United Kingdom Office of Financial Sanctions Implementation (OFSI)</li>
-                  <li>The Gibraltar Financial Services Commission (GFSC)</li>
+                  <li>The United Kingdom Financial Conduct Authority (FCA)</li>
                   <li>Other applicable sanctions authorities</li>
                 </ul>
                 <p className="mt-2"><strong className="text-foreground">Sanctions Screening:</strong></p>
@@ -274,7 +274,7 @@ export default function AMLPage() {
                 <p>For inquiries regarding this AML Policy or to report suspicious activity, please contact our AML Compliance Officer:</p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@upholdtrade.com</span><br />
-                  Address: UPHOLD Trading Ltd., Gibraltar<br />
+                  Address: Uphold Europe Limited, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH, United Kingdom<br />
                   Attention: AML Compliance Officer
                 </p>
                 <p className="mt-2">Whistleblower reports may be submitted anonymously through our dedicated channel at <span className="text-primary font-bold">Info@upholdtrade.com</span>.</p>

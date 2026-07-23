@@ -238,6 +238,20 @@ export function AboutUsPage() {
           </div>
         </Section>
 
+        {/* Registered Office */}
+        <Section delay={0.38}>
+          <SectionLabel icon={Globe} text="Registered Office" />
+          <div className="rounded-[24px] border border-white/[0.06] bg-surface/60 backdrop-blur-xl p-6">
+            <h3 className="text-[13px] font-black text-foreground mb-2">UK / European Office</h3>
+            <p className="text-[12px] text-muted-foreground leading-relaxed">
+              Uphold Europe Limited<br />
+              Eastcastle House, 27/28 Eastcastle Street<br />
+              London, W1W 8DH<br />
+              United Kingdom
+            </p>
+          </div>
+        </Section>
+
         {/* Contact */}
         <Section delay={0.4}>
           <SectionLabel icon={ArrowUpRight} text="Get in Touch" />

@@ -131,7 +131,7 @@ export default function PrivacyPage() {
                 </p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@upholdtrade.com</span><br />
-                  Address: UPHOLD Trading Ltd., Gibraltar
+                  Address: Uphold Europe Limited, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH, United Kingdom
                 </p>
               </section>
             </div>

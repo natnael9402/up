@@ -122,7 +122,7 @@ export default function TermsPage() {
               <section>
                 <h2 className="text-base sm:text-lg font-bold text-foreground mb-2 sm:mb-3" style={{ fontFamily: 'var(--font-outfit)' }}>10. Governing Law</h2>
                 <p>
-                  These Terms shall be governed by and construed in accordance with the laws of Gibraltar. Any disputes arising under these Terms shall be resolved through binding arbitration in accordance with the rules of the Gibraltar Arbitration Centre.
+                  These Terms shall be governed by and construed in accordance with the laws of the United Kingdom. Any disputes arising under these Terms shall be resolved through binding arbitration in accordance with the rules of the London Court of International Arbitration.
                 </p>
               </section>
 
@@ -140,7 +140,7 @@ export default function TermsPage() {
                 </p>
                 <p className="mt-2 text-foreground">
                   Email: <span className="text-primary font-bold">Info@upholdtrade.com</span><br />
-                  Address: UPHOLD Trading Ltd., Gibraltar
+                  Address: Uphold Europe Limited, Eastcastle House, 27/28 Eastcastle Street, London, W1W 8DH, United Kingdom
                 </p>
               </section>
             </div>
