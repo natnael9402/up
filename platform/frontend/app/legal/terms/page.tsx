@@ -139,7 +139,7 @@ export default function TermsPage() {
                   For questions about these Terms, please contact us:
                 </p>
                 <p className="mt-2 text-foreground">
-                  Email: <span className="text-primary font-bold">Info@upholdtrading.com</span><br />
+                  Email: <span className="text-primary font-bold">Info@upholdtrade.com</span><br />
                   Address: UPHOLD Trading Ltd., Gibraltar
                 </p>
               </section>

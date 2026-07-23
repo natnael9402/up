@@ -59,7 +59,7 @@ services:
       context: .
       dockerfile: Dockerfile.frontend
       args:
-        NEXT_PUBLIC_API_URL: https://api.upholdtrading.com/api
+        NEXT_PUBLIC_API_URL: https://api.upholdtrade.com/api
         NEXT_PUBLIC_HUBSPOT_API_KEY: ${NEXT_PUBLIC_HUBSPOT_API_KEY:-}
         NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
     container_name: uphold-frontend
@@ -74,7 +74,7 @@ services:
       context: .
       dockerfile: Dockerfile.admin
       args:
-        NEXT_PUBLIC_API_URL: https://api.upholdtrading.com/api
+        NEXT_PUBLIC_API_URL: https://api.upholdtrade.com/api
         NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-1x00000000000000000000AA}
     container_name: uphold-admin
     restart: unless-stopped

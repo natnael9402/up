@@ -17,8 +17,8 @@ async function bootstrap() {
   app.use(cookieParser());
   app.enableCors({
     origin: [
-      'https://upholdtrading.com',
-      'https://admin.upholdtrading.com',
+      'https://upholdtrade.com',
+      'https://admin.upholdtrade.com',
       'http://localhost:3000',
       'http://localhost:3001',
       'http://localhost:3002',

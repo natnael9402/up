@@ -245,20 +245,20 @@ export function AboutUsPage() {
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#D4AF37]/10 border border-[#D4AF37]/20 mx-auto mb-4">
               <Globe size={24} className="text-[#D4AF37]" />
             </div>
-            <h3 className="text-lg font-black text-foreground mb-2">upholdtrading.com</h3>
+            <h3 className="text-lg font-black text-foreground mb-2">upholdtrade.com</h3>
             <p className="text-[12px] text-muted-foreground mb-2 max-w-sm mx-auto">
               Have questions? Our support team is available 24/7 to help you 
               with anything you need.
             </p>
             <a
-              href="mailto:Info@upholdtrading.com"
+              href="mailto:Info@upholdtrade.com"
               className="text-[12px] font-bold text-[#D4AF37] mb-4 inline-block hover:underline"
             >
-              Info@upholdtrading.com
+              Info@upholdtrade.com
             </a>
             <div>
               <a
-                href="mailto:Info@upholdtrading.com"
+                href="mailto:Info@upholdtrade.com"
                 className="inline-flex items-center gap-2 rounded-2xl bg-[#D4AF37] px-6 py-3 text-sm font-black text-black transition-all hover:bg-[#D4AF37]/90 hover:shadow-[0_0_30px_rgba(212,175,55,0.3)]"
               >
                 Contact Support
