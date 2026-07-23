@@ -39,7 +39,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script dangerouslySetInnerHTML={{ __html: "(function(){var e='Thu, 01 Jan 2099 00:00:00 GMT';document.cookie='hs-messages-hide-welcome-message=true;expires='+e+';path=/;SameSite=Lax';try{indexedDB.databases().then(function(dbs){dbs.forEach(function(db){if(db.name&&(db.name.indexOf('hubspot')!==-1||db.name.indexOf('messages')!==-1||db.name.indexOf('hs_')!==-1)){indexedDB.deleteDatabase(db.name)}})})}catch(x){}})();" }} />
         <script dangerouslySetInnerHTML={{ __html: "(function(){var lastEl=null,obs=null;setInterval(function(){var e=document.getElementById('hubspot-messages-iframe-container');if(!e)return;e.style.setProperty('bottom','80px','important');if(e!==lastEl){if(obs)obs.disconnect();lastEl=e;obs=new MutationObserver(function(){e.style.setProperty('bottom','80px','important');if(parseInt(e.style.height)>200){e.style.setProperty('height','400px','important');}});obs.observe(e,{attributes:true,attributeFilter:['style']});}},100);})();" }} />
-        <Script src="//js-eu1.hs-scripts.com/148892423.js" strategy="afterInteractive" />
+        <Script src="//js-eu1.hs-scripts.com/148956450.js" strategy="afterInteractive" />
       </head>
       <body className={`${jakarta.className} ${outfit.variable} ${jakarta.variable} ${spaceMono.variable} antialiased`}>
         <ThemeProvider>

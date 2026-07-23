@@ -76,7 +76,7 @@ export function nukeHubspot() {
 function loadScript() {
   if (document.querySelector('script[src*="hs-scripts"]')) return;
   const script = document.createElement('script');
-  script.src = '//js-eu1.hs-scripts.com/148892423.js';
+  script.src = '//js-eu1.hs-scripts.com/148956450.js';
   script.async = true;
   document.body.appendChild(script);
 }
