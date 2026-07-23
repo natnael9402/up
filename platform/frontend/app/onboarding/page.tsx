@@ -45,7 +45,7 @@ function AnimStat({ stat, index, animate }: { stat: typeof STATS_SET_1[number]; 
   return (
     <div
       className={cn(
-        'group relative flex items-center gap-4 rounded-2xl border border-white/[0.07] bg-white/[0.03] p-4 sm:p-5 transition-all duration-700 ease-out',
+        'group relative flex items-center gap-4 rounded-2xl border border-black/[0.07] bg-black/[0.03] p-4 sm:p-5 transition-all duration-700 ease-out',
         animate ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6',
       )}
       style={{ transitionDelay: `${200 + index * 150}ms` }}
@@ -55,10 +55,10 @@ function AnimStat({ stat, index, animate }: { stat: typeof STATS_SET_1[number]; 
         <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2.5} />
       </div>
       <div className="relative min-w-0">
-        <p className="font-mono text-[1.6rem] sm:text-[2rem] font-black leading-none tracking-tight text-white tabular-nums">
+        <p className="font-mono text-[1.6rem] sm:text-[2rem] font-black leading-none tracking-tight text-black tabular-nums">
           {count}{stat.suffix}
         </p>
-        <p className="mt-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-white/35">{stat.label}</p>
+        <p className="mt-1.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-black/40">{stat.label}</p>
       </div>
     </div>
   );
@@ -81,7 +81,7 @@ export default function OnboardingPage() {
   }, [step]);
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-[#080808] text-white" style={{ colorScheme: 'dark' }}>
+    <div className="fixed inset-0 z-50 flex flex-col bg-white text-black" style={{ colorScheme: 'light' }}>
 
       {/* ════════ Step 0: Splash ════════ */}
       {step === 0 && (
@@ -98,7 +98,7 @@ export default function OnboardingPage() {
             </button>
             <button
               onClick={() => router.push('/login')}
-              className="w-full rounded-2xl border border-white/10 py-3.5 text-sm font-bold text-white/70 transition-all active:scale-[0.98] hover:bg-white/[0.04]"
+              className="w-full rounded-2xl border border-black/10 py-3.5 text-sm font-bold text-black/60 transition-all active:scale-[0.98] hover:bg-black/[0.04]"
             >
               I already have an account
             </button>
@@ -160,7 +160,7 @@ export default function OnboardingPage() {
                   key={i}
                   className={cn(
                     'h-1 rounded-full transition-all duration-500',
-                    step === i ? 'w-8 bg-[#b48608]' : 'w-3 bg-white/15',
+                    step === i ? 'w-8 bg-[#b48608]' : 'w-3 bg-black/15',
                   )}
                 />
               ))}
