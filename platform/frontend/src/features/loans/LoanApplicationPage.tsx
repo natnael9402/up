@@ -223,7 +223,7 @@ export function LoanApplicationPage() {
           </p>
           <div className="relative z-10 flex items-center gap-1.5 text-[11px] text-white/40 mb-6">
             <Clock className="w-3 h-3" />
-            <span>Review typically takes 1-24 hours</span>
+            <span>Review typically takes just a few minutes</span>
           </div>
 
           <button

@@ -117,7 +117,7 @@ function SubmitModal({ open, onClose }: { open: boolean; onClose: () => void }) 
         backImage,
         selfieImage,
       });
-      toast.success('Verification submitted successfully. Please allow 5 to 24 hours for review.');
+      toast.success('Verification submitted successfully. It usually takes just a few minutes.');
       setDocNumber('');
       setFrontImage(null);
       setBackImage(null);

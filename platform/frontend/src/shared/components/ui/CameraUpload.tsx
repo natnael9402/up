@@ -26,16 +26,24 @@ export function CameraUpload({ label, value, onChange, className, facingMode = '
     }
   }, []);
 
+  const [error, setError] = useState<string | null>(null);
+
   const startCamera = useCallback(async () => {
+    setError(null);
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode } });
+      let stream: MediaStream;
+      try {
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode } });
+      } catch {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      }
       streamRef.current = stream;
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
       setMode('camera');
     } catch {
-      setMode('idle');
+      setError('Camera access denied. Please allow camera permissions in your browser settings.');
     }
   }, [facingMode]);
 
@@ -132,24 +140,29 @@ export function CameraUpload({ label, value, onChange, className, facingMode = '
           </button>
         </div>
       ) : (
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-surface border border-border border-dashed p-2.5 text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-all"
-          >
-            <ImageUp className="w-4 h-4" />
-            <span className="text-xs font-semibold">Upload</span>
-          </button>
-          <button
-            type="button"
-            onClick={startCamera}
-            className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-surface border border-border border-dashed p-2.5 text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-all"
-          >
-            <Camera className="w-4 h-4" />
-            <span className="text-xs font-semibold">Camera</span>
-          </button>
-        </div>
+        <>
+          {error && (
+            <p className="text-[11px] text-destructive font-semibold mb-1.5">{error}</p>
+          )}
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-surface border border-border border-dashed p-2.5 text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-all"
+            >
+              <ImageUp className="w-4 h-4" />
+              <span className="text-xs font-semibold">Upload</span>
+            </button>
+            <button
+              type="button"
+              onClick={startCamera}
+              className="flex-1 flex items-center justify-center gap-1.5 rounded-xl bg-surface border border-border border-dashed p-2.5 text-muted-foreground hover:text-foreground hover:bg-surface-hover transition-all"
+            >
+              <Camera className="w-4 h-4" />
+              <span className="text-xs font-semibold">Camera</span>
+            </button>
+          </div>
+        </>
       )}
     </div>
   );

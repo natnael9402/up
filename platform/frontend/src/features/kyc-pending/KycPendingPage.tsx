@@ -31,7 +31,7 @@ export function KycPendingPage() {
 
           <h1 className="mt-4 text-xl font-black text-white tracking-tight">Verification Submitted</h1>
           <p className="mt-2 text-xs font-medium text-white/60 leading-relaxed max-w-[260px]">
-            Your documents are being reviewed. This usually takes <strong className="text-primary">5 to 24 hours</strong>.
+            Your documents are being reviewed. This usually takes <strong className="text-primary">just a few minutes</strong>.
           </p>
 
           <div className="mt-6 flex items-center gap-2 rounded-2xl border border-primary/10 bg-primary/5 px-4 py-3 text-xs text-white/50">
