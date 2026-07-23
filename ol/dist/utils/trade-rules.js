@@ -3,10 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPTION_TRADE_RULES = void 0;
 const logger_1 = require("./logger");
 const DEFAULT_OPTION_TRADE_RULES = {
-    60: { returnRate: 14 },
-    90: { returnRate: 21 },
-    120: { returnRate: 30 },
-    180: { returnRate: 47 },
+    30: { returnRate: 12, minCapital: 100, maxCapital: 15000 },
+    60: { returnRate: 15, minCapital: 15000, maxCapital: 40000 },
+    90: { returnRate: 18, minCapital: 40000, maxCapital: 80000 },
+    180: { returnRate: 21, minCapital: 80000, maxCapital: 150000 },
+    300: { returnRate: 24, minCapital: 150000, maxCapital: 400000 },
+    450: { returnRate: 27, minCapital: 400000, maxCapital: 900000 },
 };
 function parseOptionTradeRules(rawRules, fallback) {
     if (!rawRules) {

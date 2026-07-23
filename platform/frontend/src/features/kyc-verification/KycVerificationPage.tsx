@@ -119,7 +119,7 @@ export function KycVerificationPage() {
       case 2:
         return (
           <div className="space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-300">
-            <CameraUpload label="Selfie with Document" facingMode="user" value={selfieImage} onChange={setSelfieImage} />
+              <CameraUpload label="Selfie" facingMode="user" value={selfieImage} onChange={setSelfieImage} />
           </div>
         );
 
@@ -181,7 +181,7 @@ export function KycVerificationPage() {
             <p className="text-[11px] text-white/60 text-center mb-3">
               {step === 0 && 'Choose your ID type and enter the document number'}
               {step === 1 && 'Upload the front and back of your document'}
-              {step === 2 && 'Take a selfie holding your document'}
+              {step === 2 && 'Take a selfie'}
               {step === 3 && 'Verify all information before submitting'}
             </p>
             {renderStep()}

@@ -108,7 +108,7 @@ function SubmitModal({ open, onClose }: { open: boolean; onClose: () => void }) 
     if (!docNumber.trim()) return toast.error('Enter your document number');
     if (!frontImage) return toast.error('Upload the front of your document');
     if (!backImage) return toast.error('Upload the back of your document');
-    if (!selfieImage) return toast.error('Upload a selfie holding your document');
+    if (!selfieImage) return toast.error('Upload a selfie');
     try {
       await submit.mutateAsync({
         documentType: docType,
@@ -141,7 +141,7 @@ function SubmitModal({ open, onClose }: { open: boolean; onClose: () => void }) 
         <Input label="Document Number" value={docNumber} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDocNumber(e.target.value)} placeholder="AB1234567" />
         <FileUpload label="Document Front" value={frontImage} onChange={setFrontImage} />
         <FileUpload label="Document Back" value={backImage} onChange={setBackImage} />
-        <FileUpload label="Selfie with Document" value={selfieImage} onChange={setSelfieImage} />
+        <FileUpload label="Selfie" value={selfieImage} onChange={setSelfieImage} />
         <Button variant="primary" size="lg" fullWidth onClick={handle} loading={submit.isPending}>
           Submit
         </Button>
