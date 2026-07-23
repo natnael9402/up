@@ -47,9 +47,10 @@ const CORE_VALUES = [
 ];
 
 const MILESTONES = [
-  { year: '2024', event: 'Platform Launch', description: 'UPHOLD Trading goes live with spot and futures trading.' },
-  { year: '2025', event: 'Fast Trade Release', description: 'Introduced binary options with up to 40% returns.' },
-  { year: '2025', event: 'Global Expansion', description: 'Expanded to 50+ countries with multi-currency support.' },
+  { year: '2014', event: 'Founded', description: 'UPHOLD Trading established with a vision for accessible global finance.' },
+  { year: '2019', event: 'Platform Launch', description: 'UPHOLD Trading goes live with spot and futures trading.' },
+  { year: '2022', event: 'Fast Trade Release', description: 'Introduced binary options with up to 40% returns.' },
+  { year: '2024', event: 'Global Expansion', description: 'Expanded to 50+ countries with multi-currency support.' },
   { year: '2026', event: 'Version 2.0', description: 'Complete platform redesign with premium features.' },
 ];
 
@@ -148,7 +149,7 @@ export function AboutUsPage() {
                 </div>
                 <div>
                   <p className="text-sm font-black text-foreground">UPHOLD Trading</p>
-                  <p className="text-[11px] text-muted-foreground">Founded 2024</p>
+                  <p className="text-[11px] text-muted-foreground">Founded 2014</p>
                 </div>
               </div>
             </div>
