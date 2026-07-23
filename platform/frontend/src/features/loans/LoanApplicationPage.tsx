@@ -41,6 +41,8 @@ const STEPS = [
 ];
 
 const DURATIONS = [30, 60, 90];
+const INTEREST_RATE_PERCENT = 5;
+const INTEREST_FREE_THRESHOLD = 15000;
 const DOCUMENT_TYPES = [
   { value: 'passport', label: 'Passport' },
   { value: 'national_id', label: 'National ID' },
@@ -84,9 +86,10 @@ export function LoanApplicationPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const numAmount = Number(amount);
-  const interestRate = 5;
-  const totalPayable = numAmount + (numAmount * interestRate) / 100;
-  const dailyPayment = totalPayable / duration;
+  const isInterestFree = numAmount > 0 && numAmount <= INTEREST_FREE_THRESHOLD;
+  const displayRate = isInterestFree ? 0 : INTEREST_RATE_PERCENT;
+  const totalPayable = isInterestFree ? numAmount : numAmount + (numAmount * INTEREST_RATE_PERCENT) / 100;
+  const dailyPayment = totalPayable / (duration || 1);
 
   const canNext = () => {
     switch (step) {
@@ -143,9 +146,10 @@ export function LoanApplicationPage() {
             duration={duration}
             onDurationChange={setDuration}
             numAmount={numAmount}
-            interestRate={interestRate}
+            interestRate={displayRate}
             totalPayable={totalPayable}
             dailyPayment={dailyPayment}
+            isInterestFree={isInterestFree}
           />
         );
       case 2:
@@ -172,9 +176,10 @@ export function LoanApplicationPage() {
             documentType={documentType}
             frontImage={frontImage}
             backImage={backImage}
-            interestRate={interestRate}
+            interestRate={displayRate}
             totalPayable={totalPayable}
             dailyPayment={dailyPayment}
+            isInterestFree={isInterestFree}
           />
         );
       default:
@@ -302,7 +307,7 @@ export function LoanApplicationPage() {
 function WelcomeStep() {
   const features = [
     { icon: <Landmark className="w-4 h-4" />, text: 'Instant approval process' },
-    { icon: <Percent className="w-4 h-4" />, text: 'Competitive 5% interest rate' },
+    { icon: <Percent className="w-4 h-4" />, text: '0% interest on loans up to $15,000' },
     { icon: <Shield className="w-4 h-4" />, text: 'Secure document verification' },
     { icon: <CalendarDays className="w-4 h-4" />, text: 'Flexible 30-90 day terms' },
   ];
@@ -334,6 +339,7 @@ function LoanDetailsStep({
   interestRate,
   totalPayable,
   dailyPayment,
+  isInterestFree,
 }: {
   amount: string;
   onAmountChange: (v: string) => void;
@@ -343,6 +349,7 @@ function LoanDetailsStep({
   interestRate: number;
   totalPayable: number;
   dailyPayment: number;
+  isInterestFree: boolean;
 }) {
   const QUICK_AMOUNTS = [500, 1000, 2500, 5000, 10000];
 
@@ -385,7 +392,9 @@ function LoanDetailsStep({
         <div className="grid grid-cols-3 gap-2 mt-2">
           <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-2.5 text-center">
             <div className="text-[9px] text-white/30 font-bold uppercase tracking-wider mb-0.5">Interest</div>
-            <div className="text-xs font-black text-primary">{interestRate}%</div>
+            <div className={cn('text-xs font-black', isInterestFree ? 'text-emerald-400' : 'text-primary')}>
+              {isInterestFree ? '0% Free' : `${interestRate}%`}
+            </div>
           </div>
           <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] p-2.5 text-center">
             <div className="text-[9px] text-white/30 font-bold uppercase tracking-wider mb-0.5">Total</div>
@@ -481,6 +490,7 @@ function ReviewStep({
   interestRate,
   totalPayable,
   dailyPayment,
+  isInterestFree,
 }: {
   amount: number;
   duration: number;
@@ -490,6 +500,7 @@ function ReviewStep({
   interestRate: number;
   totalPayable: number;
   dailyPayment: number;
+  isInterestFree: boolean;
 }) {
   return (
     <div className="space-y-3">
@@ -506,7 +517,9 @@ function ReviewStep({
           </div>
           <div className="text-center border-x border-white/[0.06]">
             <div className="text-[9px] text-white/30 font-bold uppercase tracking-wider mb-0.5">Rate</div>
-            <div className="text-xs font-black text-white">{interestRate}%</div>
+            <div className={cn('text-xs font-black', isInterestFree ? 'text-emerald-400' : 'text-white')}>
+              {isInterestFree ? '0% Free' : `${interestRate}%`}
+            </div>
           </div>
           <div className="text-center">
             <div className="text-[9px] text-white/30 font-bold uppercase tracking-wider mb-0.5">Daily</div>

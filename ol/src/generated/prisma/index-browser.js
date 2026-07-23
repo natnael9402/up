@@ -444,6 +444,7 @@ exports.Prisma.TradeScalarFieldEnum = {
   result: 'result',
   pnl: 'pnl',
   fee: 'fee',
+  market_type: 'market_type',
   opened_at: 'opened_at',
   closed_at: 'closed_at',
   closed_by: 'closed_by',

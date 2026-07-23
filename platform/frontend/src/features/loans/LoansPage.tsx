@@ -56,7 +56,7 @@ export function LoansPage() {
             </h2>
 
             <p className="relative z-10 text-xs font-medium text-white/60 mb-6 max-w-[240px] leading-relaxed">
-              Borrow against your portfolio seamlessly without selling your crypto assets. Enjoy instant approval and low rates.
+              Borrow against your portfolio seamlessly without selling your crypto assets. Enjoy 0% interest on loans up to $15,000.
             </p>
 
             <button
@@ -92,8 +92,15 @@ export function LoansPage() {
                     <div className="min-w-0">
                       <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-wider mb-0.5">Duration: {loan.duration} Days</div>
                       <div className="font-black text-base text-foreground truncate">${formatCurrency(loan.amount)}</div>
-                      <div className="text-[11px] text-muted-foreground mt-0.5">
-                        {new Date(loan.created_at).toLocaleDateString()}
+                      <div className="flex items-center gap-2 mt-0.5">
+                        <span className="text-[11px] text-muted-foreground">
+                          {new Date(loan.created_at).toLocaleDateString()}
+                        </span>
+                        {Number(loan.interest_rate) === 0 && (
+                          <span className="text-[9px] font-bold text-emerald-400 bg-emerald-400/10 px-1.5 py-0.5 rounded-full border border-emerald-400/20">
+                            0% Interest
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

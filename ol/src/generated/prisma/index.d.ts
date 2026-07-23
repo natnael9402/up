@@ -32327,6 +32327,7 @@ export namespace Prisma {
     result: string | null
     pnl: Decimal | null
     fee: Decimal | null
+    market_type: string | null
     opened_at: Date | null
     closed_at: Date | null
     closed_by: bigint | null
@@ -32350,6 +32351,7 @@ export namespace Prisma {
     result: string | null
     pnl: Decimal | null
     fee: Decimal | null
+    market_type: string | null
     opened_at: Date | null
     closed_at: Date | null
     closed_by: bigint | null
@@ -32373,6 +32375,7 @@ export namespace Prisma {
     result: number
     pnl: number
     fee: number
+    market_type: number
     opened_at: number
     closed_at: number
     closed_by: number
@@ -32422,6 +32425,7 @@ export namespace Prisma {
     result?: true
     pnl?: true
     fee?: true
+    market_type?: true
     opened_at?: true
     closed_at?: true
     closed_by?: true
@@ -32445,6 +32449,7 @@ export namespace Prisma {
     result?: true
     pnl?: true
     fee?: true
+    market_type?: true
     opened_at?: true
     closed_at?: true
     closed_by?: true
@@ -32468,6 +32473,7 @@ export namespace Prisma {
     result?: true
     pnl?: true
     fee?: true
+    market_type?: true
     opened_at?: true
     closed_at?: true
     closed_by?: true
@@ -32578,6 +32584,7 @@ export namespace Prisma {
     result: string | null
     pnl: Decimal
     fee: Decimal
+    market_type: string | null
     opened_at: Date
     closed_at: Date | null
     closed_by: bigint | null
@@ -32620,6 +32627,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32650,6 +32658,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32675,6 +32684,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32700,6 +32710,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32707,7 +32718,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "symbol" | "type" | "direction" | "amount" | "entry_price" | "exit_price" | "exchange_rate" | "from_coin" | "to_coin" | "status" | "result" | "pnl" | "fee" | "opened_at" | "closed_at" | "closed_by" | "created_at" | "updated_at", ExtArgs["result"]["trade"]>
+  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "symbol" | "type" | "direction" | "amount" | "entry_price" | "exit_price" | "exchange_rate" | "from_coin" | "to_coin" | "status" | "result" | "pnl" | "fee" | "market_type" | "opened_at" | "closed_at" | "closed_by" | "created_at" | "updated_at", ExtArgs["result"]["trade"]>
   export type TradeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contracts?: boolean | Trade$contractsArgs<ExtArgs>
     options?: boolean | Trade$optionsArgs<ExtArgs>
@@ -32752,6 +32763,7 @@ export namespace Prisma {
       result: string | null
       pnl: Prisma.Decimal
       fee: Prisma.Decimal
+      market_type: string | null
       opened_at: Date
       closed_at: Date | null
       closed_by: bigint | null
@@ -33201,6 +33213,7 @@ export namespace Prisma {
     readonly result: FieldRef<"Trade", 'String'>
     readonly pnl: FieldRef<"Trade", 'Decimal'>
     readonly fee: FieldRef<"Trade", 'Decimal'>
+    readonly market_type: FieldRef<"Trade", 'String'>
     readonly opened_at: FieldRef<"Trade", 'DateTime'>
     readonly closed_at: FieldRef<"Trade", 'DateTime'>
     readonly closed_by: FieldRef<"Trade", 'BigInt'>
@@ -45677,6 +45690,7 @@ export namespace Prisma {
     result: 'result',
     pnl: 'pnl',
     fee: 'fee',
+    market_type: 'market_type',
     opened_at: 'opened_at',
     closed_at: 'closed_at',
     closed_by: 'closed_by',
@@ -48125,6 +48139,7 @@ export namespace Prisma {
     result?: StringNullableFilter<"Trade"> | string | null
     pnl?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableFilter<"Trade"> | string | null
     opened_at?: DateTimeFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableFilter<"Trade"> | bigint | number | null
@@ -48154,6 +48169,7 @@ export namespace Prisma {
     result?: SortOrderInput | SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrderInput | SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrderInput | SortOrder
     closed_by?: SortOrderInput | SortOrder
@@ -48186,6 +48202,7 @@ export namespace Prisma {
     result?: StringNullableFilter<"Trade"> | string | null
     pnl?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableFilter<"Trade"> | string | null
     opened_at?: DateTimeFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableFilter<"Trade"> | bigint | number | null
@@ -48215,6 +48232,7 @@ export namespace Prisma {
     result?: SortOrderInput | SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrderInput | SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrderInput | SortOrder
     closed_by?: SortOrderInput | SortOrder
@@ -48246,6 +48264,7 @@ export namespace Prisma {
     result?: StringNullableWithAggregatesFilter<"Trade"> | string | null
     pnl?: DecimalWithAggregatesFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalWithAggregatesFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableWithAggregatesFilter<"Trade"> | string | null
     opened_at?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableWithAggregatesFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableWithAggregatesFilter<"Trade"> | bigint | number | null
@@ -51323,6 +51342,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -51351,6 +51371,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -51377,6 +51398,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51405,6 +51427,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -51432,6 +51455,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -51454,6 +51478,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51476,6 +51501,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -54323,6 +54349,7 @@ export namespace Prisma {
     result?: SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrder
     closed_by?: SortOrder
@@ -54358,6 +54385,7 @@ export namespace Prisma {
     result?: SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrder
     closed_by?: SortOrder
@@ -54381,6 +54409,7 @@ export namespace Prisma {
     result?: SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrder
     closed_by?: SortOrder
@@ -61330,6 +61359,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -61357,6 +61387,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -61398,6 +61429,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -61425,6 +61457,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -61450,6 +61483,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -61477,6 +61511,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -61518,6 +61553,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -61545,6 +61581,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -61570,6 +61607,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -61597,6 +61635,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -61638,6 +61677,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -61665,6 +61705,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -62291,6 +62332,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -62318,6 +62360,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -62444,6 +62487,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -62471,6 +62515,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -63386,6 +63431,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -63413,6 +63459,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -63448,6 +63495,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -63474,6 +63522,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -64187,6 +64236,7 @@ export namespace Prisma {
     result?: StringNullableFilter<"Trade"> | string | null
     pnl?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableFilter<"Trade"> | string | null
     opened_at?: DateTimeFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableFilter<"Trade"> | bigint | number | null
@@ -66891,6 +66941,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -66912,6 +66963,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -67862,6 +67914,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67889,6 +67942,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67915,6 +67969,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67936,6 +67991,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67962,6 +68018,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -67988,6 +68045,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null

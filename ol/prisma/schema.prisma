@@ -550,7 +550,7 @@ model Loan {
   status               LoanStatus      @default(pending)
   rejection_reason     String?
   duration             Int             @default(30)
-  interest_rate        Decimal         @default(0.00) @db.Decimal(5, 2)
+  interest_rate        Decimal         @default(0.00) @db.Decimal(5, 4)
   total_payable        Decimal         @default(0.00) @db.Decimal(15, 2)
   accumulated_interest Decimal         @default(0.00) @db.Decimal(15, 2)
   last_interest_date   DateTime?       @db.Timestamp(0)

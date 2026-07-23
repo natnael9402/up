@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -173,9 +174,9 @@ model KycSubmission {
   user_id          BigInt
   document_type    String              @db.VarChar(255)
   document_number  String?             @db.VarChar(255)
-  front_image_url  String?             @db.VarChar(255)
-  back_image_url   String?             @db.VarChar(255)
-  selfie_image_url String?             @db.VarChar(255)
+  front_image_url  String?             @db.Text
+  back_image_url   String?             @db.Text
+  selfie_image_url String?             @db.Text
   status           KycSubmissionStatus @default(pending)
   rejection_reason String?
   approved_at      DateTime?           @db.Timestamp(0)
@@ -189,6 +190,7 @@ model KycSubmission {
 
   @@index([processed_by])
   @@index([user_id])
+  @@index([user_id, status])
   @@map("kyc_submissions")
 }
 
@@ -435,6 +437,7 @@ model Trade {
   result        String?         @db.VarChar(255)
   pnl           Decimal         @default(0.00) @db.Decimal(15, 2)
   fee           Decimal         @default(0.00) @db.Decimal(15, 2)
+  market_type   String?         @db.VarChar(50)
   opened_at     DateTime        @default(now()) @db.Timestamp(0)
   closed_at     DateTime?       @db.Timestamp(0)
   closed_by     BigInt?
