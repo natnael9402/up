@@ -706,6 +706,11 @@ class MarketService {
                     const valid = results
                         .filter((r) => r.status === "fulfilled" && r.value !== null && r.value.price > 0)
                         .map((r) => r.value);
+                    const validIds = new Set(valid.map(v => v.id));
+                    const defaults = getDefaultMetals();
+                    for (const d of defaults) {
+                        if (!validIds.has(d.id)) valid.push(d);
+                    }
                     if (valid.length > 0)
                         return valid;
                     logger_1.logger.warn("Gold API returned no valid metal prices, using defaults");

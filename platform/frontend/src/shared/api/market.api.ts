@@ -186,6 +186,11 @@ async function fetchCommoditiesFallback(): Promise<NormalizedAsset[]> {
     const valid = results
       .filter((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled' && r.value?.price > 0)
       .map((r) => normalizeAsset(r.value, 'metal'));
+    const defaults = getHardcodedCommodities();
+    const validIds = new Set(valid.map(v => v.id));
+    for (const d of defaults) {
+      if (!validIds.has(d.id)) valid.push(d);
+    }
     if (valid.length > 0) return valid;
     return getHardcodedCommodities();
   } catch {
