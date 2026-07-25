@@ -93,6 +93,7 @@ const mapMetalSymbol = (symbol) => {
         XAGUSD: "silver",
         XPTUSD: "platinum",
         XPDUSD: "palladium",
+        CRUDE_OIL: "crude_oil",
     };
     return (_a = map[normalized]) !== null && _a !== void 0 ? _a : normalized;
 };
@@ -194,6 +195,8 @@ const searchAlphaVantage = (query, limit) => __awaiter(void 0, void 0, void 0, f
 });
 const resolveMetalCurrencyCode = (symbol) => {
     const normalized = symbol.toUpperCase();
+    const exactMatch = { CRUDE_OIL: "CRUDE_OIL" };
+    if (exactMatch[normalized]) return exactMatch[normalized];
     const supportedCodes = ["XAU", "XAG", "XPT", "XPD"];
     return supportedCodes.find((code) => normalized.startsWith(code));
 };
@@ -292,6 +295,7 @@ const mapAlphaVantageCommoditySymbol = (symbol) => {
         XAGUSD: "SILVER",
         XPTUSD: "PLATINUM",
         XPDUSD: "PALLADIUM",
+        CRUDE_OIL: "CL=F",
     };
     return (_a = map[symbol.toUpperCase()]) !== null && _a !== void 0 ? _a : symbol;
 };
@@ -680,7 +684,8 @@ class MarketService {
                     { code: "XAU", symbol: "XAUUSD", name: "Gold" },
                     { code: "XAG", symbol: "XAGUSD", name: "Silver" },
                     { code: "XPT", symbol: "XPTUSD", name: "Platinum" },
-                    { code: "XPD", symbol: "XPDUSD", name: "Palladium" }
+                    { code: "XPD", symbol: "XPDUSD", name: "Palladium" },
+                    { code: "CRUDE_OIL", symbol: "CRUDE_OIL", name: "Crude Oil" }
                 ];
                 try {
                     const results = yield Promise.allSettled(metals.map((metal) => __awaiter(this, void 0, void 0, function* () {
@@ -716,6 +721,7 @@ class MarketService {
                 { id: "XAGUSD", symbol: "XAGUSD", name: "Silver", price: 60.00, changePercent: 0 },
                 { id: "XPTUSD", symbol: "XPTUSD", name: "Platinum", price: 1634.00, changePercent: 0 },
                 { id: "XPDUSD", symbol: "XPDUSD", name: "Palladium", price: 1282.00, changePercent: 0 },
+                { id: "CRUDE_OIL", symbol: "CRUDE_OIL", name: "Crude Oil", price: 72.00, changePercent: 0 },
             ];
             const getDefaultStocks = () => [
                 { id: "AAPL", symbol: "AAPL", name: "AAPL", price: 315.00, changePercent: 0, image: "https://s3-symbol-logo.tradingview.com/apple--big.svg" },

@@ -1220,7 +1220,7 @@ class TradeService {
         // Auto-detect from symbol if no market type provided
         if (symbol && typeof symbol === "string") {
             const sym = symbol.replace(/\/USD(T)?$/i, "").trim().toUpperCase();
-            if (["XAUUSD", "XAGUSD", "XPTUSD", "XPDUSD"].includes(sym)) {
+            if (["XAUUSD", "XAGUSD", "XPTUSD", "XPDUSD", "CRUDE_OIL"].includes(sym)) {
                 return "metals";
             }
             if (["AAPL", "MSFT", "AMZN", "GOOGL", "TSLA", "NVDA", "META", "NFLX", "AMD", "INTC", "BABA", "BA", "DIS", "V", "JPM", "GS", "PYPL", "SQ", "COIN", "UBER", "SNAP", "PINS", "ROKU", "SHOP", "SPOT", "ZM", "DKNG", "PLTR", "SOFI", "NIO", "RIVN", "MARA", "RIOT", "HOOD", "RBLX", "ABNB", "NET", "CRWD", "ZS", "DDOG", "SNOW", "NOW", "ISRG", "PFE", "JNJ", "LLY", "ABBV", "AMGN", "GILD"].includes(sym)) {
@@ -1231,7 +1231,7 @@ class TradeService {
     }
     normalizeMarketTypeBySymbol(symbol) {
         if (typeof symbol === "string" &&
-            ["XAUUSD", "XAGUSD", "XPTUSD", "XPDUSD"].includes(symbol.toUpperCase())) {
+            ["XAUUSD", "XAGUSD", "XPTUSD", "XPDUSD", "CRUDE_OIL"].includes(symbol.toUpperCase())) {
             return "metals";
         }
         if (typeof symbol === "string" &&
@@ -1277,7 +1277,7 @@ class TradeService {
                 // Fallback: Gold API direct
                 try {
                     const axios = require("axios");
-                    const metalCode = { XAUUSD: "XAU", XAGUSD: "XAG", XPTUSD: "XPT", XPDUSD: "XPD" }[cleanSymbol];
+                    const metalCode = { XAUUSD: "XAU", XAGUSD: "XAG", XPTUSD: "XPT", XPDUSD: "XPD", CRUDE_OIL: "CRUDE_OIL" }[cleanSymbol];
                     if (metalCode) {
                         const res = yield axios.get(`https://api.gold-api.com/price/${metalCode}`, { timeout: 10000 });
                         if (res.data && typeof res.data.price === "number" && res.data.price > 0) {
@@ -1295,7 +1295,7 @@ class TradeService {
                 }
                 // Fallback: hardcoded prices
                 const METAL_PRICES = {
-                    XAUUSD: 4122, XAGUSD: 60, XPTUSD: 1634, XPDUSD: 1282,
+                    XAUUSD: 4122, XAGUSD: 60, XPTUSD: 1634, XPDUSD: 1282, CRUDE_OIL: 72,
                 };
                 if (METAL_PRICES[cleanSymbol]) {
                     const price = new library_1.Decimal(METAL_PRICES[cleanSymbol]);

@@ -23,7 +23,7 @@ const FALLBACK_SYMBOLS = {
 
 const GOLD_API_BASE = "https://api.gold-api.com/price";
 const MARKETDATA_BASE = "https://api.marketdata.app/v1";
-const KNOWN_METALS = { XAUUSD: "XAU", XAGUSD: "XAG", XPTUSD: "XPT", XPDUSD: "XPD" };
+const KNOWN_METALS = { XAUUSD: "XAU", XAGUSD: "XAG", XPTUSD: "XPT", XPDUSD: "XPD", CRUDE_OIL: "CRUDE_OIL" };
 const KNOWN_STOCKS = new Set(["AAPL","TSLA","NVDA","MSFT","AMZN","GOOGL","META","NFLX","AMD","INTC","BABA","BA","DIS","V","JPM","GS","PYPL","SQ","COIN","UBER","LYFT","SNAP","PINS","ROKU","SHOP","SQ","SPOT","ZM","DKNG","PLTR","SOFI","NIO","XPEV","LI","RIVN","MARA","RIOT","HOOD","RBLX","ABNB","COIN","NET","CRWD","ZS","DDOG","SNOW","DBX","BOX","TEAM","NOW","VEEV","ISRG","VRTX","REGN","BIIB","MRNA","PFE","JNJ","UNH","ABT","TMO","DHR","BMY","LLY","NVO","AZN","GSK","PFE","MRK","ABBV","AMGN","GILD","VRTX"]);
 
 class MarketDataService {
