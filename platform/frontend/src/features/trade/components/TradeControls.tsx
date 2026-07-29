@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useRef, useState, useEffect } from 'react';
-import { TrendingDown, TrendingUp, Loader2, Timer, ChevronDown, Eye, EyeOff } from 'lucide-react';
+import { TrendingDown, TrendingUp, Loader2, Timer, ChevronDown, Eye, EyeOff, RefreshCw } from 'lucide-react';
 import { formatCompact, formatCurrency } from '../../../shared/lib/utils';
 import { DURATIONS, OPTION_TRADE_RULES, profitFor, type TradeDirection, type TradeDuration } from '../logic/tradeMath';
 import { cn } from '../../../shared/lib/utils';
@@ -15,6 +15,8 @@ interface Props {
   onAmountChange: (v: number) => void;
   onDurationChange: (d: TradeDuration) => void;
   onTrade: (type: TradeDirection) => void;
+  onRefresh?: () => Promise<void>;
+  isRefreshing?: boolean;
 }
 
 function TradeControlsBase({ amount, duration, placingDirection, balance, accountLabel = 'Balance', onAmountChange, onDurationChange, onTrade }: Props) {
@@ -58,6 +60,15 @@ function TradeControlsBase({ amount, duration, placingDirection, balance, accoun
           >
             {showBalance ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
           </button>
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              className="text-muted-foreground hover:text-foreground transition-colors disabled:pointer-events-none"
+            >
+              <RefreshCw className={cn('h-3.5 w-3.5', isRefreshing && 'animate-spin')} />
+            </button>
+          )}
         </div>
       </div>
 

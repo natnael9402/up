@@ -55,8 +55,8 @@ export function TransferApprovalModal({ open, onClose, onApproved, onDeposit, cu
       } else {
         await walletApi.loadFromMain(targetAccount, shortfall);
       }
-      queryClient.invalidateQueries({ queryKey: ['trades', 'balances'] });
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+      await queryClient.refetchQueries({ queryKey: ['trades', 'balances'] });
+      await queryClient.refetchQueries({ queryKey: ['profile'] });
       toast.success(`$${formatCurrency(shortfall)} transferred to ${ACCOUNT_LABELS[targetAccount] || targetAccount}`);
       onApproved();
       onClose();

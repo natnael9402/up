@@ -20,6 +20,7 @@ import { DepositModal } from '../../shared/components/DepositModal';
 import { ChartSkeleton } from '../../shared/components/ui/ChartSkeleton';
 import { cn, formatCurrency } from '../../shared/lib/utils';
 import { OPTION_TRADE_RULES, TIME_INTERVALS, type AssetOption, type TradeDirection, type TradeDuration } from './logic/tradeMath';
+import type { TradeBalances } from './hooks/useTradeBalances';
 
 export function TradeOptionPage() {
   useDocumentTitle('Binary Option · UPHOLD Trading');
@@ -45,6 +46,7 @@ export function TradeOptionPage() {
   const [loadTradeIntent, setLoadTradeIntent] = useState<TradeDirection | null>(null);
   const [depositOpen, setDepositOpen] = useState(false);
   const [depositAmount, setDepositAmount] = useState(0);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [intervalSec, setIntervalSec] = useState(3600);
   const initialPriceRef = useRef<number | null>(null);
 
@@ -137,7 +139,8 @@ export function TradeOptionPage() {
       return;
     }
 
-    const fastTradeBal = balances.data?.fastTradeBalance ?? 0;
+    const cached = queryClient.getQueryData<TradeBalances>(['trades', 'balances']);
+    const fastTradeBal = cached?.fastTradeBalance ?? 0;
     const needed = amount - fastTradeBal;
     if (needed > 0) {
       setLoadTradeIntent(type);
@@ -150,6 +153,18 @@ export function TradeOptionPage() {
     const visualStrike = stream.price;
     const marketType = currentAsset.type === 'metal' ? 'metals' : currentAsset.type === 'stock' ? 'stocks' : currentAsset.type;
     await trade.start({ assetSymbol: symbol, visualStrikePrice: visualStrike, amount, duration, type, marketType });
+  };
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await Promise.all([
+      queryClient.refetchQueries({ queryKey: ['market', 'crypto'] }),
+      queryClient.refetchQueries({ queryKey: ['market', 'stocks'] }),
+      queryClient.refetchQueries({ queryKey: ['market', 'metals'] }),
+      queryClient.refetchQueries({ queryKey: ['trades', 'balances'] }),
+    ]);
+    if (currentAsset) stream.reset(currentAsset.current_price);
+    setIsRefreshing(false);
   };
 
   return (
@@ -228,6 +243,8 @@ export function TradeOptionPage() {
               onAmountChange={setAmount}
               onDurationChange={handleDurationChange}
               onTrade={handleTrade}
+              onRefresh={handleRefresh}
+              isRefreshing={isRefreshing}
             />
           )}
         </div>
@@ -257,10 +274,10 @@ export function TradeOptionPage() {
       <DepositModal
         open={depositOpen}
         onClose={() => setDepositOpen(false)}
-        onSuccess={(deposited) => {
+        onSuccess={async (deposited) => {
           setDepositOpen(false);
-          queryClient.invalidateQueries({ queryKey: ['profile'] });
-          queryClient.invalidateQueries({ queryKey: ['trades', 'balances'] });
+          await queryClient.refetchQueries({ queryKey: ['profile'] });
+          await queryClient.refetchQueries({ queryKey: ['trades', 'balances'] });
           toast.success(`$${formatCurrency(deposited)} deposited successfully`);
           if (loadTradeIntent) {
             handleTrade(loadTradeIntent);

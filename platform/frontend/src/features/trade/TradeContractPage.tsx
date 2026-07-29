@@ -26,6 +26,7 @@ export function TradeContractPage() {
   const metals = useCommoditiesMarket();
   const [selectedAsset, setSelectedAsset] = useState<AssetOption | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [intervalSec, setIntervalSec] = useState(3600);
   const [successModal, setSuccessModal] = useState<{ open: boolean; type: TradeDirection; symbol: string; amount: string; profit: number; outcome?: 'WIN' | 'LOSS' | 'SPOT'; completedAt?: number }>({
     open: false,
@@ -74,6 +75,18 @@ export function TradeContractPage() {
   const handleAssetSelect = (asset: AssetOption) => {
     setSelectedAsset(asset);
     stream.reset(asset.current_price);
+  };
+
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    await Promise.all([
+      queryClient.refetchQueries({ queryKey: ['market', 'crypto'] }),
+      queryClient.refetchQueries({ queryKey: ['market', 'stocks'] }),
+      queryClient.refetchQueries({ queryKey: ['market', 'metals'] }),
+      queryClient.refetchQueries({ queryKey: ['trades', 'balances'] }),
+    ]);
+    if (currentAsset) stream.reset(currentAsset.current_price);
+    setIsRefreshing(false);
   };
 
   return (
@@ -135,6 +148,8 @@ export function TradeContractPage() {
             balance={balances.data?.tradingBalance ?? 0}
             accountLabel="Trading"
             currentPrice={stream.price}
+            onRefresh={handleRefresh}
+            isRefreshing={isRefreshing}
             onComplete={(res) => {
               setSuccessModal({
                 open: true,

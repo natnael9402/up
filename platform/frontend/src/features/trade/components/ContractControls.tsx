@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState, useCallback, useEffect, useRef } from 'react';
-import { TrendingDown, TrendingUp, Loader2, Eye, EyeOff } from 'lucide-react';
+import { TrendingDown, TrendingUp, Loader2, Eye, EyeOff, RefreshCw } from 'lucide-react';
 import { tradesApi } from '../../../shared/api';
 import { useToast } from '../../../shared/contexts/ToastContext';
 import { formatCurrency, cn } from '../../../shared/lib/utils';
@@ -16,6 +16,8 @@ interface Props {
   accountLabel?: string;
   currentPrice: number;
   onComplete: (result: { symbol: string; amount: string; profit: number; direction: 'buy' | 'sell' }) => void;
+  onRefresh?: () => Promise<void>;
+  isRefreshing?: boolean;
 }
 
 interface ContractPosition {
@@ -238,6 +240,15 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
           >
             {showBalance ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
           </button>
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              className="text-muted-foreground hover:text-foreground transition-colors disabled:pointer-events-none"
+            >
+              <RefreshCw className={cn('h-3.5 w-3.5', isRefreshing && 'animate-spin')} />
+            </button>
+          )}
         </div>
       </div>
 

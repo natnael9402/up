@@ -1,10 +1,10 @@
 'use client';
 
 import { memo, useState, useCallback, useMemo } from 'react';
-import { ArrowRight, ArrowLeftRight, Loader2, Eye, EyeOff, ChevronDown } from 'lucide-react';
+import { ArrowRight, ArrowLeftRight, Loader2, Eye, EyeOff, ChevronDown, RefreshCw } from 'lucide-react';
 import { tradesApi } from '../../../shared/api';
 import { useToast } from '../../../shared/contexts/ToastContext';
-import { formatCurrency } from '../../../shared/lib/utils';
+import { cn, formatCurrency } from '../../../shared/lib/utils';
 import { TransferApprovalModal } from './TransferApprovalModal';
 import type { AssetOption } from '../logic/tradeMath';
 import type { UserAsset } from '../../../shared/types';
@@ -31,6 +31,8 @@ interface Props {
   onComplete: (result: { symbol: string; amount: string; profit: number; direction: 'buy' | 'sell'; tradeData?: SpotTradeData }) => void;
   allAssets: AssetOption[];
   portfolio: UserAsset[];
+  onRefresh?: () => Promise<void>;
+  isRefreshing?: boolean;
 }
 
 function SpotControlsBase({ asset, balance, accountLabel = 'Balance', onComplete, allAssets, portfolio }: Props) {
@@ -162,6 +164,15 @@ function SpotControlsBase({ asset, balance, accountLabel = 'Balance', onComplete
           <button onClick={() => setShowBalance((v) => !v)} className="text-muted-foreground hover:text-foreground transition-colors">
             {showBalance ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
           </button>
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              className="text-muted-foreground hover:text-foreground transition-colors disabled:pointer-events-none"
+            >
+              <RefreshCw className={cn('h-3.5 w-3.5', isRefreshing && 'animate-spin')} />
+            </button>
+          )}
         </div>
       </div>
 

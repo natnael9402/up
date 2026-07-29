@@ -34,6 +34,7 @@ class TradeController {
                     marketType: typeof req.body.market_type === "string"
                         ? req.body.market_type
                         : undefined,
+                    price: req.body.price !== undefined ? Number(req.body.price) : undefined,
                 });
                 trade_scheduler_1.default.scheduleOptionResolution(BigInt(trade.id), Number(req.body.duration));
                 return res.status(201).json({
