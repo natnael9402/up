@@ -35,7 +35,7 @@ interface Props {
   isRefreshing?: boolean;
 }
 
-function SpotControlsBase({ asset, balance, accountLabel = 'Balance', onComplete, allAssets, portfolio }: Props) {
+function SpotControlsBase({ asset, balance, accountLabel = 'Balance', onComplete, allAssets, portfolio, onRefresh, isRefreshing }: Props) {
   const [fromCoin, setFromCoin] = useState('USDT');
   const [toCoin, setToCoin] = useState(asset?.symbol?.toUpperCase() ?? 'ETH');
   const [amount, setAmount] = useState('100');

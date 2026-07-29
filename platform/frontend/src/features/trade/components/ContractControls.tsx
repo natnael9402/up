@@ -32,7 +32,7 @@ interface ContractPosition {
   stopLoss: number | null;
 }
 
-function ContractControlsBase({ asset, balance, accountLabel = 'Balance', currentPrice, onComplete }: Props) {
+function ContractControlsBase({ asset, balance, accountLabel = 'Balance', currentPrice, onComplete, onRefresh, isRefreshing }: Props) {
   const [showBalance, setShowBalance] = useState(false);
   const [amount, setAmount] = useState('100');
   const [leverage, setLeverage] = useState(10);

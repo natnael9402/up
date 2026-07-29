@@ -19,7 +19,7 @@ interface Props {
   isRefreshing?: boolean;
 }
 
-function TradeControlsBase({ amount, duration, placingDirection, balance, accountLabel = 'Balance', onAmountChange, onDurationChange, onTrade }: Props) {
+function TradeControlsBase({ amount, duration, placingDirection, balance, accountLabel = 'Balance', onAmountChange, onDurationChange, onTrade, onRefresh, isRefreshing }: Props) {
   const [internal, setInternal] = useState(String(amount));
   const [open, setOpen] = useState(false);
   const [showBalance, setShowBalance] = useState(false);
