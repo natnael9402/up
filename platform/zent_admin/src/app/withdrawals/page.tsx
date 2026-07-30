@@ -144,6 +144,7 @@ function EmptyState({ tab }: { tab: string }) {
 export default function WithdrawalsPage() {
   const [withdrawals, setWithdrawals] = useState<Withdrawal[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [toast, setToast] = useState<Toast>(null);
   const [tab, setTab] = useState<'pending' | 'approved' | 'rejected'>('pending');
 
@@ -154,9 +155,13 @@ export default function WithdrawalsPage() {
 
   const fetchWithdrawals = useCallback((status: string) => {
     setLoading(true);
+    setError(null);
     getWithdrawalsByStatus(status)
       .then((data) => setWithdrawals(data.sort((a: any, b: any) => new Date(b.createdAt || b.created_at || 0).getTime() - new Date(a.createdAt || a.created_at || 0).getTime())))
-      .catch(console.error)
+      .catch((err) => {
+        console.error(err);
+        setError(err instanceof Error ? err.message : 'Failed to load withdrawals');
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -219,6 +224,13 @@ export default function WithdrawalsPage() {
         {loading ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
+          </div>
+        ) : error ? (
+          <div className="col-span-full rounded-2xl border border-destructive/30 bg-destructive/5 px-6 py-8 text-center">
+            <p className="text-sm font-semibold text-destructive">{error}</p>
+            <button onClick={() => fetchWithdrawals(tab)} className="mt-3 text-xs font-bold text-primary hover:underline">
+              Try again
+            </button>
           </div>
         ) : withdrawals.length === 0 ? (
           <EmptyState tab={tab} />

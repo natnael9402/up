@@ -15,6 +15,9 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var __importStar = (this && this.__importStar) || (function () {
     var ownKeys = function(o) {
         ownKeys = Object.getOwnPropertyNames || function (o) {
@@ -46,6 +49,7 @@ exports.calculateFee = exports.deleteWithdrawal = exports.updateWithdrawal = exp
 const withdrawalService = __importStar(require("./withdrawal.service"));
 const withdrawal_service_1 = require("./withdrawal.service");
 const http_response_1 = require("../utils/http-response");
+const prisma_1 = __importDefault(require("../prisma"));
 const ensureAuthenticated = (req, res) => {
     var _a;
     if (!((_a = req.user) === null || _a === void 0 ? void 0 : _a.id)) {
@@ -81,7 +85,8 @@ const listWithdrawals = (req, res) => __awaiter(void 0, void 0, void 0, function
     };
     const extractQueryValue = (value) => Array.isArray(value) ? value[0] : value;
     try {
-        const isAdmin = req.user.role === "admin";
+        const user = yield prisma_1.default.user.findUnique({ where: { id: userId } });
+        const isAdmin = (user === null || user === void 0 ? void 0 : user.role) === "admin";
         const statusQuery = extractQueryValue(req.query.status);
         const perPageRaw = extractQueryValue(((_a = req.query.per_page) !== null && _a !== void 0 ? _a : req.query.perPage));
         const pageRaw = extractQueryValue(req.query.page);
@@ -178,7 +183,8 @@ const getWithdrawal = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         return;
     try {
         const withdrawalId = BigInt(req.params.id);
-        const isAdmin = req.user.role === "admin";
+        const user = yield prisma_1.default.user.findUnique({ where: { id: userId } });
+        const isAdmin = (user === null || user === void 0 ? void 0 : user.role) === "admin";
         const withdrawal = yield withdrawalService.getWithdrawalById(withdrawalId, userId, isAdmin);
         if (!withdrawal) {
             return (0, http_response_1.errorResponse)(res, "Withdrawal not found", 404);
@@ -219,7 +225,8 @@ const updateWithdrawal = (req, res) => __awaiter(void 0, void 0, void 0, functio
     const userId = ensureAuthenticated(req, res);
     if (userId === null)
         return;
-    if (req.user.role !== "admin") {
+    const user = yield prisma_1.default.user.findUnique({ where: { id: userId } });
+    if (!user || user.role !== "admin") {
         return (0, http_response_1.errorResponse)(res, "Unauthorized action", 403);
     }
     try {
@@ -245,7 +252,8 @@ const deleteWithdrawal = (req, res) => __awaiter(void 0, void 0, void 0, functio
         return;
     try {
         const withdrawalId = BigInt(req.params.id);
-        const isAdmin = req.user.role === "admin";
+        const user = yield prisma_1.default.user.findUnique({ where: { id: userId } });
+        const isAdmin = (user === null || user === void 0 ? void 0 : user.role) === "admin";
         yield withdrawalService.deleteWithdrawal(withdrawalId, userId, isAdmin);
         return (0, http_response_1.successResponse)(res, [], "Withdrawal deleted successfully");
     }
