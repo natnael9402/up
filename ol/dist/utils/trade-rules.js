@@ -3,12 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OPTION_TRADE_RULES = void 0;
 const logger_1 = require("./logger");
 const DEFAULT_OPTION_TRADE_RULES = {
-    30: { returnRate: 12, minCapital: 100, maxCapital: 15000 },
-    60: { returnRate: 15, minCapital: 15000, maxCapital: 40000 },
-    90: { returnRate: 18, minCapital: 40000, maxCapital: 80000 },
-    180: { returnRate: 21, minCapital: 80000, maxCapital: 150000 },
-    300: { returnRate: 24, minCapital: 150000, maxCapital: 400000 },
-    450: { returnRate: 27, minCapital: 400000, maxCapital: 900000 },
+    30: { returnRate: 12, minAmount: 100, maxAmount: 15000 },
+    60: { returnRate: 15, minAmount: 15000, maxAmount: 40000 },
+    90: { returnRate: 18, minAmount: 40000, maxAmount: 80000 },
+    180: { returnRate: 21, minAmount: 80000, maxAmount: 150000 },
+    300: { returnRate: 24, minAmount: 150000, maxAmount: 400000 },
+    450: { returnRate: 27, minAmount: 400000, maxAmount: 900000 },
 };
 function parseOptionTradeRules(rawRules, fallback) {
     if (!rawRules) {
@@ -31,11 +31,13 @@ function parseOptionTradeRules(rawRules, fallback) {
                 Array.isArray(ruleValue)) {
                 return acc;
             }
-            const { returnRate, minAmount, maxAmount } = ruleValue;
+            const { returnRate, minAmount, maxAmount, minCapital, maxCapital } = ruleValue;
             if (typeof returnRate !== "number") {
                 return acc;
             }
-            acc[duration] = Object.assign(Object.assign({ returnRate }, (typeof minAmount === "number" ? { minAmount } : {})), (typeof maxAmount === "number" ? { maxAmount } : {}));
+            const effectiveMinAmount = typeof minAmount === "number" ? minAmount : minCapital;
+            const effectiveMaxAmount = typeof maxAmount === "number" ? maxAmount : maxCapital;
+            acc[duration] = Object.assign(Object.assign({ returnRate }, (typeof effectiveMinAmount === "number" ? { minAmount: effectiveMinAmount } : {})), (typeof effectiveMaxAmount === "number" ? { maxAmount: effectiveMaxAmount } : {}));
             return acc;
         }, {});
         if (Object.keys(normalized).length === 0) {
