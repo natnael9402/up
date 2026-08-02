@@ -266,6 +266,26 @@ class ProfileService {
             return result;
         });
     }
+    getProfileMe(userId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const user = yield prisma_1.default.user.findUnique({
+                where: { id: userId },
+                include: { profiles: true },
+            });
+            if (!user)
+                throw new Error("User not found");
+            const profile = user.profiles[0];
+            if (!profile)
+                throw new Error("Profile not found");
+            const accountBalances = yield prisma_1.default.accountBalance.findMany({ where: { user_id: BigInt(userId) } });
+            const balance = accountBalances.reduce((sum, ab) => sum.add(new library_1.Decimal(ab.balance.toString())), new library_1.Decimal("0"));
+            return {
+                profile: formatProfile(profile),
+                balance,
+                user: sanitizeUserSummary(user),
+            };
+        });
+    }
 }
 exports.ProfileService = ProfileService;
 exports.default = new ProfileService();

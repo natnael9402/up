@@ -54,6 +54,19 @@ router.get("/", (req, res) => profile_controller_1.default.getProfile(req, res))
 router.get("/with-user-data", (req, res) => profile_controller_1.default.getProfileWithUserData(req, res));
 /**
  * @swagger
+ * /api/profile/me:
+ *   get:
+ *     summary: Retrieve lightweight authenticated user data (profile, balance, user)
+ *     tags: [Profile]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User data retrieved successfully
+ */
+router.get("/me", (req, res) => profile_controller_1.default.getProfileMe(req, res));
+/**
+ * @swagger
  * /api/profile:
  *   put:
  *     summary: Update profile preferences

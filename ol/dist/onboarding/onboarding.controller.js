@@ -12,10 +12,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.adminGetUserOnboarding = exports.getOnboarding = exports.submitOnboarding = void 0;
 const http_response_1 = require("../utils/http-response");
 const onboarding_service_1 = require("./onboarding.service");
+const REQUIRED_FIELDS = ["income_source", "annual_income", "employment_status"];
 const submitOnboarding = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const body = req.body || {};
+        const missing = REQUIRED_FIELDS.filter((field) => !body[field]);
+        if (missing.length > 0) {
+            return (0, http_response_1.errorResponse)(res, "Missing required onboarding fields", 400, missing);
+        }
         const userId = BigInt(req.user.id);
-        const onboarding = yield (0, onboarding_service_1.upsertOnboarding)(userId, req.body);
+        const onboarding = yield (0, onboarding_service_1.upsertOnboarding)(userId, body);
         return (0, http_response_1.successResponse)(res, { onboarding }, "Onboarding completed successfully");
     }
     catch (error) {
@@ -27,6 +33,9 @@ const getOnboarding = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const userId = BigInt(req.user.id);
         const onboarding = yield (0, onboarding_service_1.getUserOnboarding)(userId);
+        if (!onboarding) {
+            return (0, http_response_1.errorResponse)(res, "Onboarding data not found", 404);
+        }
         return (0, http_response_1.successResponse)(res, { onboarding }, "Onboarding retrieved successfully");
     }
     catch (error) {

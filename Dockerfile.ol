@@ -14,4 +14,4 @@ COPY ol/prisma ./prisma
 RUN sed -i 's|output.*=.*"../src/generated/prisma"|output = "../dist/generated/prisma"|' prisma/schema.prisma
 RUN npx prisma generate
 EXPOSE 4000
-CMD ["node", "dist/index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]

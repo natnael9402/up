@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Briefcase, DollarSign, Target, TrendingUp, PiggyBank, Building, GraduationCap, Globe } from 'lucide-react';
 import { useDocumentTitle } from '../../shared/hooks/useDocumentTitle';
@@ -48,7 +48,7 @@ const INVESTMENT_GOALS = [
 export function OnboardPage() {
   useDocumentTitle('Tell Us About Yourself · UPHOLD Trading');
   const router = useRouter();
-  const { user } = useAuth();
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const toast = useToast();
   const [step, setStep] = useState(0);
   const [incomeSource, setIncomeSource] = useState('');
@@ -56,6 +56,42 @@ export function OnboardPage() {
   const [employmentStatus, setEmploymentStatus] = useState('');
   const [investmentGoal, setInvestmentGoal] = useState('');
   const [loading, setLoading] = useState(false);
+  const [statusLoading, setStatusLoading] = useState(true);
+
+  useEffect(() => {
+    if (!authLoading && !isAuthenticated) {
+      router.replace('/login');
+    }
+  }, [authLoading, isAuthenticated, router]);
+
+  useEffect(() => {
+    let active = true;
+    onboardApi
+      .getStatus()
+      .then((res) => {
+        if (!active) return;
+        if (res.onboarding) {
+          router.replace('/kyc-verification');
+        }
+      })
+      .catch(() => {
+        // 404 = not onboarded yet; ignore and show the form
+      })
+      .finally(() => {
+        if (active) setStatusLoading(false);
+      });
+    return () => {
+      active = false;
+    };
+  }, [router]);
+
+  if (authLoading || statusLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-background">
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    );
+  }
 
   const steps = [
     { title: 'Income Source', description: 'Where does your income come from?' },
@@ -85,8 +121,9 @@ export function OnboardPage() {
       });
       toast.success('Welcome to UPHOLD Trading!');
       router.push('/kyc-verification');
-    } catch (err: any) {
-      toast.error(err.message || 'Something went wrong');
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong';
+      toast.error(message);
     } finally {
       setLoading(false);
     }

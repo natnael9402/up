@@ -18,12 +18,11 @@ export const authApi = {
   login: (data: { email?: string; phone?: string; password: string; captchaToken?: string }) =>
     http.post<{ access_token: string; user: User }>('/login', data, { skipAuth: true }),
   logout: () => Promise.resolve(),
-  // The endpoint responds with { profile, balance, assets, user, ... } where the
-  // identity fields (name, email, id, role) live under `user`. Flatten those onto
-  // the top level so `user.name` survives a page refresh, while keeping the
-  // top-level balance/assets that other callers rely on.
+  // Lightweight endpoint used on every auth refresh/page mount. The heavy
+  // /profile/with-user-data (assets aggregation + async profile update) is only
+  // needed by the profile screen via getProfileData().
   getProfile: async (): Promise<User> => {
-    const res = await http.get<Record<string, unknown>>('/profile/with-user-data');
+    const res = await http.get<Record<string, unknown>>('/profile/me');
     const u = (res.user ?? {}) as Record<string, unknown>;
     const p = (res.profile ?? {}) as Record<string, unknown>;
     return {

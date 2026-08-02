@@ -73,7 +73,7 @@ app.use((0, cors_1.default)(corsOptions));
 // app.options("*", cors(corsOptions));
 app.set("etag", false);
 app.use((req, res, next) => {
-    if (req.method === "GET" && /^\/api\/profile\/with-user-data/.test(req.path)) {
+    if (req.method === "GET" && (/^\/api\/profile\/with-user-data/.test(req.path) || /^\/api\/profile\/me/.test(req.path))) {
         res.setHeader("Cache-Control", "private, max-age=30");
     } else {
         res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
@@ -108,10 +108,13 @@ app.use(express_1.default.urlencoded({ extended: true, limit: "1mb" }));
 app.use(express_1.default.json({ limit: "1mb" }));
 // app.use(responseFormatter);
 app.use(request_logger_middleware_1.requestLogger);
-// Add this to the entry point of your application
+// Safe global BigInt serialization: keep small values as numbers (backward
+// compatible with existing clients), fall back to strings only when a value
+// exceeds Number.MAX_SAFE_INTEGER and would otherwise lose precision.
 // @ts-ignore
 BigInt.prototype.toJSON = function () {
-    return Number(this.toString());
+    const value = Number(this.toString());
+    return Number.isSafeInteger(value) ? value : this.toString();
 };
 const swaggerOptions = {
     swaggerDefinition: {

@@ -91,13 +91,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       ...(phone ? { phone } : {}),
       ...(referralCode ? { invite_code: referralCode } : {}),
     };
-    console.log('SIGNUP PAYLOAD:', JSON.stringify(payload));
     const newUser = await authApi.signup(payload);
     if (newUser) {
-      await login(email || phone || '', password);
+      storage.setToken(newUser.access_token);
       setIsNewSignup(true);
+      await refresh(true);
     }
-  }, [login]);
+  }, [refresh]);
 
   const logout = useCallback(async () => {
     nukeHubspot();

@@ -79,6 +79,29 @@ class ProfileController {
             }
         });
     }
+    getProfileMe(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const userId = ensureAuthenticated(req, res);
+            if (userId === null)
+                return;
+            try {
+                const data = yield this.service.getProfileMe(userId);
+                return (0, http_response_1.successResponse)(res, {
+                    profile: data.profile,
+                    balance: serializeDecimal(data.balance),
+                    user: data.user,
+                }, "User data retrieved successfully");
+            }
+            catch (error) {
+                const err = error;
+                if (err.message === "Profile not found" ||
+                    err.message === "User not found") {
+                    return (0, http_response_1.errorResponse)(res, err.message, 401);
+                }
+                return (0, http_response_1.errorResponse)(res, "Failed to retrieve profile data", 500, err.message);
+            }
+        });
+    }
     updateProfile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const userId = ensureAuthenticated(req, res);
