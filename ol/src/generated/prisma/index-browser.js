@@ -322,6 +322,17 @@ exports.Prisma.NotificationScalarFieldEnum = {
   image_url: 'image_url'
 };
 
+exports.Prisma.PushSubscriptionScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  endpoint: 'endpoint',
+  p256dh: 'p256dh',
+  auth: 'auth',
+  user_agent: 'user_agent',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.PersonalAccessTokenScalarFieldEnum = {
   id: 'id',
   tokenable_type: 'tokenable_type',
@@ -584,6 +595,23 @@ exports.Prisma.UserOnboardingScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.FlashTransferScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  amount: 'amount',
+  currency: 'currency',
+  network: 'network',
+  to_address: 'to_address',
+  tx_hash: 'tx_hash',
+  block_number: 'block_number',
+  status: 'status',
+  is_test: 'is_test',
+  warning_seen: 'warning_seen',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -682,6 +710,12 @@ exports.LoanRepaymentStatus = exports.$Enums.LoanRepaymentStatus = {
   rejected: 'rejected'
 };
 
+exports.FlashTransferStatus = exports.$Enums.FlashTransferStatus = {
+  active: 'active',
+  expired: 'expired',
+  revoked: 'revoked'
+};
+
 exports.Prisma.ModelName = {
   ArbitrageHosting: 'ArbitrageHosting',
   ArbitrageProduct: 'ArbitrageProduct',
@@ -699,6 +733,7 @@ exports.Prisma.ModelName = {
   MiningProduct: 'MiningProduct',
   PasswordResetToken: 'PasswordResetToken',
   Notification: 'Notification',
+  PushSubscription: 'PushSubscription',
   PersonalAccessToken: 'PersonalAccessToken',
   Profile: 'Profile',
   Session: 'Session',
@@ -716,7 +751,8 @@ exports.Prisma.ModelName = {
   NewsArticle: 'NewsArticle',
   AccountBalance: 'AccountBalance',
   ReferralCommission: 'ReferralCommission',
-  UserOnboarding: 'UserOnboarding'
+  UserOnboarding: 'UserOnboarding',
+  FlashTransfer: 'FlashTransfer'
 };
 
 /**

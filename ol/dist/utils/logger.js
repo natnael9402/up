@@ -22,12 +22,10 @@ const SENSITIVE_FIELDS = new Set([
     "api_key",
 ]);
 const sanitizeForLogging = (meta) => {
-    if (meta === null || meta === undefined) {
+    if (meta === null || meta === undefined)
         return meta;
-    }
-    if (Array.isArray(meta)) {
+    if (Array.isArray(meta))
         return meta.map((item) => (0, exports.sanitizeForLogging)(item));
-    }
     if (typeof meta === "object") {
         return Object.entries(meta).reduce((acc, [key, value]) => {
             if (SENSITIVE_FIELDS.has(key.toLowerCase())) {
@@ -43,9 +41,8 @@ const sanitizeForLogging = (meta) => {
 };
 exports.sanitizeForLogging = sanitizeForLogging;
 const serializeMeta = (meta) => {
-    if (meta === undefined || meta === null) {
+    if (meta === undefined || meta === null)
         return undefined;
-    }
     try {
         return JSON.parse(JSON.stringify((0, exports.sanitizeForLogging)(meta), (_key, value) => typeof value === "bigint" ? Number(value) : value));
     }
@@ -67,9 +64,8 @@ const levelColors = {
     error: colors.red,
 };
 const writeLog = (level, message, meta) => {
-    if (!shouldLog(level)) {
+    if (!shouldLog(level))
         return;
-    }
     const payload = {
         timestamp: new Date().toISOString(),
         level,
@@ -79,9 +75,8 @@ const writeLog = (level, message, meta) => {
     const color = levelColors[level] || colors.reset;
     const coloredLevel = `${color}[${payload.level.toUpperCase()}]${colors.reset}`;
     const logArgs = [coloredLevel, payload.timestamp, payload.message];
-    if (payload.meta !== undefined) {
+    if (payload.meta !== undefined)
         logArgs.push(payload.meta);
-    }
     switch (level) {
         case "debug":
             console.debug(...logArgs);

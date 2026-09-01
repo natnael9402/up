@@ -8,6 +8,7 @@ import { AuthProvider } from '../src/shared/contexts/AuthContext';
 import { ToastProvider } from '../src/shared/contexts/ToastContext';
 import { QueryProvider } from '../src/shared/contexts/QueryProvider';
 import { PremiumBackground } from '../src/shared/components/ui/PremiumBackground';
+import { NotificationPermissionPrompt } from '../src/shared/components/NotificationPermissionPrompt';
 import './globals.css';
 
 const outfit = Outfit({ subsets: ['latin'], variable: '--font-outfit', display: 'swap' });
@@ -49,6 +50,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <PremiumBackground />
                 <ScrollToTop />
                 <ServiceWorkerRegister />
+                <NotificationPermissionPrompt />
                 {children}
               </ToastProvider>
             </AuthProvider>

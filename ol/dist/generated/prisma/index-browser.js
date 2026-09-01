@@ -444,6 +444,7 @@ exports.Prisma.TradeScalarFieldEnum = {
   result: 'result',
   pnl: 'pnl',
   fee: 'fee',
+  market_type: 'market_type',
   opened_at: 'opened_at',
   closed_at: 'closed_at',
   closed_by: 'closed_by',
@@ -583,6 +584,23 @@ exports.Prisma.UserOnboardingScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.FlashTransferScalarFieldEnum = {
+  id: 'id',
+  user_id: 'user_id',
+  amount: 'amount',
+  currency: 'currency',
+  network: 'network',
+  to_address: 'to_address',
+  tx_hash: 'tx_hash',
+  block_number: 'block_number',
+  status: 'status',
+  is_test: 'is_test',
+  warning_seen: 'warning_seen',
+  expires_at: 'expires_at',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -617,6 +635,7 @@ exports.KycSubmissionStatus = exports.$Enums.KycSubmissionStatus = {
 
 exports.MiningHostingStatus = exports.$Enums.MiningHostingStatus = {
   running: 'running',
+  paused: 'paused',
   ended: 'ended',
   cancelled: 'cancelled'
 };
@@ -680,6 +699,12 @@ exports.LoanRepaymentStatus = exports.$Enums.LoanRepaymentStatus = {
   rejected: 'rejected'
 };
 
+exports.FlashTransferStatus = exports.$Enums.FlashTransferStatus = {
+  active: 'active',
+  expired: 'expired',
+  revoked: 'revoked'
+};
+
 exports.Prisma.ModelName = {
   ArbitrageHosting: 'ArbitrageHosting',
   ArbitrageProduct: 'ArbitrageProduct',
@@ -714,7 +739,8 @@ exports.Prisma.ModelName = {
   NewsArticle: 'NewsArticle',
   AccountBalance: 'AccountBalance',
   ReferralCommission: 'ReferralCommission',
-  UserOnboarding: 'UserOnboarding'
+  UserOnboarding: 'UserOnboarding',
+  FlashTransfer: 'FlashTransfer'
 };
 
 /**

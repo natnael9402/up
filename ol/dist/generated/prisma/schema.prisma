@@ -1,6 +1,7 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -173,9 +174,9 @@ model KycSubmission {
   user_id          BigInt
   document_type    String              @db.VarChar(255)
   document_number  String?             @db.VarChar(255)
-  front_image_url  String?             @db.VarChar(255)
-  back_image_url   String?             @db.VarChar(255)
-  selfie_image_url String?             @db.VarChar(255)
+  front_image_url  String?             @db.Text
+  back_image_url   String?             @db.Text
+  selfie_image_url String?             @db.Text
   status           KycSubmissionStatus @default(pending)
   rejection_reason String?
   approved_at      DateTime?           @db.Timestamp(0)
@@ -189,6 +190,7 @@ model KycSubmission {
 
   @@index([processed_by])
   @@index([user_id])
+  @@index([user_id, status])
   @@map("kyc_submissions")
 }
 
@@ -435,6 +437,7 @@ model Trade {
   result        String?         @db.VarChar(255)
   pnl           Decimal         @default(0.00) @db.Decimal(15, 2)
   fee           Decimal         @default(0.00) @db.Decimal(15, 2)
+  market_type   String?         @db.VarChar(50)
   opened_at     DateTime        @default(now()) @db.Timestamp(0)
   closed_at     DateTime?       @db.Timestamp(0)
   closed_by     BigInt?
@@ -510,6 +513,7 @@ model User {
   processedWithdrawals    Withdrawal[]           @relation("WithdrawalsProcessedBy")
   withdrawals             Withdrawal[]           @relation("UserWithdrawals")
   referral_commissions    ReferralCommission[]   @relation("ReferredUserCommissions")
+  flashTransfers          FlashTransfer[]
 
   @@map("users")
 }
@@ -547,7 +551,7 @@ model Loan {
   status               LoanStatus      @default(pending)
   rejection_reason     String?
   duration             Int             @default(30)
-  interest_rate        Decimal         @default(0.00) @db.Decimal(5, 2)
+  interest_rate        Decimal         @default(0.00) @db.Decimal(5, 4)
   total_payable        Decimal         @default(0.00) @db.Decimal(15, 2)
   accumulated_interest Decimal         @default(0.00) @db.Decimal(15, 2)
   last_interest_date   DateTime?       @db.Timestamp(0)
@@ -670,6 +674,7 @@ enum ArbitrageHostingStatus {
 
 enum MiningHostingStatus {
   running
+  paused
   ended
   cancelled
 
@@ -763,4 +768,35 @@ model UserOnboarding {
   user              User      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Restrict)
 
   @@map("user_onboarding")
+}
+
+model FlashTransfer {
+  id           BigInt              @id @default(autoincrement())
+  user_id      BigInt
+  amount       Decimal             @db.Decimal(15, 2)
+  currency     String              @default("USDT") @db.VarChar(10)
+  network      String              @db.VarChar(20)
+  to_address   String              @db.VarChar(255)
+  tx_hash      String              @unique @db.VarChar(255)
+  block_number String              @db.VarChar(50)
+  status       FlashTransferStatus @default(active)
+  is_test      Boolean             @default(true)
+  warning_seen Boolean             @default(false)
+  expires_at   DateTime?           @db.Timestamp(0)
+  created_at   DateTime?           @default(now()) @db.Timestamp(0)
+  updated_at   DateTime?           @updatedAt @db.Timestamp(0)
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@index([user_id, created_at])
+  @@index([status])
+  @@map("flash_transfers")
+}
+
+enum FlashTransferStatus {
+  active
+  expired
+  revoked
+
+  @@map("flash_transfers_status")
 }

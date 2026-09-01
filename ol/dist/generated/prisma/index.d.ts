@@ -183,6 +183,11 @@ export type ReferralCommission = $Result.DefaultSelection<Prisma.$ReferralCommis
  * 
  */
 export type UserOnboarding = $Result.DefaultSelection<Prisma.$UserOnboardingPayload>
+/**
+ * Model FlashTransfer
+ * 
+ */
+export type FlashTransfer = $Result.DefaultSelection<Prisma.$FlashTransferPayload>
 
 /**
  * Enums
@@ -219,6 +224,7 @@ export type ArbitrageHostingStatus = (typeof ArbitrageHostingStatus)[keyof typeo
 
 export const MiningHostingStatus: {
   running: 'running',
+  paused: 'paused',
   ended: 'ended',
   cancelled: 'cancelled'
 };
@@ -309,6 +315,15 @@ export const ProfileTradeStatus: {
 
 export type ProfileTradeStatus = (typeof ProfileTradeStatus)[keyof typeof ProfileTradeStatus]
 
+
+export const FlashTransferStatus: {
+  active: 'active',
+  expired: 'expired',
+  revoked: 'revoked'
+};
+
+export type FlashTransferStatus = (typeof FlashTransferStatus)[keyof typeof FlashTransferStatus]
+
 }
 
 export type ProfileKycStatus = $Enums.ProfileKycStatus
@@ -362,6 +377,10 @@ export const LoanRepaymentStatus: typeof $Enums.LoanRepaymentStatus
 export type ProfileTradeStatus = $Enums.ProfileTradeStatus
 
 export const ProfileTradeStatus: typeof $Enums.ProfileTradeStatus
+
+export type FlashTransferStatus = $Enums.FlashTransferStatus
+
+export const FlashTransferStatus: typeof $Enums.FlashTransferStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -820,6 +839,16 @@ export class PrismaClient<
     * ```
     */
   get userOnboarding(): Prisma.UserOnboardingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flashTransfer`: Exposes CRUD operations for the **FlashTransfer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FlashTransfers
+    * const flashTransfers = await prisma.flashTransfer.findMany()
+    * ```
+    */
+  get flashTransfer(): Prisma.FlashTransferDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1294,7 +1323,8 @@ export namespace Prisma {
     NewsArticle: 'NewsArticle',
     AccountBalance: 'AccountBalance',
     ReferralCommission: 'ReferralCommission',
-    UserOnboarding: 'UserOnboarding'
+    UserOnboarding: 'UserOnboarding',
+    FlashTransfer: 'FlashTransfer'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1313,7 +1343,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "arbitrageHosting" | "arbitrageProduct" | "asset" | "cache" | "cacheLock" | "cryptoAddress" | "deposit" | "failedJob" | "jobBatch" | "job" | "kycSubmission" | "migration" | "miningHosting" | "miningProduct" | "passwordResetToken" | "notification" | "personalAccessToken" | "profile" | "session" | "supportTicketMessage" | "supportTicket" | "tradeContract" | "tradeOption" | "tradeSpot" | "trade" | "transaction" | "user" | "withdrawal" | "loan" | "loanRepayment" | "newsArticle" | "accountBalance" | "referralCommission" | "userOnboarding"
+      modelProps: "arbitrageHosting" | "arbitrageProduct" | "asset" | "cache" | "cacheLock" | "cryptoAddress" | "deposit" | "failedJob" | "jobBatch" | "job" | "kycSubmission" | "migration" | "miningHosting" | "miningProduct" | "passwordResetToken" | "notification" | "personalAccessToken" | "profile" | "session" | "supportTicketMessage" | "supportTicket" | "tradeContract" | "tradeOption" | "tradeSpot" | "trade" | "transaction" | "user" | "withdrawal" | "loan" | "loanRepayment" | "newsArticle" | "accountBalance" | "referralCommission" | "userOnboarding" | "flashTransfer"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -3833,6 +3863,80 @@ export namespace Prisma {
           }
         }
       }
+      FlashTransfer: {
+        payload: Prisma.$FlashTransferPayload<ExtArgs>
+        fields: Prisma.FlashTransferFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlashTransferFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlashTransferFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          findFirst: {
+            args: Prisma.FlashTransferFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlashTransferFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          findMany: {
+            args: Prisma.FlashTransferFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>[]
+          }
+          create: {
+            args: Prisma.FlashTransferCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          createMany: {
+            args: Prisma.FlashTransferCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FlashTransferCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>[]
+          }
+          delete: {
+            args: Prisma.FlashTransferDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          update: {
+            args: Prisma.FlashTransferUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          deleteMany: {
+            args: Prisma.FlashTransferDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlashTransferUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FlashTransferUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>[]
+          }
+          upsert: {
+            args: Prisma.FlashTransferUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          aggregate: {
+            args: Prisma.FlashTransferAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlashTransfer>
+          }
+          groupBy: {
+            args: Prisma.FlashTransferGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlashTransferGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlashTransferCountArgs<ExtArgs>
+            result: $Utils.Optional<FlashTransferCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3963,6 +4067,7 @@ export namespace Prisma {
     accountBalance?: AccountBalanceOmit
     referralCommission?: ReferralCommissionOmit
     userOnboarding?: UserOnboardingOmit
+    flashTransfer?: FlashTransferOmit
   }
 
   /* Types for Logging */
@@ -4290,6 +4395,7 @@ export namespace Prisma {
     processedWithdrawals: number
     withdrawals: number
     referral_commissions: number
+    flashTransfers: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4318,6 +4424,7 @@ export namespace Prisma {
     processedWithdrawals?: boolean | UserCountOutputTypeCountProcessedWithdrawalsArgs
     withdrawals?: boolean | UserCountOutputTypeCountWithdrawalsArgs
     referral_commissions?: boolean | UserCountOutputTypeCountReferral_commissionsArgs
+    flashTransfers?: boolean | UserCountOutputTypeCountFlashTransfersArgs
   }
 
   // Custom InputTypes
@@ -4504,6 +4611,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReferral_commissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReferralCommissionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFlashTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashTransferWhereInput
   }
 
 
@@ -32326,6 +32440,7 @@ export namespace Prisma {
     result: string | null
     pnl: Decimal | null
     fee: Decimal | null
+    market_type: string | null
     opened_at: Date | null
     closed_at: Date | null
     closed_by: bigint | null
@@ -32349,6 +32464,7 @@ export namespace Prisma {
     result: string | null
     pnl: Decimal | null
     fee: Decimal | null
+    market_type: string | null
     opened_at: Date | null
     closed_at: Date | null
     closed_by: bigint | null
@@ -32372,6 +32488,7 @@ export namespace Prisma {
     result: number
     pnl: number
     fee: number
+    market_type: number
     opened_at: number
     closed_at: number
     closed_by: number
@@ -32421,6 +32538,7 @@ export namespace Prisma {
     result?: true
     pnl?: true
     fee?: true
+    market_type?: true
     opened_at?: true
     closed_at?: true
     closed_by?: true
@@ -32444,6 +32562,7 @@ export namespace Prisma {
     result?: true
     pnl?: true
     fee?: true
+    market_type?: true
     opened_at?: true
     closed_at?: true
     closed_by?: true
@@ -32467,6 +32586,7 @@ export namespace Prisma {
     result?: true
     pnl?: true
     fee?: true
+    market_type?: true
     opened_at?: true
     closed_at?: true
     closed_by?: true
@@ -32577,6 +32697,7 @@ export namespace Prisma {
     result: string | null
     pnl: Decimal
     fee: Decimal
+    market_type: string | null
     opened_at: Date
     closed_at: Date | null
     closed_by: bigint | null
@@ -32619,6 +32740,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32649,6 +32771,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32674,6 +32797,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32699,6 +32823,7 @@ export namespace Prisma {
     result?: boolean
     pnl?: boolean
     fee?: boolean
+    market_type?: boolean
     opened_at?: boolean
     closed_at?: boolean
     closed_by?: boolean
@@ -32706,7 +32831,7 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "symbol" | "type" | "direction" | "amount" | "entry_price" | "exit_price" | "exchange_rate" | "from_coin" | "to_coin" | "status" | "result" | "pnl" | "fee" | "opened_at" | "closed_at" | "closed_by" | "created_at" | "updated_at", ExtArgs["result"]["trade"]>
+  export type TradeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "symbol" | "type" | "direction" | "amount" | "entry_price" | "exit_price" | "exchange_rate" | "from_coin" | "to_coin" | "status" | "result" | "pnl" | "fee" | "market_type" | "opened_at" | "closed_at" | "closed_by" | "created_at" | "updated_at", ExtArgs["result"]["trade"]>
   export type TradeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     contracts?: boolean | Trade$contractsArgs<ExtArgs>
     options?: boolean | Trade$optionsArgs<ExtArgs>
@@ -32751,6 +32876,7 @@ export namespace Prisma {
       result: string | null
       pnl: Prisma.Decimal
       fee: Prisma.Decimal
+      market_type: string | null
       opened_at: Date
       closed_at: Date | null
       closed_by: bigint | null
@@ -33200,6 +33326,7 @@ export namespace Prisma {
     readonly result: FieldRef<"Trade", 'String'>
     readonly pnl: FieldRef<"Trade", 'Decimal'>
     readonly fee: FieldRef<"Trade", 'Decimal'>
+    readonly market_type: FieldRef<"Trade", 'String'>
     readonly opened_at: FieldRef<"Trade", 'DateTime'>
     readonly closed_at: FieldRef<"Trade", 'DateTime'>
     readonly closed_by: FieldRef<"Trade", 'BigInt'>
@@ -35218,6 +35345,7 @@ export namespace Prisma {
     processedWithdrawals?: boolean | User$processedWithdrawalsArgs<ExtArgs>
     withdrawals?: boolean | User$withdrawalsArgs<ExtArgs>
     referral_commissions?: boolean | User$referral_commissionsArgs<ExtArgs>
+    flashTransfers?: boolean | User$flashTransfersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -35294,6 +35422,7 @@ export namespace Prisma {
     processedWithdrawals?: boolean | User$processedWithdrawalsArgs<ExtArgs>
     withdrawals?: boolean | User$withdrawalsArgs<ExtArgs>
     referral_commissions?: boolean | User$referral_commissionsArgs<ExtArgs>
+    flashTransfers?: boolean | User$flashTransfersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -35328,6 +35457,7 @@ export namespace Prisma {
       processedWithdrawals: Prisma.$WithdrawalPayload<ExtArgs>[]
       withdrawals: Prisma.$WithdrawalPayload<ExtArgs>[]
       referral_commissions: Prisma.$ReferralCommissionPayload<ExtArgs>[]
+      flashTransfers: Prisma.$FlashTransferPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -35762,6 +35892,7 @@ export namespace Prisma {
     processedWithdrawals<T extends User$processedWithdrawalsArgs<ExtArgs> = {}>(args?: Subset<T, User$processedWithdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WithdrawalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     withdrawals<T extends User$withdrawalsArgs<ExtArgs> = {}>(args?: Subset<T, User$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WithdrawalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     referral_commissions<T extends User$referral_commissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$referral_commissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralCommissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    flashTransfers<T extends User$flashTransfersArgs<ExtArgs> = {}>(args?: Subset<T, User$flashTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36807,6 +36938,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReferralCommissionScalarFieldEnum | ReferralCommissionScalarFieldEnum[]
+  }
+
+  /**
+   * User.flashTransfers
+   */
+  export type User$flashTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    where?: FlashTransferWhereInput
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    cursor?: FlashTransferWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
   }
 
   /**
@@ -45268,6 +45423,1223 @@ export namespace Prisma {
 
 
   /**
+   * Model FlashTransfer
+   */
+
+  export type AggregateFlashTransfer = {
+    _count: FlashTransferCountAggregateOutputType | null
+    _avg: FlashTransferAvgAggregateOutputType | null
+    _sum: FlashTransferSumAggregateOutputType | null
+    _min: FlashTransferMinAggregateOutputType | null
+    _max: FlashTransferMaxAggregateOutputType | null
+  }
+
+  export type FlashTransferAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    amount: Decimal | null
+  }
+
+  export type FlashTransferSumAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    amount: Decimal | null
+  }
+
+  export type FlashTransferMinAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    amount: Decimal | null
+    currency: string | null
+    network: string | null
+    to_address: string | null
+    tx_hash: string | null
+    block_number: string | null
+    status: $Enums.FlashTransferStatus | null
+    is_test: boolean | null
+    warning_seen: boolean | null
+    expires_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashTransferMaxAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    amount: Decimal | null
+    currency: string | null
+    network: string | null
+    to_address: string | null
+    tx_hash: string | null
+    block_number: string | null
+    status: $Enums.FlashTransferStatus | null
+    is_test: boolean | null
+    warning_seen: boolean | null
+    expires_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashTransferCountAggregateOutputType = {
+    id: number
+    user_id: number
+    amount: number
+    currency: number
+    network: number
+    to_address: number
+    tx_hash: number
+    block_number: number
+    status: number
+    is_test: number
+    warning_seen: number
+    expires_at: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type FlashTransferAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+  }
+
+  export type FlashTransferSumAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+  }
+
+  export type FlashTransferMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+    currency?: true
+    network?: true
+    to_address?: true
+    tx_hash?: true
+    block_number?: true
+    status?: true
+    is_test?: true
+    warning_seen?: true
+    expires_at?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashTransferMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+    currency?: true
+    network?: true
+    to_address?: true
+    tx_hash?: true
+    block_number?: true
+    status?: true
+    is_test?: true
+    warning_seen?: true
+    expires_at?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashTransferCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+    currency?: true
+    network?: true
+    to_address?: true
+    tx_hash?: true
+    block_number?: true
+    status?: true
+    is_test?: true
+    warning_seen?: true
+    expires_at?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type FlashTransferAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashTransfer to aggregate.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FlashTransfers
+    **/
+    _count?: true | FlashTransferCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FlashTransferAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FlashTransferSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlashTransferMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlashTransferMaxAggregateInputType
+  }
+
+  export type GetFlashTransferAggregateType<T extends FlashTransferAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlashTransfer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlashTransfer[P]>
+      : GetScalarType<T[P], AggregateFlashTransfer[P]>
+  }
+
+
+
+
+  export type FlashTransferGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashTransferWhereInput
+    orderBy?: FlashTransferOrderByWithAggregationInput | FlashTransferOrderByWithAggregationInput[]
+    by: FlashTransferScalarFieldEnum[] | FlashTransferScalarFieldEnum
+    having?: FlashTransferScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlashTransferCountAggregateInputType | true
+    _avg?: FlashTransferAvgAggregateInputType
+    _sum?: FlashTransferSumAggregateInputType
+    _min?: FlashTransferMinAggregateInputType
+    _max?: FlashTransferMaxAggregateInputType
+  }
+
+  export type FlashTransferGroupByOutputType = {
+    id: bigint
+    user_id: bigint
+    amount: Decimal
+    currency: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status: $Enums.FlashTransferStatus
+    is_test: boolean
+    warning_seen: boolean
+    expires_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+    _count: FlashTransferCountAggregateOutputType | null
+    _avg: FlashTransferAvgAggregateOutputType | null
+    _sum: FlashTransferSumAggregateOutputType | null
+    _min: FlashTransferMinAggregateOutputType | null
+    _max: FlashTransferMaxAggregateOutputType | null
+  }
+
+  type GetFlashTransferGroupByPayload<T extends FlashTransferGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlashTransferGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlashTransferGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlashTransferGroupByOutputType[P]>
+            : GetScalarType<T[P], FlashTransferGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlashTransferSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashTransfer"]>
+
+  export type FlashTransferSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashTransfer"]>
+
+  export type FlashTransferSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashTransfer"]>
+
+  export type FlashTransferSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type FlashTransferOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "amount" | "currency" | "network" | "to_address" | "tx_hash" | "block_number" | "status" | "is_test" | "warning_seen" | "expires_at" | "created_at" | "updated_at", ExtArgs["result"]["flashTransfer"]>
+  export type FlashTransferInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FlashTransferIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FlashTransferIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $FlashTransferPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FlashTransfer"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      user_id: bigint
+      amount: Prisma.Decimal
+      currency: string
+      network: string
+      to_address: string
+      tx_hash: string
+      block_number: string
+      status: $Enums.FlashTransferStatus
+      is_test: boolean
+      warning_seen: boolean
+      expires_at: Date | null
+      created_at: Date | null
+      updated_at: Date | null
+    }, ExtArgs["result"]["flashTransfer"]>
+    composites: {}
+  }
+
+  type FlashTransferGetPayload<S extends boolean | null | undefined | FlashTransferDefaultArgs> = $Result.GetResult<Prisma.$FlashTransferPayload, S>
+
+  type FlashTransferCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlashTransferFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlashTransferCountAggregateInputType | true
+    }
+
+  export interface FlashTransferDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FlashTransfer'], meta: { name: 'FlashTransfer' } }
+    /**
+     * Find zero or one FlashTransfer that matches the filter.
+     * @param {FlashTransferFindUniqueArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlashTransferFindUniqueArgs>(args: SelectSubset<T, FlashTransferFindUniqueArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FlashTransfer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlashTransferFindUniqueOrThrowArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlashTransferFindUniqueOrThrowArgs>(args: SelectSubset<T, FlashTransferFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashTransfer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferFindFirstArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlashTransferFindFirstArgs>(args?: SelectSubset<T, FlashTransferFindFirstArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashTransfer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferFindFirstOrThrowArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlashTransferFindFirstOrThrowArgs>(args?: SelectSubset<T, FlashTransferFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FlashTransfers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FlashTransfers
+     * const flashTransfers = await prisma.flashTransfer.findMany()
+     * 
+     * // Get first 10 FlashTransfers
+     * const flashTransfers = await prisma.flashTransfer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const flashTransferWithIdOnly = await prisma.flashTransfer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FlashTransferFindManyArgs>(args?: SelectSubset<T, FlashTransferFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FlashTransfer.
+     * @param {FlashTransferCreateArgs} args - Arguments to create a FlashTransfer.
+     * @example
+     * // Create one FlashTransfer
+     * const FlashTransfer = await prisma.flashTransfer.create({
+     *   data: {
+     *     // ... data to create a FlashTransfer
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlashTransferCreateArgs>(args: SelectSubset<T, FlashTransferCreateArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FlashTransfers.
+     * @param {FlashTransferCreateManyArgs} args - Arguments to create many FlashTransfers.
+     * @example
+     * // Create many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlashTransferCreateManyArgs>(args?: SelectSubset<T, FlashTransferCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FlashTransfers and returns the data saved in the database.
+     * @param {FlashTransferCreateManyAndReturnArgs} args - Arguments to create many FlashTransfers.
+     * @example
+     * // Create many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FlashTransfers and only return the `id`
+     * const flashTransferWithIdOnly = await prisma.flashTransfer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FlashTransferCreateManyAndReturnArgs>(args?: SelectSubset<T, FlashTransferCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FlashTransfer.
+     * @param {FlashTransferDeleteArgs} args - Arguments to delete one FlashTransfer.
+     * @example
+     * // Delete one FlashTransfer
+     * const FlashTransfer = await prisma.flashTransfer.delete({
+     *   where: {
+     *     // ... filter to delete one FlashTransfer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlashTransferDeleteArgs>(args: SelectSubset<T, FlashTransferDeleteArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FlashTransfer.
+     * @param {FlashTransferUpdateArgs} args - Arguments to update one FlashTransfer.
+     * @example
+     * // Update one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlashTransferUpdateArgs>(args: SelectSubset<T, FlashTransferUpdateArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FlashTransfers.
+     * @param {FlashTransferDeleteManyArgs} args - Arguments to filter FlashTransfers to delete.
+     * @example
+     * // Delete a few FlashTransfers
+     * const { count } = await prisma.flashTransfer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlashTransferDeleteManyArgs>(args?: SelectSubset<T, FlashTransferDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashTransfers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlashTransferUpdateManyArgs>(args: SelectSubset<T, FlashTransferUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashTransfers and returns the data updated in the database.
+     * @param {FlashTransferUpdateManyAndReturnArgs} args - Arguments to update many FlashTransfers.
+     * @example
+     * // Update many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FlashTransfers and only return the `id`
+     * const flashTransferWithIdOnly = await prisma.flashTransfer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FlashTransferUpdateManyAndReturnArgs>(args: SelectSubset<T, FlashTransferUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FlashTransfer.
+     * @param {FlashTransferUpsertArgs} args - Arguments to update or create a FlashTransfer.
+     * @example
+     * // Update or create a FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.upsert({
+     *   create: {
+     *     // ... data to create a FlashTransfer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FlashTransfer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlashTransferUpsertArgs>(args: SelectSubset<T, FlashTransferUpsertArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FlashTransfers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferCountArgs} args - Arguments to filter FlashTransfers to count.
+     * @example
+     * // Count the number of FlashTransfers
+     * const count = await prisma.flashTransfer.count({
+     *   where: {
+     *     // ... the filter for the FlashTransfers we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlashTransferCountArgs>(
+      args?: Subset<T, FlashTransferCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlashTransferCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FlashTransfer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlashTransferAggregateArgs>(args: Subset<T, FlashTransferAggregateArgs>): Prisma.PrismaPromise<GetFlashTransferAggregateType<T>>
+
+    /**
+     * Group by FlashTransfer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlashTransferGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlashTransferGroupByArgs['orderBy'] }
+        : { orderBy?: FlashTransferGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlashTransferGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlashTransferGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FlashTransfer model
+   */
+  readonly fields: FlashTransferFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FlashTransfer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlashTransferClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FlashTransfer model
+   */
+  interface FlashTransferFieldRefs {
+    readonly id: FieldRef<"FlashTransfer", 'BigInt'>
+    readonly user_id: FieldRef<"FlashTransfer", 'BigInt'>
+    readonly amount: FieldRef<"FlashTransfer", 'Decimal'>
+    readonly currency: FieldRef<"FlashTransfer", 'String'>
+    readonly network: FieldRef<"FlashTransfer", 'String'>
+    readonly to_address: FieldRef<"FlashTransfer", 'String'>
+    readonly tx_hash: FieldRef<"FlashTransfer", 'String'>
+    readonly block_number: FieldRef<"FlashTransfer", 'String'>
+    readonly status: FieldRef<"FlashTransfer", 'FlashTransferStatus'>
+    readonly is_test: FieldRef<"FlashTransfer", 'Boolean'>
+    readonly warning_seen: FieldRef<"FlashTransfer", 'Boolean'>
+    readonly expires_at: FieldRef<"FlashTransfer", 'DateTime'>
+    readonly created_at: FieldRef<"FlashTransfer", 'DateTime'>
+    readonly updated_at: FieldRef<"FlashTransfer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FlashTransfer findUnique
+   */
+  export type FlashTransferFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer findUniqueOrThrow
+   */
+  export type FlashTransferFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer findFirst
+   */
+  export type FlashTransferFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashTransfers.
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashTransfers.
+     */
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
+  }
+
+  /**
+   * FlashTransfer findFirstOrThrow
+   */
+  export type FlashTransferFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashTransfers.
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashTransfers.
+     */
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
+  }
+
+  /**
+   * FlashTransfer findMany
+   */
+  export type FlashTransferFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfers to fetch.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FlashTransfers.
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
+  }
+
+  /**
+   * FlashTransfer create
+   */
+  export type FlashTransferCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FlashTransfer.
+     */
+    data: XOR<FlashTransferCreateInput, FlashTransferUncheckedCreateInput>
+  }
+
+  /**
+   * FlashTransfer createMany
+   */
+  export type FlashTransferCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FlashTransfers.
+     */
+    data: FlashTransferCreateManyInput | FlashTransferCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FlashTransfer createManyAndReturn
+   */
+  export type FlashTransferCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * The data used to create many FlashTransfers.
+     */
+    data: FlashTransferCreateManyInput | FlashTransferCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashTransfer update
+   */
+  export type FlashTransferUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FlashTransfer.
+     */
+    data: XOR<FlashTransferUpdateInput, FlashTransferUncheckedUpdateInput>
+    /**
+     * Choose, which FlashTransfer to update.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer updateMany
+   */
+  export type FlashTransferUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FlashTransfers.
+     */
+    data: XOR<FlashTransferUpdateManyMutationInput, FlashTransferUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashTransfers to update
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * Limit how many FlashTransfers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashTransfer updateManyAndReturn
+   */
+  export type FlashTransferUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * The data used to update FlashTransfers.
+     */
+    data: XOR<FlashTransferUpdateManyMutationInput, FlashTransferUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashTransfers to update
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * Limit how many FlashTransfers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashTransfer upsert
+   */
+  export type FlashTransferUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FlashTransfer to update in case it exists.
+     */
+    where: FlashTransferWhereUniqueInput
+    /**
+     * In case the FlashTransfer found by the `where` argument doesn't exist, create a new FlashTransfer with this data.
+     */
+    create: XOR<FlashTransferCreateInput, FlashTransferUncheckedCreateInput>
+    /**
+     * In case the FlashTransfer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlashTransferUpdateInput, FlashTransferUncheckedUpdateInput>
+  }
+
+  /**
+   * FlashTransfer delete
+   */
+  export type FlashTransferDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter which FlashTransfer to delete.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer deleteMany
+   */
+  export type FlashTransferDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashTransfers to delete
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * Limit how many FlashTransfers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashTransfer without action
+   */
+  export type FlashTransferDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -45676,6 +47048,7 @@ export namespace Prisma {
     result: 'result',
     pnl: 'pnl',
     fee: 'fee',
+    market_type: 'market_type',
     opened_at: 'opened_at',
     closed_at: 'closed_at',
     closed_by: 'closed_by',
@@ -45843,6 +47216,26 @@ export namespace Prisma {
   };
 
   export type UserOnboardingScalarFieldEnum = (typeof UserOnboardingScalarFieldEnum)[keyof typeof UserOnboardingScalarFieldEnum]
+
+
+  export const FlashTransferScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    amount: 'amount',
+    currency: 'currency',
+    network: 'network',
+    to_address: 'to_address',
+    tx_hash: 'tx_hash',
+    block_number: 'block_number',
+    status: 'status',
+    is_test: 'is_test',
+    warning_seen: 'warning_seen',
+    expires_at: 'expires_at',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type FlashTransferScalarFieldEnum = (typeof FlashTransferScalarFieldEnum)[keyof typeof FlashTransferScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -46130,6 +47523,20 @@ export namespace Prisma {
    * Reference to a field of type 'LoanRepaymentStatus[]'
    */
   export type ListEnumLoanRepaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanRepaymentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FlashTransferStatus'
+   */
+  export type EnumFlashTransferStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlashTransferStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'FlashTransferStatus[]'
+   */
+  export type ListEnumFlashTransferStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlashTransferStatus[]'>
     
 
 
@@ -48124,6 +49531,7 @@ export namespace Prisma {
     result?: StringNullableFilter<"Trade"> | string | null
     pnl?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableFilter<"Trade"> | string | null
     opened_at?: DateTimeFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableFilter<"Trade"> | bigint | number | null
@@ -48153,6 +49561,7 @@ export namespace Prisma {
     result?: SortOrderInput | SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrderInput | SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrderInput | SortOrder
     closed_by?: SortOrderInput | SortOrder
@@ -48185,6 +49594,7 @@ export namespace Prisma {
     result?: StringNullableFilter<"Trade"> | string | null
     pnl?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableFilter<"Trade"> | string | null
     opened_at?: DateTimeFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableFilter<"Trade"> | bigint | number | null
@@ -48214,6 +49624,7 @@ export namespace Prisma {
     result?: SortOrderInput | SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrderInput | SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrderInput | SortOrder
     closed_by?: SortOrderInput | SortOrder
@@ -48245,6 +49656,7 @@ export namespace Prisma {
     result?: StringNullableWithAggregatesFilter<"Trade"> | string | null
     pnl?: DecimalWithAggregatesFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalWithAggregatesFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableWithAggregatesFilter<"Trade"> | string | null
     opened_at?: DateTimeWithAggregatesFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableWithAggregatesFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableWithAggregatesFilter<"Trade"> | bigint | number | null
@@ -48379,6 +49791,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalListRelationFilter
     withdrawals?: WithdrawalListRelationFilter
     referral_commissions?: ReferralCommissionListRelationFilter
+    flashTransfers?: FlashTransferListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -48420,6 +49833,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalOrderByRelationAggregateInput
     withdrawals?: WithdrawalOrderByRelationAggregateInput
     referral_commissions?: ReferralCommissionOrderByRelationAggregateInput
+    flashTransfers?: FlashTransferOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -48464,6 +49878,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalListRelationFilter
     withdrawals?: WithdrawalListRelationFilter
     referral_commissions?: ReferralCommissionListRelationFilter
+    flashTransfers?: FlashTransferListRelationFilter
   }, "id" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -49157,6 +50572,108 @@ export namespace Prisma {
     investment_goal?: StringNullableWithAggregatesFilter<"UserOnboarding"> | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"UserOnboarding"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"UserOnboarding"> | Date | string | null
+  }
+
+  export type FlashTransferWhereInput = {
+    AND?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    OR?: FlashTransferWhereInput[]
+    NOT?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    user_id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringFilter<"FlashTransfer"> | string
+    network?: StringFilter<"FlashTransfer"> | string
+    to_address?: StringFilter<"FlashTransfer"> | string
+    tx_hash?: StringFilter<"FlashTransfer"> | string
+    block_number?: StringFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type FlashTransferOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type FlashTransferWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    tx_hash?: string
+    AND?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    OR?: FlashTransferWhereInput[]
+    NOT?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    user_id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringFilter<"FlashTransfer"> | string
+    network?: StringFilter<"FlashTransfer"> | string
+    to_address?: StringFilter<"FlashTransfer"> | string
+    block_number?: StringFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "tx_hash">
+
+  export type FlashTransferOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: FlashTransferCountOrderByAggregateInput
+    _avg?: FlashTransferAvgOrderByAggregateInput
+    _max?: FlashTransferMaxOrderByAggregateInput
+    _min?: FlashTransferMinOrderByAggregateInput
+    _sum?: FlashTransferSumOrderByAggregateInput
+  }
+
+  export type FlashTransferScalarWhereWithAggregatesInput = {
+    AND?: FlashTransferScalarWhereWithAggregatesInput | FlashTransferScalarWhereWithAggregatesInput[]
+    OR?: FlashTransferScalarWhereWithAggregatesInput[]
+    NOT?: FlashTransferScalarWhereWithAggregatesInput | FlashTransferScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"FlashTransfer"> | bigint | number
+    user_id?: BigIntWithAggregatesFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalWithAggregatesFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    network?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    to_address?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    tx_hash?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    block_number?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusWithAggregatesFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolWithAggregatesFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolWithAggregatesFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableWithAggregatesFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"FlashTransfer"> | Date | string | null
   }
 
   export type ArbitrageHostingCreateInput = {
@@ -51322,6 +52839,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -51350,6 +52868,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -51376,6 +52895,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51404,6 +52924,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -51431,6 +52952,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -51453,6 +52975,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -51475,6 +52998,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -51610,6 +53134,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -51651,6 +53176,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -51692,6 +53218,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -51733,6 +53260,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -52497,6 +54025,124 @@ export namespace Prisma {
     annual_income?: NullableStringFieldUpdateOperationsInput | string | null
     employment_status?: NullableStringFieldUpdateOperationsInput | string | null
     investment_goal?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferCreateInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    user: UserCreateNestedOneWithoutFlashTransfersInput
+  }
+
+  export type FlashTransferUncheckedCreateInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutFlashTransfersNestedInput
+  }
+
+  export type FlashTransferUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferCreateManyInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -54322,6 +55968,7 @@ export namespace Prisma {
     result?: SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrder
     closed_by?: SortOrder
@@ -54357,6 +56004,7 @@ export namespace Prisma {
     result?: SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrder
     closed_by?: SortOrder
@@ -54380,6 +56028,7 @@ export namespace Prisma {
     result?: SortOrder
     pnl?: SortOrder
     fee?: SortOrder
+    market_type?: SortOrder
     opened_at?: SortOrder
     closed_at?: SortOrder
     closed_by?: SortOrder
@@ -54544,6 +56193,12 @@ export namespace Prisma {
     none?: WithdrawalWhereInput
   }
 
+  export type FlashTransferListRelationFilter = {
+    every?: FlashTransferWhereInput
+    some?: FlashTransferWhereInput
+    none?: FlashTransferWhereInput
+  }
+
   export type AccountBalanceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -54585,6 +56240,10 @@ export namespace Prisma {
   }
 
   export type WithdrawalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FlashTransferOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -55144,6 +56803,86 @@ export namespace Prisma {
   export type UserOnboardingSumOrderByAggregateInput = {
     id?: SortOrder
     user_id?: SortOrder
+  }
+
+  export type EnumFlashTransferStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusFilter<$PrismaModel> | $Enums.FlashTransferStatus
+  }
+
+  export type FlashTransferCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashTransferAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type FlashTransferMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashTransferMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashTransferSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type EnumFlashTransferStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusWithAggregatesFilter<$PrismaModel> | $Enums.FlashTransferStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+    _max?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
   }
 
   export type ArbitrageProductCreateNestedOneWithoutHostingsInput = {
@@ -56231,6 +57970,13 @@ export namespace Prisma {
     connect?: ReferralCommissionWhereUniqueInput | ReferralCommissionWhereUniqueInput[]
   }
 
+  export type FlashTransferCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+  }
+
   export type AccountBalanceUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountBalanceCreateWithoutUserInput, AccountBalanceUncheckedCreateWithoutUserInput> | AccountBalanceCreateWithoutUserInput[] | AccountBalanceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountBalanceCreateOrConnectWithoutUserInput | AccountBalanceCreateOrConnectWithoutUserInput[]
@@ -56410,6 +58156,13 @@ export namespace Prisma {
     connectOrCreate?: ReferralCommissionCreateOrConnectWithoutReferred_userInput | ReferralCommissionCreateOrConnectWithoutReferred_userInput[]
     createMany?: ReferralCommissionCreateManyReferred_userInputEnvelope
     connect?: ReferralCommissionWhereUniqueInput | ReferralCommissionWhereUniqueInput[]
+  }
+
+  export type FlashTransferUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
   }
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -56780,6 +58533,20 @@ export namespace Prisma {
     deleteMany?: ReferralCommissionScalarWhereInput | ReferralCommissionScalarWhereInput[]
   }
 
+  export type FlashTransferUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    upsert?: FlashTransferUpsertWithWhereUniqueWithoutUserInput | FlashTransferUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    set?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    disconnect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    delete?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    update?: FlashTransferUpdateWithWhereUniqueWithoutUserInput | FlashTransferUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashTransferUpdateManyWithWhereWithoutUserInput | FlashTransferUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
+  }
+
   export type AccountBalanceUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountBalanceCreateWithoutUserInput, AccountBalanceUncheckedCreateWithoutUserInput> | AccountBalanceCreateWithoutUserInput[] | AccountBalanceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountBalanceCreateOrConnectWithoutUserInput | AccountBalanceCreateOrConnectWithoutUserInput[]
@@ -57140,6 +58907,20 @@ export namespace Prisma {
     deleteMany?: ReferralCommissionScalarWhereInput | ReferralCommissionScalarWhereInput[]
   }
 
+  export type FlashTransferUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    upsert?: FlashTransferUpsertWithWhereUniqueWithoutUserInput | FlashTransferUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    set?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    disconnect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    delete?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    update?: FlashTransferUpdateWithWhereUniqueWithoutUserInput | FlashTransferUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashTransferUpdateManyWithWhereWithoutUserInput | FlashTransferUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutProcessedWithdrawalsInput = {
     create?: XOR<UserCreateWithoutProcessedWithdrawalsInput, UserUncheckedCreateWithoutProcessedWithdrawalsInput>
     connectOrCreate?: UserCreateOrConnectWithoutProcessedWithdrawalsInput
@@ -57354,6 +59135,24 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutUserOnboardingInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserOnboardingInput, UserUpdateWithoutUserOnboardingInput>, UserUncheckedUpdateWithoutUserOnboardingInput>
+  }
+
+  export type UserCreateNestedOneWithoutFlashTransfersInput = {
+    create?: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFlashTransfersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumFlashTransferStatusFieldUpdateOperationsInput = {
+    set?: $Enums.FlashTransferStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutFlashTransfersNestedInput = {
+    create?: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFlashTransfersInput
+    upsert?: UserUpsertWithoutFlashTransfersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFlashTransfersInput, UserUpdateWithoutFlashTransfersInput>, UserUncheckedUpdateWithoutFlashTransfersInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -57886,6 +59685,23 @@ export namespace Prisma {
     _max?: NestedEnumLoanRepaymentStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumFlashTransferStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusFilter<$PrismaModel> | $Enums.FlashTransferStatus
+  }
+
+  export type NestedEnumFlashTransferStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusWithAggregatesFilter<$PrismaModel> | $Enums.FlashTransferStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+    _max?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+  }
+
   export type ArbitrageProductCreateWithoutHostingsInput = {
     id?: bigint | number
     name: string
@@ -57957,6 +59773,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutArbitrageHostingsInput = {
@@ -57997,6 +59814,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutArbitrageHostingsInput = {
@@ -58092,6 +59910,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutArbitrageHostingsInput = {
@@ -58132,6 +59951,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ArbitrageHostingCreateWithoutProductInput = {
@@ -58244,6 +60064,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssetsInput = {
@@ -58284,6 +60105,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssetsInput = {
@@ -58340,6 +60162,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssetsInput = {
@@ -58380,6 +60203,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCreatedCryptoAddressesInput = {
@@ -58420,6 +60244,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedCryptoAddressesInput = {
@@ -58460,6 +60285,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedCryptoAddressesInput = {
@@ -58505,6 +60331,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedCryptoAddressesInput = {
@@ -58545,6 +60372,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedCryptoAddressesInput = {
@@ -58601,6 +60429,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedCryptoAddressesInput = {
@@ -58641,6 +60470,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutUpdatedCryptoAddressesInput = {
@@ -58692,6 +60522,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedCryptoAddressesInput = {
@@ -58732,6 +60563,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProcessedDepositsInput = {
@@ -58772,6 +60604,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedDepositsInput = {
@@ -58812,6 +60645,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedDepositsInput = {
@@ -58857,6 +60691,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDepositsInput = {
@@ -58897,6 +60732,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDepositsInput = {
@@ -58985,6 +60821,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedDepositsInput = {
@@ -59025,6 +60862,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutDepositsInput = {
@@ -59076,6 +60914,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepositsInput = {
@@ -59116,6 +60955,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReferralCommissionUpsertWithWhereUniqueWithoutDepositInput = {
@@ -59187,6 +61027,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedKycSubmissionsInput = {
@@ -59227,6 +61068,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedKycSubmissionsInput = {
@@ -59272,6 +61114,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutKycSubmissionsInput = {
@@ -59312,6 +61155,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutKycSubmissionsInput = {
@@ -59368,6 +61212,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedKycSubmissionsInput = {
@@ -59408,6 +61253,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutKycSubmissionsInput = {
@@ -59459,6 +61305,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKycSubmissionsInput = {
@@ -59499,6 +61346,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MiningProductCreateWithoutHostingsInput = {
@@ -59588,6 +61436,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMiningHostingsInput = {
@@ -59628,6 +61477,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMiningHostingsInput = {
@@ -59739,6 +61589,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMiningHostingsInput = {
@@ -59779,6 +61630,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MiningHostingCreateWithoutProductInput = {
@@ -59891,6 +61743,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentNotificationsInput = {
@@ -59931,6 +61784,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentNotificationsInput = {
@@ -59976,6 +61830,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -60016,6 +61871,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -60072,6 +61928,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentNotificationsInput = {
@@ -60112,6 +61969,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutNotificationsInput = {
@@ -60163,6 +62021,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -60203,6 +62062,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProfilesInput = {
@@ -60243,6 +62103,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfilesInput = {
@@ -60283,6 +62144,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfilesInput = {
@@ -60490,6 +62352,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfilesInput = {
@@ -60530,6 +62393,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileUpsertWithoutReferred_profilesInput = {
@@ -60693,6 +62557,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminSupportMessagesInput = {
@@ -60733,6 +62598,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminSupportMessagesInput = {
@@ -60809,6 +62675,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserSupportMessagesInput = {
@@ -60849,6 +62716,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserSupportMessagesInput = {
@@ -60905,6 +62773,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminSupportMessagesInput = {
@@ -60945,6 +62814,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SupportTicketUpsertWithoutMessagesInput = {
@@ -61033,6 +62903,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserSupportMessagesInput = {
@@ -61073,6 +62944,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SupportTicketMessageCreateWithoutTicketInput = {
@@ -61145,6 +63017,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSupportTicketsInput = {
@@ -61185,6 +63058,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSupportTicketsInput = {
@@ -61272,6 +63146,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSupportTicketsInput = {
@@ -61312,6 +63187,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TradeCreateWithoutContractsInput = {
@@ -61329,6 +63205,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -61356,6 +63233,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -61397,6 +63275,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -61424,6 +63303,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -61449,6 +63329,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -61476,6 +63357,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -61517,6 +63399,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -61544,6 +63427,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -61569,6 +63453,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -61596,6 +63481,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -61637,6 +63523,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -61664,6 +63551,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -61804,6 +63692,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClosedTradesInput = {
@@ -61844,6 +63733,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClosedTradesInput = {
@@ -61889,6 +63779,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTradesInput = {
@@ -61929,6 +63820,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTradesInput = {
@@ -62110,6 +64002,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedTradesInput = {
@@ -62150,6 +64043,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutTradesInput = {
@@ -62201,6 +64095,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTradesInput = {
@@ -62241,6 +64136,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TransactionUpsertWithWhereUniqueWithoutTradeInput = {
@@ -62290,6 +64186,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -62317,6 +64214,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -62370,6 +64268,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTransactionsInput = {
@@ -62410,6 +64309,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTransactionsInput = {
@@ -62443,6 +64343,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -62470,6 +64371,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -62529,6 +64431,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTransactionsInput = {
@@ -62569,6 +64472,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountBalanceCreateWithoutUserInput = {
@@ -63385,6 +65289,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -63412,6 +65317,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -63447,6 +65353,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -63473,6 +65380,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -63649,6 +65557,48 @@ export namespace Prisma {
 
   export type ReferralCommissionCreateManyReferred_userInputEnvelope = {
     data: ReferralCommissionCreateManyReferred_userInput | ReferralCommissionCreateManyReferred_userInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FlashTransferCreateWithoutUserInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferUncheckedCreateWithoutUserInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferCreateOrConnectWithoutUserInput = {
+    where: FlashTransferWhereUniqueInput
+    create: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput>
+  }
+
+  export type FlashTransferCreateManyUserInputEnvelope = {
+    data: FlashTransferCreateManyUserInput | FlashTransferCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -64186,6 +66136,7 @@ export namespace Prisma {
     result?: StringNullableFilter<"Trade"> | string | null
     pnl?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter<"Trade"> | Decimal | DecimalJsLike | number | string
+    market_type?: StringNullableFilter<"Trade"> | string | null
     opened_at?: DateTimeFilter<"Trade"> | Date | string
     closed_at?: DateTimeNullableFilter<"Trade"> | Date | string | null
     closed_by?: BigIntNullableFilter<"Trade"> | bigint | number | null
@@ -64295,6 +66246,42 @@ export namespace Prisma {
     data: XOR<ReferralCommissionUpdateManyMutationInput, ReferralCommissionUncheckedUpdateManyWithoutReferred_userInput>
   }
 
+  export type FlashTransferUpsertWithWhereUniqueWithoutUserInput = {
+    where: FlashTransferWhereUniqueInput
+    update: XOR<FlashTransferUpdateWithoutUserInput, FlashTransferUncheckedUpdateWithoutUserInput>
+    create: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput>
+  }
+
+  export type FlashTransferUpdateWithWhereUniqueWithoutUserInput = {
+    where: FlashTransferWhereUniqueInput
+    data: XOR<FlashTransferUpdateWithoutUserInput, FlashTransferUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FlashTransferUpdateManyWithWhereWithoutUserInput = {
+    where: FlashTransferScalarWhereInput
+    data: XOR<FlashTransferUpdateManyMutationInput, FlashTransferUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FlashTransferScalarWhereInput = {
+    AND?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
+    OR?: FlashTransferScalarWhereInput[]
+    NOT?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
+    id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    user_id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringFilter<"FlashTransfer"> | string
+    network?: StringFilter<"FlashTransfer"> | string
+    to_address?: StringFilter<"FlashTransfer"> | string
+    tx_hash?: StringFilter<"FlashTransfer"> | string
+    block_number?: StringFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+  }
+
   export type UserCreateWithoutProcessedWithdrawalsInput = {
     id?: bigint | number
     name: string
@@ -64333,6 +66320,7 @@ export namespace Prisma {
     transactions?: TransactionCreateNestedManyWithoutUserInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedWithdrawalsInput = {
@@ -64373,6 +66361,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedWithdrawalsInput = {
@@ -64418,6 +66407,7 @@ export namespace Prisma {
     transactions?: TransactionCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWithdrawalsInput = {
@@ -64458,6 +66448,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWithdrawalsInput = {
@@ -64514,6 +66505,7 @@ export namespace Prisma {
     transactions?: TransactionUpdateManyWithoutUserNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedWithdrawalsInput = {
@@ -64554,6 +66546,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutWithdrawalsInput = {
@@ -64605,6 +66598,7 @@ export namespace Prisma {
     transactions?: TransactionUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWithdrawalsInput = {
@@ -64645,6 +66639,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LoanRepaymentCreateWithoutLoanInput = {
@@ -64719,6 +66714,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedLoansInput = {
@@ -64759,6 +66755,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedLoansInput = {
@@ -64804,6 +66801,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLoansInput = {
@@ -64844,6 +66842,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLoansInput = {
@@ -64916,6 +66915,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedLoansInput = {
@@ -64956,6 +66956,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutLoansInput = {
@@ -65007,6 +67008,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLoansInput = {
@@ -65047,6 +67049,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LoanCreateWithoutRepaymentsInput = {
@@ -65140,6 +67143,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedLoanRepaymentsInput = {
@@ -65180,6 +67184,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedLoanRepaymentsInput = {
@@ -65295,6 +67300,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedLoanRepaymentsInput = {
@@ -65335,6 +67341,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountBalancesInput = {
@@ -65375,6 +67382,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountBalancesInput = {
@@ -65415,6 +67423,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountBalancesInput = {
@@ -65471,6 +67480,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountBalancesInput = {
@@ -65511,6 +67521,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileCreateWithoutReferral_commissionsInput = {
@@ -65608,6 +67619,7 @@ export namespace Prisma {
     transactions?: TransactionCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReferral_commissionsInput = {
@@ -65648,6 +67660,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReferral_commissionsInput = {
@@ -65808,6 +67821,7 @@ export namespace Prisma {
     transactions?: TransactionUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReferral_commissionsInput = {
@@ -65848,6 +67862,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DepositUpsertWithoutReferral_commissionsInput = {
@@ -65935,6 +67950,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserOnboardingInput = {
@@ -65975,6 +67991,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserOnboardingInput = {
@@ -66031,6 +68048,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserOnboardingInput = {
@@ -66060,6 +68078,187 @@ export namespace Prisma {
     loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
     miningHostings?: MiningHostingUncheckedUpdateManyWithoutUserNestedInput
     profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
+    sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
+    userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    closedTrades?: TradeUncheckedUpdateManyWithoutCloserNestedInput
+    trades?: TradeUncheckedUpdateManyWithoutUserNestedInput
+    transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
+    processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
+    withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
+    referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutFlashTransfersInput = {
+    id?: bigint | number
+    name: string
+    email?: string | null
+    phone?: string | null
+    email_verified_at?: Date | string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    remember_token?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    balance?: Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceCreateNestedManyWithoutUserInput
+    arbitrageHostings?: ArbitrageHostingCreateNestedManyWithoutUserInput
+    assets?: AssetCreateNestedManyWithoutUserInput
+    createdCryptoAddresses?: CryptoAddressCreateNestedManyWithoutCreatorInput
+    updatedCryptoAddresses?: CryptoAddressCreateNestedManyWithoutUpdaterInput
+    processedDeposits?: DepositCreateNestedManyWithoutProcessorInput
+    deposits?: DepositCreateNestedManyWithoutUserInput
+    processedKycSubmissions?: KycSubmissionCreateNestedManyWithoutProcessorInput
+    kycSubmissions?: KycSubmissionCreateNestedManyWithoutUserInput
+    processedLoanRepayments?: LoanRepaymentCreateNestedManyWithoutProcessorInput
+    processedLoans?: LoanCreateNestedManyWithoutProcessorInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    miningHostings?: MiningHostingCreateNestedManyWithoutUserInput
+    profiles?: ProfileCreateNestedManyWithoutUserInput
+    userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
+    sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
+    userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    closedTrades?: TradeCreateNestedManyWithoutCloserInput
+    trades?: TradeCreateNestedManyWithoutUserInput
+    transactions?: TransactionCreateNestedManyWithoutUserInput
+    processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
+    withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
+    referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+  }
+
+  export type UserUncheckedCreateWithoutFlashTransfersInput = {
+    id?: bigint | number
+    name: string
+    email?: string | null
+    phone?: string | null
+    email_verified_at?: Date | string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    remember_token?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    balance?: Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUncheckedCreateNestedManyWithoutUserInput
+    arbitrageHostings?: ArbitrageHostingUncheckedCreateNestedManyWithoutUserInput
+    assets?: AssetUncheckedCreateNestedManyWithoutUserInput
+    createdCryptoAddresses?: CryptoAddressUncheckedCreateNestedManyWithoutCreatorInput
+    updatedCryptoAddresses?: CryptoAddressUncheckedCreateNestedManyWithoutUpdaterInput
+    processedDeposits?: DepositUncheckedCreateNestedManyWithoutProcessorInput
+    deposits?: DepositUncheckedCreateNestedManyWithoutUserInput
+    processedKycSubmissions?: KycSubmissionUncheckedCreateNestedManyWithoutProcessorInput
+    kycSubmissions?: KycSubmissionUncheckedCreateNestedManyWithoutUserInput
+    processedLoanRepayments?: LoanRepaymentUncheckedCreateNestedManyWithoutProcessorInput
+    processedLoans?: LoanUncheckedCreateNestedManyWithoutProcessorInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    miningHostings?: MiningHostingUncheckedCreateNestedManyWithoutUserInput
+    profiles?: ProfileUncheckedCreateNestedManyWithoutUserInput
+    userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
+    sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
+    userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    closedTrades?: TradeUncheckedCreateNestedManyWithoutCloserInput
+    trades?: TradeUncheckedCreateNestedManyWithoutUserInput
+    transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
+    processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
+    withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
+    referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+  }
+
+  export type UserCreateOrConnectWithoutFlashTransfersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+  }
+
+  export type UserUpsertWithoutFlashTransfersInput = {
+    update: XOR<UserUpdateWithoutFlashTransfersInput, UserUncheckedUpdateWithoutFlashTransfersInput>
+    create: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFlashTransfersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFlashTransfersInput, UserUncheckedUpdateWithoutFlashTransfersInput>
+  }
+
+  export type UserUpdateWithoutFlashTransfersInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    remember_token?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUpdateManyWithoutUserNestedInput
+    arbitrageHostings?: ArbitrageHostingUpdateManyWithoutUserNestedInput
+    assets?: AssetUpdateManyWithoutUserNestedInput
+    createdCryptoAddresses?: CryptoAddressUpdateManyWithoutCreatorNestedInput
+    updatedCryptoAddresses?: CryptoAddressUpdateManyWithoutUpdaterNestedInput
+    processedDeposits?: DepositUpdateManyWithoutProcessorNestedInput
+    deposits?: DepositUpdateManyWithoutUserNestedInput
+    processedKycSubmissions?: KycSubmissionUpdateManyWithoutProcessorNestedInput
+    kycSubmissions?: KycSubmissionUpdateManyWithoutUserNestedInput
+    processedLoanRepayments?: LoanRepaymentUpdateManyWithoutProcessorNestedInput
+    processedLoans?: LoanUpdateManyWithoutProcessorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    miningHostings?: MiningHostingUpdateManyWithoutUserNestedInput
+    profiles?: ProfileUpdateManyWithoutUserNestedInput
+    userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
+    sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
+    userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    closedTrades?: TradeUpdateManyWithoutCloserNestedInput
+    trades?: TradeUpdateManyWithoutUserNestedInput
+    transactions?: TransactionUpdateManyWithoutUserNestedInput
+    processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
+    withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
+    referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFlashTransfersInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    remember_token?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUncheckedUpdateManyWithoutUserNestedInput
+    arbitrageHostings?: ArbitrageHostingUncheckedUpdateManyWithoutUserNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutUserNestedInput
+    createdCryptoAddresses?: CryptoAddressUncheckedUpdateManyWithoutCreatorNestedInput
+    updatedCryptoAddresses?: CryptoAddressUncheckedUpdateManyWithoutUpdaterNestedInput
+    processedDeposits?: DepositUncheckedUpdateManyWithoutProcessorNestedInput
+    deposits?: DepositUncheckedUpdateManyWithoutUserNestedInput
+    processedKycSubmissions?: KycSubmissionUncheckedUpdateManyWithoutProcessorNestedInput
+    kycSubmissions?: KycSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    processedLoanRepayments?: LoanRepaymentUncheckedUpdateManyWithoutProcessorNestedInput
+    processedLoans?: LoanUncheckedUpdateManyWithoutProcessorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    miningHostings?: MiningHostingUncheckedUpdateManyWithoutUserNestedInput
+    profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
+    userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
@@ -66890,6 +69089,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     created_at?: Date | string | null
@@ -66911,6 +69111,7 @@ export namespace Prisma {
     result?: string | null
     pnl?: Decimal | DecimalJsLike | number | string
     fee?: Decimal | DecimalJsLike | number | string
+    market_type?: string | null
     opened_at?: Date | string
     closed_at?: Date | string | null
     closed_by?: bigint | number | null
@@ -66975,6 +69176,22 @@ export namespace Prisma {
     status?: string
     paid_at?: Date | string | null
     created_at?: Date | string | null
+  }
+
+  export type FlashTransferCreateManyUserInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
   }
 
   export type AccountBalanceUpdateWithoutUserInput = {
@@ -67861,6 +70078,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67888,6 +70106,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67914,6 +70133,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67935,6 +70155,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -67961,6 +70182,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -67987,6 +70209,7 @@ export namespace Prisma {
     result?: NullableStringFieldUpdateOperationsInput | string | null
     pnl?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    market_type?: NullableStringFieldUpdateOperationsInput | string | null
     opened_at?: DateTimeFieldUpdateOperationsInput | Date | string
     closed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     closed_by?: NullableBigIntFieldUpdateOperationsInput | bigint | number | null
@@ -68169,6 +70392,54 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     paid_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUncheckedUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUncheckedUpdateManyWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type LoanRepaymentCreateManyLoanInput = {

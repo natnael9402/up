@@ -94,6 +94,11 @@ export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetT
  */
 export type Notification = $Result.DefaultSelection<Prisma.$NotificationPayload>
 /**
+ * Model PushSubscription
+ * 
+ */
+export type PushSubscription = $Result.DefaultSelection<Prisma.$PushSubscriptionPayload>
+/**
  * Model PersonalAccessToken
  * 
  */
@@ -183,6 +188,11 @@ export type ReferralCommission = $Result.DefaultSelection<Prisma.$ReferralCommis
  * 
  */
 export type UserOnboarding = $Result.DefaultSelection<Prisma.$UserOnboardingPayload>
+/**
+ * Model FlashTransfer
+ * 
+ */
+export type FlashTransfer = $Result.DefaultSelection<Prisma.$FlashTransferPayload>
 
 /**
  * Enums
@@ -310,6 +320,15 @@ export const ProfileTradeStatus: {
 
 export type ProfileTradeStatus = (typeof ProfileTradeStatus)[keyof typeof ProfileTradeStatus]
 
+
+export const FlashTransferStatus: {
+  active: 'active',
+  expired: 'expired',
+  revoked: 'revoked'
+};
+
+export type FlashTransferStatus = (typeof FlashTransferStatus)[keyof typeof FlashTransferStatus]
+
 }
 
 export type ProfileKycStatus = $Enums.ProfileKycStatus
@@ -363,6 +382,10 @@ export const LoanRepaymentStatus: typeof $Enums.LoanRepaymentStatus
 export type ProfileTradeStatus = $Enums.ProfileTradeStatus
 
 export const ProfileTradeStatus: typeof $Enums.ProfileTradeStatus
+
+export type FlashTransferStatus = $Enums.FlashTransferStatus
+
+export const FlashTransferStatus: typeof $Enums.FlashTransferStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -643,6 +666,16 @@ export class PrismaClient<
   get notification(): Prisma.NotificationDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.pushSubscription`: Exposes CRUD operations for the **PushSubscription** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PushSubscriptions
+    * const pushSubscriptions = await prisma.pushSubscription.findMany()
+    * ```
+    */
+  get pushSubscription(): Prisma.PushSubscriptionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.personalAccessToken`: Exposes CRUD operations for the **PersonalAccessToken** model.
     * Example usage:
     * ```ts
@@ -821,6 +854,16 @@ export class PrismaClient<
     * ```
     */
   get userOnboarding(): Prisma.UserOnboardingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.flashTransfer`: Exposes CRUD operations for the **FlashTransfer** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more FlashTransfers
+    * const flashTransfers = await prisma.flashTransfer.findMany()
+    * ```
+    */
+  get flashTransfer(): Prisma.FlashTransferDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1278,6 +1321,7 @@ export namespace Prisma {
     MiningProduct: 'MiningProduct',
     PasswordResetToken: 'PasswordResetToken',
     Notification: 'Notification',
+    PushSubscription: 'PushSubscription',
     PersonalAccessToken: 'PersonalAccessToken',
     Profile: 'Profile',
     Session: 'Session',
@@ -1295,7 +1339,8 @@ export namespace Prisma {
     NewsArticle: 'NewsArticle',
     AccountBalance: 'AccountBalance',
     ReferralCommission: 'ReferralCommission',
-    UserOnboarding: 'UserOnboarding'
+    UserOnboarding: 'UserOnboarding',
+    FlashTransfer: 'FlashTransfer'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1314,7 +1359,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "arbitrageHosting" | "arbitrageProduct" | "asset" | "cache" | "cacheLock" | "cryptoAddress" | "deposit" | "failedJob" | "jobBatch" | "job" | "kycSubmission" | "migration" | "miningHosting" | "miningProduct" | "passwordResetToken" | "notification" | "personalAccessToken" | "profile" | "session" | "supportTicketMessage" | "supportTicket" | "tradeContract" | "tradeOption" | "tradeSpot" | "trade" | "transaction" | "user" | "withdrawal" | "loan" | "loanRepayment" | "newsArticle" | "accountBalance" | "referralCommission" | "userOnboarding"
+      modelProps: "arbitrageHosting" | "arbitrageProduct" | "asset" | "cache" | "cacheLock" | "cryptoAddress" | "deposit" | "failedJob" | "jobBatch" | "job" | "kycSubmission" | "migration" | "miningHosting" | "miningProduct" | "passwordResetToken" | "notification" | "pushSubscription" | "personalAccessToken" | "profile" | "session" | "supportTicketMessage" | "supportTicket" | "tradeContract" | "tradeOption" | "tradeSpot" | "trade" | "transaction" | "user" | "withdrawal" | "loan" | "loanRepayment" | "newsArticle" | "accountBalance" | "referralCommission" | "userOnboarding" | "flashTransfer"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2499,6 +2544,80 @@ export namespace Prisma {
           count: {
             args: Prisma.NotificationCountArgs<ExtArgs>
             result: $Utils.Optional<NotificationCountAggregateOutputType> | number
+          }
+        }
+      }
+      PushSubscription: {
+        payload: Prisma.$PushSubscriptionPayload<ExtArgs>
+        fields: Prisma.PushSubscriptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PushSubscriptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PushSubscriptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+          }
+          findFirst: {
+            args: Prisma.PushSubscriptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PushSubscriptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+          }
+          findMany: {
+            args: Prisma.PushSubscriptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>[]
+          }
+          create: {
+            args: Prisma.PushSubscriptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+          }
+          createMany: {
+            args: Prisma.PushSubscriptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PushSubscriptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>[]
+          }
+          delete: {
+            args: Prisma.PushSubscriptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+          }
+          update: {
+            args: Prisma.PushSubscriptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.PushSubscriptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PushSubscriptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PushSubscriptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.PushSubscriptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PushSubscriptionPayload>
+          }
+          aggregate: {
+            args: Prisma.PushSubscriptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePushSubscription>
+          }
+          groupBy: {
+            args: Prisma.PushSubscriptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PushSubscriptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PushSubscriptionCountArgs<ExtArgs>
+            result: $Utils.Optional<PushSubscriptionCountAggregateOutputType> | number
           }
         }
       }
@@ -3834,6 +3953,80 @@ export namespace Prisma {
           }
         }
       }
+      FlashTransfer: {
+        payload: Prisma.$FlashTransferPayload<ExtArgs>
+        fields: Prisma.FlashTransferFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.FlashTransferFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.FlashTransferFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          findFirst: {
+            args: Prisma.FlashTransferFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.FlashTransferFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          findMany: {
+            args: Prisma.FlashTransferFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>[]
+          }
+          create: {
+            args: Prisma.FlashTransferCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          createMany: {
+            args: Prisma.FlashTransferCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.FlashTransferCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>[]
+          }
+          delete: {
+            args: Prisma.FlashTransferDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          update: {
+            args: Prisma.FlashTransferUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          deleteMany: {
+            args: Prisma.FlashTransferDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.FlashTransferUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.FlashTransferUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>[]
+          }
+          upsert: {
+            args: Prisma.FlashTransferUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$FlashTransferPayload>
+          }
+          aggregate: {
+            args: Prisma.FlashTransferAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateFlashTransfer>
+          }
+          groupBy: {
+            args: Prisma.FlashTransferGroupByArgs<ExtArgs>
+            result: $Utils.Optional<FlashTransferGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.FlashTransferCountArgs<ExtArgs>
+            result: $Utils.Optional<FlashTransferCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -3946,6 +4139,7 @@ export namespace Prisma {
     miningProduct?: MiningProductOmit
     passwordResetToken?: PasswordResetTokenOmit
     notification?: NotificationOmit
+    pushSubscription?: PushSubscriptionOmit
     personalAccessToken?: PersonalAccessTokenOmit
     profile?: ProfileOmit
     session?: SessionOmit
@@ -3964,6 +4158,7 @@ export namespace Prisma {
     accountBalance?: AccountBalanceOmit
     referralCommission?: ReferralCommissionOmit
     userOnboarding?: UserOnboardingOmit
+    flashTransfer?: FlashTransferOmit
   }
 
   /* Types for Logging */
@@ -4282,6 +4477,7 @@ export namespace Prisma {
     profiles: number
     sentNotifications: number
     notifications: number
+    pushSubscriptions: number
     adminSupportMessages: number
     userSupportMessages: number
     supportTickets: number
@@ -4291,6 +4487,7 @@ export namespace Prisma {
     processedWithdrawals: number
     withdrawals: number
     referral_commissions: number
+    flashTransfers: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4310,6 +4507,7 @@ export namespace Prisma {
     profiles?: boolean | UserCountOutputTypeCountProfilesArgs
     sentNotifications?: boolean | UserCountOutputTypeCountSentNotificationsArgs
     notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+    pushSubscriptions?: boolean | UserCountOutputTypeCountPushSubscriptionsArgs
     adminSupportMessages?: boolean | UserCountOutputTypeCountAdminSupportMessagesArgs
     userSupportMessages?: boolean | UserCountOutputTypeCountUserSupportMessagesArgs
     supportTickets?: boolean | UserCountOutputTypeCountSupportTicketsArgs
@@ -4319,6 +4517,7 @@ export namespace Prisma {
     processedWithdrawals?: boolean | UserCountOutputTypeCountProcessedWithdrawalsArgs
     withdrawals?: boolean | UserCountOutputTypeCountWithdrawalsArgs
     referral_commissions?: boolean | UserCountOutputTypeCountReferral_commissionsArgs
+    flashTransfers?: boolean | UserCountOutputTypeCountFlashTransfersArgs
   }
 
   // Custom InputTypes
@@ -4447,6 +4646,13 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
+  export type UserCountOutputTypeCountPushSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PushSubscriptionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
   export type UserCountOutputTypeCountAdminSupportMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SupportTicketMessageWhereInput
   }
@@ -4505,6 +4711,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountReferral_commissionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReferralCommissionWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountFlashTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashTransferWhereInput
   }
 
 
@@ -22851,6 +23064,1141 @@ export namespace Prisma {
 
 
   /**
+   * Model PushSubscription
+   */
+
+  export type AggregatePushSubscription = {
+    _count: PushSubscriptionCountAggregateOutputType | null
+    _avg: PushSubscriptionAvgAggregateOutputType | null
+    _sum: PushSubscriptionSumAggregateOutputType | null
+    _min: PushSubscriptionMinAggregateOutputType | null
+    _max: PushSubscriptionMaxAggregateOutputType | null
+  }
+
+  export type PushSubscriptionAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+  }
+
+  export type PushSubscriptionSumAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+  }
+
+  export type PushSubscriptionMinAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    endpoint: string | null
+    p256dh: string | null
+    auth: string | null
+    user_agent: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PushSubscriptionMaxAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    endpoint: string | null
+    p256dh: string | null
+    auth: string | null
+    user_agent: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type PushSubscriptionCountAggregateOutputType = {
+    id: number
+    user_id: number
+    endpoint: number
+    p256dh: number
+    auth: number
+    user_agent: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type PushSubscriptionAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type PushSubscriptionSumAggregateInputType = {
+    id?: true
+    user_id?: true
+  }
+
+  export type PushSubscriptionMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    endpoint?: true
+    p256dh?: true
+    auth?: true
+    user_agent?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PushSubscriptionMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    endpoint?: true
+    p256dh?: true
+    auth?: true
+    user_agent?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type PushSubscriptionCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    endpoint?: true
+    p256dh?: true
+    auth?: true
+    user_agent?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type PushSubscriptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PushSubscription to aggregate.
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PushSubscriptions to fetch.
+     */
+    orderBy?: PushSubscriptionOrderByWithRelationInput | PushSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PushSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PushSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PushSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PushSubscriptions
+    **/
+    _count?: true | PushSubscriptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PushSubscriptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PushSubscriptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PushSubscriptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PushSubscriptionMaxAggregateInputType
+  }
+
+  export type GetPushSubscriptionAggregateType<T extends PushSubscriptionAggregateArgs> = {
+        [P in keyof T & keyof AggregatePushSubscription]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePushSubscription[P]>
+      : GetScalarType<T[P], AggregatePushSubscription[P]>
+  }
+
+
+
+
+  export type PushSubscriptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PushSubscriptionWhereInput
+    orderBy?: PushSubscriptionOrderByWithAggregationInput | PushSubscriptionOrderByWithAggregationInput[]
+    by: PushSubscriptionScalarFieldEnum[] | PushSubscriptionScalarFieldEnum
+    having?: PushSubscriptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PushSubscriptionCountAggregateInputType | true
+    _avg?: PushSubscriptionAvgAggregateInputType
+    _sum?: PushSubscriptionSumAggregateInputType
+    _min?: PushSubscriptionMinAggregateInputType
+    _max?: PushSubscriptionMaxAggregateInputType
+  }
+
+  export type PushSubscriptionGroupByOutputType = {
+    id: bigint
+    user_id: bigint
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent: string | null
+    created_at: Date | null
+    updated_at: Date | null
+    _count: PushSubscriptionCountAggregateOutputType | null
+    _avg: PushSubscriptionAvgAggregateOutputType | null
+    _sum: PushSubscriptionSumAggregateOutputType | null
+    _min: PushSubscriptionMinAggregateOutputType | null
+    _max: PushSubscriptionMaxAggregateOutputType | null
+  }
+
+  type GetPushSubscriptionGroupByPayload<T extends PushSubscriptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PushSubscriptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PushSubscriptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PushSubscriptionGroupByOutputType[P]>
+            : GetScalarType<T[P], PushSubscriptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PushSubscriptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    endpoint?: boolean
+    p256dh?: boolean
+    auth?: boolean
+    user_agent?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pushSubscription"]>
+
+  export type PushSubscriptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    endpoint?: boolean
+    p256dh?: boolean
+    auth?: boolean
+    user_agent?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pushSubscription"]>
+
+  export type PushSubscriptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    endpoint?: boolean
+    p256dh?: boolean
+    auth?: boolean
+    user_agent?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["pushSubscription"]>
+
+  export type PushSubscriptionSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    endpoint?: boolean
+    p256dh?: boolean
+    auth?: boolean
+    user_agent?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type PushSubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "endpoint" | "p256dh" | "auth" | "user_agent" | "created_at" | "updated_at", ExtArgs["result"]["pushSubscription"]>
+  export type PushSubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PushSubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type PushSubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $PushSubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PushSubscription"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      user_id: bigint
+      endpoint: string
+      p256dh: string
+      auth: string
+      user_agent: string | null
+      created_at: Date | null
+      updated_at: Date | null
+    }, ExtArgs["result"]["pushSubscription"]>
+    composites: {}
+  }
+
+  type PushSubscriptionGetPayload<S extends boolean | null | undefined | PushSubscriptionDefaultArgs> = $Result.GetResult<Prisma.$PushSubscriptionPayload, S>
+
+  type PushSubscriptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PushSubscriptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PushSubscriptionCountAggregateInputType | true
+    }
+
+  export interface PushSubscriptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PushSubscription'], meta: { name: 'PushSubscription' } }
+    /**
+     * Find zero or one PushSubscription that matches the filter.
+     * @param {PushSubscriptionFindUniqueArgs} args - Arguments to find a PushSubscription
+     * @example
+     * // Get one PushSubscription
+     * const pushSubscription = await prisma.pushSubscription.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PushSubscriptionFindUniqueArgs>(args: SelectSubset<T, PushSubscriptionFindUniqueArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PushSubscription that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PushSubscriptionFindUniqueOrThrowArgs} args - Arguments to find a PushSubscription
+     * @example
+     * // Get one PushSubscription
+     * const pushSubscription = await prisma.pushSubscription.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PushSubscriptionFindUniqueOrThrowArgs>(args: SelectSubset<T, PushSubscriptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PushSubscription that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionFindFirstArgs} args - Arguments to find a PushSubscription
+     * @example
+     * // Get one PushSubscription
+     * const pushSubscription = await prisma.pushSubscription.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PushSubscriptionFindFirstArgs>(args?: SelectSubset<T, PushSubscriptionFindFirstArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PushSubscription that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionFindFirstOrThrowArgs} args - Arguments to find a PushSubscription
+     * @example
+     * // Get one PushSubscription
+     * const pushSubscription = await prisma.pushSubscription.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PushSubscriptionFindFirstOrThrowArgs>(args?: SelectSubset<T, PushSubscriptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PushSubscriptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PushSubscriptions
+     * const pushSubscriptions = await prisma.pushSubscription.findMany()
+     * 
+     * // Get first 10 PushSubscriptions
+     * const pushSubscriptions = await prisma.pushSubscription.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const pushSubscriptionWithIdOnly = await prisma.pushSubscription.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PushSubscriptionFindManyArgs>(args?: SelectSubset<T, PushSubscriptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PushSubscription.
+     * @param {PushSubscriptionCreateArgs} args - Arguments to create a PushSubscription.
+     * @example
+     * // Create one PushSubscription
+     * const PushSubscription = await prisma.pushSubscription.create({
+     *   data: {
+     *     // ... data to create a PushSubscription
+     *   }
+     * })
+     * 
+     */
+    create<T extends PushSubscriptionCreateArgs>(args: SelectSubset<T, PushSubscriptionCreateArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PushSubscriptions.
+     * @param {PushSubscriptionCreateManyArgs} args - Arguments to create many PushSubscriptions.
+     * @example
+     * // Create many PushSubscriptions
+     * const pushSubscription = await prisma.pushSubscription.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PushSubscriptionCreateManyArgs>(args?: SelectSubset<T, PushSubscriptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PushSubscriptions and returns the data saved in the database.
+     * @param {PushSubscriptionCreateManyAndReturnArgs} args - Arguments to create many PushSubscriptions.
+     * @example
+     * // Create many PushSubscriptions
+     * const pushSubscription = await prisma.pushSubscription.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PushSubscriptions and only return the `id`
+     * const pushSubscriptionWithIdOnly = await prisma.pushSubscription.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PushSubscriptionCreateManyAndReturnArgs>(args?: SelectSubset<T, PushSubscriptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PushSubscription.
+     * @param {PushSubscriptionDeleteArgs} args - Arguments to delete one PushSubscription.
+     * @example
+     * // Delete one PushSubscription
+     * const PushSubscription = await prisma.pushSubscription.delete({
+     *   where: {
+     *     // ... filter to delete one PushSubscription
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PushSubscriptionDeleteArgs>(args: SelectSubset<T, PushSubscriptionDeleteArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PushSubscription.
+     * @param {PushSubscriptionUpdateArgs} args - Arguments to update one PushSubscription.
+     * @example
+     * // Update one PushSubscription
+     * const pushSubscription = await prisma.pushSubscription.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PushSubscriptionUpdateArgs>(args: SelectSubset<T, PushSubscriptionUpdateArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PushSubscriptions.
+     * @param {PushSubscriptionDeleteManyArgs} args - Arguments to filter PushSubscriptions to delete.
+     * @example
+     * // Delete a few PushSubscriptions
+     * const { count } = await prisma.pushSubscription.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PushSubscriptionDeleteManyArgs>(args?: SelectSubset<T, PushSubscriptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PushSubscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PushSubscriptions
+     * const pushSubscription = await prisma.pushSubscription.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PushSubscriptionUpdateManyArgs>(args: SelectSubset<T, PushSubscriptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PushSubscriptions and returns the data updated in the database.
+     * @param {PushSubscriptionUpdateManyAndReturnArgs} args - Arguments to update many PushSubscriptions.
+     * @example
+     * // Update many PushSubscriptions
+     * const pushSubscription = await prisma.pushSubscription.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PushSubscriptions and only return the `id`
+     * const pushSubscriptionWithIdOnly = await prisma.pushSubscription.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PushSubscriptionUpdateManyAndReturnArgs>(args: SelectSubset<T, PushSubscriptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PushSubscription.
+     * @param {PushSubscriptionUpsertArgs} args - Arguments to update or create a PushSubscription.
+     * @example
+     * // Update or create a PushSubscription
+     * const pushSubscription = await prisma.pushSubscription.upsert({
+     *   create: {
+     *     // ... data to create a PushSubscription
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PushSubscription we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PushSubscriptionUpsertArgs>(args: SelectSubset<T, PushSubscriptionUpsertArgs<ExtArgs>>): Prisma__PushSubscriptionClient<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PushSubscriptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionCountArgs} args - Arguments to filter PushSubscriptions to count.
+     * @example
+     * // Count the number of PushSubscriptions
+     * const count = await prisma.pushSubscription.count({
+     *   where: {
+     *     // ... the filter for the PushSubscriptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends PushSubscriptionCountArgs>(
+      args?: Subset<T, PushSubscriptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PushSubscriptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PushSubscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PushSubscriptionAggregateArgs>(args: Subset<T, PushSubscriptionAggregateArgs>): Prisma.PrismaPromise<GetPushSubscriptionAggregateType<T>>
+
+    /**
+     * Group by PushSubscription.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PushSubscriptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PushSubscriptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PushSubscriptionGroupByArgs['orderBy'] }
+        : { orderBy?: PushSubscriptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PushSubscriptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPushSubscriptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PushSubscription model
+   */
+  readonly fields: PushSubscriptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PushSubscription.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PushSubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PushSubscription model
+   */
+  interface PushSubscriptionFieldRefs {
+    readonly id: FieldRef<"PushSubscription", 'BigInt'>
+    readonly user_id: FieldRef<"PushSubscription", 'BigInt'>
+    readonly endpoint: FieldRef<"PushSubscription", 'String'>
+    readonly p256dh: FieldRef<"PushSubscription", 'String'>
+    readonly auth: FieldRef<"PushSubscription", 'String'>
+    readonly user_agent: FieldRef<"PushSubscription", 'String'>
+    readonly created_at: FieldRef<"PushSubscription", 'DateTime'>
+    readonly updated_at: FieldRef<"PushSubscription", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PushSubscription findUnique
+   */
+  export type PushSubscriptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PushSubscription to fetch.
+     */
+    where: PushSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * PushSubscription findUniqueOrThrow
+   */
+  export type PushSubscriptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PushSubscription to fetch.
+     */
+    where: PushSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * PushSubscription findFirst
+   */
+  export type PushSubscriptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PushSubscription to fetch.
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PushSubscriptions to fetch.
+     */
+    orderBy?: PushSubscriptionOrderByWithRelationInput | PushSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PushSubscriptions.
+     */
+    cursor?: PushSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PushSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PushSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PushSubscriptions.
+     */
+    distinct?: PushSubscriptionScalarFieldEnum | PushSubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * PushSubscription findFirstOrThrow
+   */
+  export type PushSubscriptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PushSubscription to fetch.
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PushSubscriptions to fetch.
+     */
+    orderBy?: PushSubscriptionOrderByWithRelationInput | PushSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PushSubscriptions.
+     */
+    cursor?: PushSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PushSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PushSubscriptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PushSubscriptions.
+     */
+    distinct?: PushSubscriptionScalarFieldEnum | PushSubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * PushSubscription findMany
+   */
+  export type PushSubscriptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter, which PushSubscriptions to fetch.
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PushSubscriptions to fetch.
+     */
+    orderBy?: PushSubscriptionOrderByWithRelationInput | PushSubscriptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PushSubscriptions.
+     */
+    cursor?: PushSubscriptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PushSubscriptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PushSubscriptions.
+     */
+    skip?: number
+    distinct?: PushSubscriptionScalarFieldEnum | PushSubscriptionScalarFieldEnum[]
+  }
+
+  /**
+   * PushSubscription create
+   */
+  export type PushSubscriptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PushSubscription.
+     */
+    data: XOR<PushSubscriptionCreateInput, PushSubscriptionUncheckedCreateInput>
+  }
+
+  /**
+   * PushSubscription createMany
+   */
+  export type PushSubscriptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PushSubscriptions.
+     */
+    data: PushSubscriptionCreateManyInput | PushSubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PushSubscription createManyAndReturn
+   */
+  export type PushSubscriptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many PushSubscriptions.
+     */
+    data: PushSubscriptionCreateManyInput | PushSubscriptionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PushSubscription update
+   */
+  export type PushSubscriptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PushSubscription.
+     */
+    data: XOR<PushSubscriptionUpdateInput, PushSubscriptionUncheckedUpdateInput>
+    /**
+     * Choose, which PushSubscription to update.
+     */
+    where: PushSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * PushSubscription updateMany
+   */
+  export type PushSubscriptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PushSubscriptions.
+     */
+    data: XOR<PushSubscriptionUpdateManyMutationInput, PushSubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which PushSubscriptions to update
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * Limit how many PushSubscriptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PushSubscription updateManyAndReturn
+   */
+  export type PushSubscriptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * The data used to update PushSubscriptions.
+     */
+    data: XOR<PushSubscriptionUpdateManyMutationInput, PushSubscriptionUncheckedUpdateManyInput>
+    /**
+     * Filter which PushSubscriptions to update
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * Limit how many PushSubscriptions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PushSubscription upsert
+   */
+  export type PushSubscriptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PushSubscription to update in case it exists.
+     */
+    where: PushSubscriptionWhereUniqueInput
+    /**
+     * In case the PushSubscription found by the `where` argument doesn't exist, create a new PushSubscription with this data.
+     */
+    create: XOR<PushSubscriptionCreateInput, PushSubscriptionUncheckedCreateInput>
+    /**
+     * In case the PushSubscription was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PushSubscriptionUpdateInput, PushSubscriptionUncheckedUpdateInput>
+  }
+
+  /**
+   * PushSubscription delete
+   */
+  export type PushSubscriptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    /**
+     * Filter which PushSubscription to delete.
+     */
+    where: PushSubscriptionWhereUniqueInput
+  }
+
+  /**
+   * PushSubscription deleteMany
+   */
+  export type PushSubscriptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PushSubscriptions to delete
+     */
+    where?: PushSubscriptionWhereInput
+    /**
+     * Limit how many PushSubscriptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PushSubscription without action
+   */
+  export type PushSubscriptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model PersonalAccessToken
    */
 
@@ -35223,6 +36571,7 @@ export namespace Prisma {
     userOnboarding?: boolean | User$userOnboardingArgs<ExtArgs>
     sentNotifications?: boolean | User$sentNotificationsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
+    pushSubscriptions?: boolean | User$pushSubscriptionsArgs<ExtArgs>
     adminSupportMessages?: boolean | User$adminSupportMessagesArgs<ExtArgs>
     userSupportMessages?: boolean | User$userSupportMessagesArgs<ExtArgs>
     supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
@@ -35232,6 +36581,7 @@ export namespace Prisma {
     processedWithdrawals?: boolean | User$processedWithdrawalsArgs<ExtArgs>
     withdrawals?: boolean | User$withdrawalsArgs<ExtArgs>
     referral_commissions?: boolean | User$referral_commissionsArgs<ExtArgs>
+    flashTransfers?: boolean | User$flashTransfersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -35299,6 +36649,7 @@ export namespace Prisma {
     userOnboarding?: boolean | User$userOnboardingArgs<ExtArgs>
     sentNotifications?: boolean | User$sentNotificationsArgs<ExtArgs>
     notifications?: boolean | User$notificationsArgs<ExtArgs>
+    pushSubscriptions?: boolean | User$pushSubscriptionsArgs<ExtArgs>
     adminSupportMessages?: boolean | User$adminSupportMessagesArgs<ExtArgs>
     userSupportMessages?: boolean | User$userSupportMessagesArgs<ExtArgs>
     supportTickets?: boolean | User$supportTicketsArgs<ExtArgs>
@@ -35308,6 +36659,7 @@ export namespace Prisma {
     processedWithdrawals?: boolean | User$processedWithdrawalsArgs<ExtArgs>
     withdrawals?: boolean | User$withdrawalsArgs<ExtArgs>
     referral_commissions?: boolean | User$referral_commissionsArgs<ExtArgs>
+    flashTransfers?: boolean | User$flashTransfersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -35333,6 +36685,7 @@ export namespace Prisma {
       userOnboarding: Prisma.$UserOnboardingPayload<ExtArgs> | null
       sentNotifications: Prisma.$NotificationPayload<ExtArgs>[]
       notifications: Prisma.$NotificationPayload<ExtArgs>[]
+      pushSubscriptions: Prisma.$PushSubscriptionPayload<ExtArgs>[]
       adminSupportMessages: Prisma.$SupportTicketMessagePayload<ExtArgs>[]
       userSupportMessages: Prisma.$SupportTicketMessagePayload<ExtArgs>[]
       supportTickets: Prisma.$SupportTicketPayload<ExtArgs>[]
@@ -35342,6 +36695,7 @@ export namespace Prisma {
       processedWithdrawals: Prisma.$WithdrawalPayload<ExtArgs>[]
       withdrawals: Prisma.$WithdrawalPayload<ExtArgs>[]
       referral_commissions: Prisma.$ReferralCommissionPayload<ExtArgs>[]
+      flashTransfers: Prisma.$FlashTransferPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: bigint
@@ -35767,6 +37121,7 @@ export namespace Prisma {
     userOnboarding<T extends User$userOnboardingArgs<ExtArgs> = {}>(args?: Subset<T, User$userOnboardingArgs<ExtArgs>>): Prisma__UserOnboardingClient<$Result.GetResult<Prisma.$UserOnboardingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     sentNotifications<T extends User$sentNotificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$sentNotificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notifications<T extends User$notificationsArgs<ExtArgs> = {}>(args?: Subset<T, User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    pushSubscriptions<T extends User$pushSubscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, User$pushSubscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PushSubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     adminSupportMessages<T extends User$adminSupportMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$adminSupportMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     userSupportMessages<T extends User$userSupportMessagesArgs<ExtArgs> = {}>(args?: Subset<T, User$userSupportMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     supportTickets<T extends User$supportTicketsArgs<ExtArgs> = {}>(args?: Subset<T, User$supportTicketsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupportTicketPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -35776,6 +37131,7 @@ export namespace Prisma {
     processedWithdrawals<T extends User$processedWithdrawalsArgs<ExtArgs> = {}>(args?: Subset<T, User$processedWithdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WithdrawalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     withdrawals<T extends User$withdrawalsArgs<ExtArgs> = {}>(args?: Subset<T, User$withdrawalsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WithdrawalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     referral_commissions<T extends User$referral_commissionsArgs<ExtArgs> = {}>(args?: Subset<T, User$referral_commissionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReferralCommissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    flashTransfers<T extends User$flashTransfersArgs<ExtArgs> = {}>(args?: Subset<T, User$flashTransfersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -36608,6 +37964,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.pushSubscriptions
+   */
+  export type User$pushSubscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PushSubscription
+     */
+    select?: PushSubscriptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PushSubscription
+     */
+    omit?: PushSubscriptionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PushSubscriptionInclude<ExtArgs> | null
+    where?: PushSubscriptionWhereInput
+    orderBy?: PushSubscriptionOrderByWithRelationInput | PushSubscriptionOrderByWithRelationInput[]
+    cursor?: PushSubscriptionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PushSubscriptionScalarFieldEnum | PushSubscriptionScalarFieldEnum[]
+  }
+
+  /**
    * User.adminSupportMessages
    */
   export type User$adminSupportMessagesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -36821,6 +38201,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReferralCommissionScalarFieldEnum | ReferralCommissionScalarFieldEnum[]
+  }
+
+  /**
+   * User.flashTransfers
+   */
+  export type User$flashTransfersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    where?: FlashTransferWhereInput
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    cursor?: FlashTransferWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
   }
 
   /**
@@ -45282,6 +46686,1223 @@ export namespace Prisma {
 
 
   /**
+   * Model FlashTransfer
+   */
+
+  export type AggregateFlashTransfer = {
+    _count: FlashTransferCountAggregateOutputType | null
+    _avg: FlashTransferAvgAggregateOutputType | null
+    _sum: FlashTransferSumAggregateOutputType | null
+    _min: FlashTransferMinAggregateOutputType | null
+    _max: FlashTransferMaxAggregateOutputType | null
+  }
+
+  export type FlashTransferAvgAggregateOutputType = {
+    id: number | null
+    user_id: number | null
+    amount: Decimal | null
+  }
+
+  export type FlashTransferSumAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    amount: Decimal | null
+  }
+
+  export type FlashTransferMinAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    amount: Decimal | null
+    currency: string | null
+    network: string | null
+    to_address: string | null
+    tx_hash: string | null
+    block_number: string | null
+    status: $Enums.FlashTransferStatus | null
+    is_test: boolean | null
+    warning_seen: boolean | null
+    expires_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashTransferMaxAggregateOutputType = {
+    id: bigint | null
+    user_id: bigint | null
+    amount: Decimal | null
+    currency: string | null
+    network: string | null
+    to_address: string | null
+    tx_hash: string | null
+    block_number: string | null
+    status: $Enums.FlashTransferStatus | null
+    is_test: boolean | null
+    warning_seen: boolean | null
+    expires_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type FlashTransferCountAggregateOutputType = {
+    id: number
+    user_id: number
+    amount: number
+    currency: number
+    network: number
+    to_address: number
+    tx_hash: number
+    block_number: number
+    status: number
+    is_test: number
+    warning_seen: number
+    expires_at: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type FlashTransferAvgAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+  }
+
+  export type FlashTransferSumAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+  }
+
+  export type FlashTransferMinAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+    currency?: true
+    network?: true
+    to_address?: true
+    tx_hash?: true
+    block_number?: true
+    status?: true
+    is_test?: true
+    warning_seen?: true
+    expires_at?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashTransferMaxAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+    currency?: true
+    network?: true
+    to_address?: true
+    tx_hash?: true
+    block_number?: true
+    status?: true
+    is_test?: true
+    warning_seen?: true
+    expires_at?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type FlashTransferCountAggregateInputType = {
+    id?: true
+    user_id?: true
+    amount?: true
+    currency?: true
+    network?: true
+    to_address?: true
+    tx_hash?: true
+    block_number?: true
+    status?: true
+    is_test?: true
+    warning_seen?: true
+    expires_at?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type FlashTransferAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashTransfer to aggregate.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned FlashTransfers
+    **/
+    _count?: true | FlashTransferCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: FlashTransferAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: FlashTransferSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: FlashTransferMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: FlashTransferMaxAggregateInputType
+  }
+
+  export type GetFlashTransferAggregateType<T extends FlashTransferAggregateArgs> = {
+        [P in keyof T & keyof AggregateFlashTransfer]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateFlashTransfer[P]>
+      : GetScalarType<T[P], AggregateFlashTransfer[P]>
+  }
+
+
+
+
+  export type FlashTransferGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: FlashTransferWhereInput
+    orderBy?: FlashTransferOrderByWithAggregationInput | FlashTransferOrderByWithAggregationInput[]
+    by: FlashTransferScalarFieldEnum[] | FlashTransferScalarFieldEnum
+    having?: FlashTransferScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: FlashTransferCountAggregateInputType | true
+    _avg?: FlashTransferAvgAggregateInputType
+    _sum?: FlashTransferSumAggregateInputType
+    _min?: FlashTransferMinAggregateInputType
+    _max?: FlashTransferMaxAggregateInputType
+  }
+
+  export type FlashTransferGroupByOutputType = {
+    id: bigint
+    user_id: bigint
+    amount: Decimal
+    currency: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status: $Enums.FlashTransferStatus
+    is_test: boolean
+    warning_seen: boolean
+    expires_at: Date | null
+    created_at: Date | null
+    updated_at: Date | null
+    _count: FlashTransferCountAggregateOutputType | null
+    _avg: FlashTransferAvgAggregateOutputType | null
+    _sum: FlashTransferSumAggregateOutputType | null
+    _min: FlashTransferMinAggregateOutputType | null
+    _max: FlashTransferMaxAggregateOutputType | null
+  }
+
+  type GetFlashTransferGroupByPayload<T extends FlashTransferGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<FlashTransferGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof FlashTransferGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], FlashTransferGroupByOutputType[P]>
+            : GetScalarType<T[P], FlashTransferGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type FlashTransferSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashTransfer"]>
+
+  export type FlashTransferSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashTransfer"]>
+
+  export type FlashTransferSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["flashTransfer"]>
+
+  export type FlashTransferSelectScalar = {
+    id?: boolean
+    user_id?: boolean
+    amount?: boolean
+    currency?: boolean
+    network?: boolean
+    to_address?: boolean
+    tx_hash?: boolean
+    block_number?: boolean
+    status?: boolean
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type FlashTransferOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "user_id" | "amount" | "currency" | "network" | "to_address" | "tx_hash" | "block_number" | "status" | "is_test" | "warning_seen" | "expires_at" | "created_at" | "updated_at", ExtArgs["result"]["flashTransfer"]>
+  export type FlashTransferInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FlashTransferIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type FlashTransferIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $FlashTransferPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "FlashTransfer"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: bigint
+      user_id: bigint
+      amount: Prisma.Decimal
+      currency: string
+      network: string
+      to_address: string
+      tx_hash: string
+      block_number: string
+      status: $Enums.FlashTransferStatus
+      is_test: boolean
+      warning_seen: boolean
+      expires_at: Date | null
+      created_at: Date | null
+      updated_at: Date | null
+    }, ExtArgs["result"]["flashTransfer"]>
+    composites: {}
+  }
+
+  type FlashTransferGetPayload<S extends boolean | null | undefined | FlashTransferDefaultArgs> = $Result.GetResult<Prisma.$FlashTransferPayload, S>
+
+  type FlashTransferCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<FlashTransferFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: FlashTransferCountAggregateInputType | true
+    }
+
+  export interface FlashTransferDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['FlashTransfer'], meta: { name: 'FlashTransfer' } }
+    /**
+     * Find zero or one FlashTransfer that matches the filter.
+     * @param {FlashTransferFindUniqueArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends FlashTransferFindUniqueArgs>(args: SelectSubset<T, FlashTransferFindUniqueArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one FlashTransfer that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {FlashTransferFindUniqueOrThrowArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends FlashTransferFindUniqueOrThrowArgs>(args: SelectSubset<T, FlashTransferFindUniqueOrThrowArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashTransfer that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferFindFirstArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends FlashTransferFindFirstArgs>(args?: SelectSubset<T, FlashTransferFindFirstArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first FlashTransfer that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferFindFirstOrThrowArgs} args - Arguments to find a FlashTransfer
+     * @example
+     * // Get one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends FlashTransferFindFirstOrThrowArgs>(args?: SelectSubset<T, FlashTransferFindFirstOrThrowArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more FlashTransfers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all FlashTransfers
+     * const flashTransfers = await prisma.flashTransfer.findMany()
+     * 
+     * // Get first 10 FlashTransfers
+     * const flashTransfers = await prisma.flashTransfer.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const flashTransferWithIdOnly = await prisma.flashTransfer.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends FlashTransferFindManyArgs>(args?: SelectSubset<T, FlashTransferFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a FlashTransfer.
+     * @param {FlashTransferCreateArgs} args - Arguments to create a FlashTransfer.
+     * @example
+     * // Create one FlashTransfer
+     * const FlashTransfer = await prisma.flashTransfer.create({
+     *   data: {
+     *     // ... data to create a FlashTransfer
+     *   }
+     * })
+     * 
+     */
+    create<T extends FlashTransferCreateArgs>(args: SelectSubset<T, FlashTransferCreateArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many FlashTransfers.
+     * @param {FlashTransferCreateManyArgs} args - Arguments to create many FlashTransfers.
+     * @example
+     * // Create many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends FlashTransferCreateManyArgs>(args?: SelectSubset<T, FlashTransferCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many FlashTransfers and returns the data saved in the database.
+     * @param {FlashTransferCreateManyAndReturnArgs} args - Arguments to create many FlashTransfers.
+     * @example
+     * // Create many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many FlashTransfers and only return the `id`
+     * const flashTransferWithIdOnly = await prisma.flashTransfer.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends FlashTransferCreateManyAndReturnArgs>(args?: SelectSubset<T, FlashTransferCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a FlashTransfer.
+     * @param {FlashTransferDeleteArgs} args - Arguments to delete one FlashTransfer.
+     * @example
+     * // Delete one FlashTransfer
+     * const FlashTransfer = await prisma.flashTransfer.delete({
+     *   where: {
+     *     // ... filter to delete one FlashTransfer
+     *   }
+     * })
+     * 
+     */
+    delete<T extends FlashTransferDeleteArgs>(args: SelectSubset<T, FlashTransferDeleteArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one FlashTransfer.
+     * @param {FlashTransferUpdateArgs} args - Arguments to update one FlashTransfer.
+     * @example
+     * // Update one FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends FlashTransferUpdateArgs>(args: SelectSubset<T, FlashTransferUpdateArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more FlashTransfers.
+     * @param {FlashTransferDeleteManyArgs} args - Arguments to filter FlashTransfers to delete.
+     * @example
+     * // Delete a few FlashTransfers
+     * const { count } = await prisma.flashTransfer.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends FlashTransferDeleteManyArgs>(args?: SelectSubset<T, FlashTransferDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashTransfers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends FlashTransferUpdateManyArgs>(args: SelectSubset<T, FlashTransferUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more FlashTransfers and returns the data updated in the database.
+     * @param {FlashTransferUpdateManyAndReturnArgs} args - Arguments to update many FlashTransfers.
+     * @example
+     * // Update many FlashTransfers
+     * const flashTransfer = await prisma.flashTransfer.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more FlashTransfers and only return the `id`
+     * const flashTransferWithIdOnly = await prisma.flashTransfer.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends FlashTransferUpdateManyAndReturnArgs>(args: SelectSubset<T, FlashTransferUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one FlashTransfer.
+     * @param {FlashTransferUpsertArgs} args - Arguments to update or create a FlashTransfer.
+     * @example
+     * // Update or create a FlashTransfer
+     * const flashTransfer = await prisma.flashTransfer.upsert({
+     *   create: {
+     *     // ... data to create a FlashTransfer
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the FlashTransfer we want to update
+     *   }
+     * })
+     */
+    upsert<T extends FlashTransferUpsertArgs>(args: SelectSubset<T, FlashTransferUpsertArgs<ExtArgs>>): Prisma__FlashTransferClient<$Result.GetResult<Prisma.$FlashTransferPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of FlashTransfers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferCountArgs} args - Arguments to filter FlashTransfers to count.
+     * @example
+     * // Count the number of FlashTransfers
+     * const count = await prisma.flashTransfer.count({
+     *   where: {
+     *     // ... the filter for the FlashTransfers we want to count
+     *   }
+     * })
+    **/
+    count<T extends FlashTransferCountArgs>(
+      args?: Subset<T, FlashTransferCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], FlashTransferCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a FlashTransfer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends FlashTransferAggregateArgs>(args: Subset<T, FlashTransferAggregateArgs>): Prisma.PrismaPromise<GetFlashTransferAggregateType<T>>
+
+    /**
+     * Group by FlashTransfer.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {FlashTransferGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends FlashTransferGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: FlashTransferGroupByArgs['orderBy'] }
+        : { orderBy?: FlashTransferGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, FlashTransferGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetFlashTransferGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the FlashTransfer model
+   */
+  readonly fields: FlashTransferFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for FlashTransfer.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__FlashTransferClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the FlashTransfer model
+   */
+  interface FlashTransferFieldRefs {
+    readonly id: FieldRef<"FlashTransfer", 'BigInt'>
+    readonly user_id: FieldRef<"FlashTransfer", 'BigInt'>
+    readonly amount: FieldRef<"FlashTransfer", 'Decimal'>
+    readonly currency: FieldRef<"FlashTransfer", 'String'>
+    readonly network: FieldRef<"FlashTransfer", 'String'>
+    readonly to_address: FieldRef<"FlashTransfer", 'String'>
+    readonly tx_hash: FieldRef<"FlashTransfer", 'String'>
+    readonly block_number: FieldRef<"FlashTransfer", 'String'>
+    readonly status: FieldRef<"FlashTransfer", 'FlashTransferStatus'>
+    readonly is_test: FieldRef<"FlashTransfer", 'Boolean'>
+    readonly warning_seen: FieldRef<"FlashTransfer", 'Boolean'>
+    readonly expires_at: FieldRef<"FlashTransfer", 'DateTime'>
+    readonly created_at: FieldRef<"FlashTransfer", 'DateTime'>
+    readonly updated_at: FieldRef<"FlashTransfer", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * FlashTransfer findUnique
+   */
+  export type FlashTransferFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer findUniqueOrThrow
+   */
+  export type FlashTransferFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer findFirst
+   */
+  export type FlashTransferFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashTransfers.
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashTransfers.
+     */
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
+  }
+
+  /**
+   * FlashTransfer findFirstOrThrow
+   */
+  export type FlashTransferFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfer to fetch.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for FlashTransfers.
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of FlashTransfers.
+     */
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
+  }
+
+  /**
+   * FlashTransfer findMany
+   */
+  export type FlashTransferFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter, which FlashTransfers to fetch.
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of FlashTransfers to fetch.
+     */
+    orderBy?: FlashTransferOrderByWithRelationInput | FlashTransferOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing FlashTransfers.
+     */
+    cursor?: FlashTransferWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` FlashTransfers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` FlashTransfers.
+     */
+    skip?: number
+    distinct?: FlashTransferScalarFieldEnum | FlashTransferScalarFieldEnum[]
+  }
+
+  /**
+   * FlashTransfer create
+   */
+  export type FlashTransferCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * The data needed to create a FlashTransfer.
+     */
+    data: XOR<FlashTransferCreateInput, FlashTransferUncheckedCreateInput>
+  }
+
+  /**
+   * FlashTransfer createMany
+   */
+  export type FlashTransferCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many FlashTransfers.
+     */
+    data: FlashTransferCreateManyInput | FlashTransferCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * FlashTransfer createManyAndReturn
+   */
+  export type FlashTransferCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * The data used to create many FlashTransfers.
+     */
+    data: FlashTransferCreateManyInput | FlashTransferCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashTransfer update
+   */
+  export type FlashTransferUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * The data needed to update a FlashTransfer.
+     */
+    data: XOR<FlashTransferUpdateInput, FlashTransferUncheckedUpdateInput>
+    /**
+     * Choose, which FlashTransfer to update.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer updateMany
+   */
+  export type FlashTransferUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update FlashTransfers.
+     */
+    data: XOR<FlashTransferUpdateManyMutationInput, FlashTransferUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashTransfers to update
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * Limit how many FlashTransfers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashTransfer updateManyAndReturn
+   */
+  export type FlashTransferUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * The data used to update FlashTransfers.
+     */
+    data: XOR<FlashTransferUpdateManyMutationInput, FlashTransferUncheckedUpdateManyInput>
+    /**
+     * Filter which FlashTransfers to update
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * Limit how many FlashTransfers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * FlashTransfer upsert
+   */
+  export type FlashTransferUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * The filter to search for the FlashTransfer to update in case it exists.
+     */
+    where: FlashTransferWhereUniqueInput
+    /**
+     * In case the FlashTransfer found by the `where` argument doesn't exist, create a new FlashTransfer with this data.
+     */
+    create: XOR<FlashTransferCreateInput, FlashTransferUncheckedCreateInput>
+    /**
+     * In case the FlashTransfer was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<FlashTransferUpdateInput, FlashTransferUncheckedUpdateInput>
+  }
+
+  /**
+   * FlashTransfer delete
+   */
+  export type FlashTransferDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+    /**
+     * Filter which FlashTransfer to delete.
+     */
+    where: FlashTransferWhereUniqueInput
+  }
+
+  /**
+   * FlashTransfer deleteMany
+   */
+  export type FlashTransferDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which FlashTransfers to delete
+     */
+    where?: FlashTransferWhereInput
+    /**
+     * Limit how many FlashTransfers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * FlashTransfer without action
+   */
+  export type FlashTransferDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the FlashTransfer
+     */
+    select?: FlashTransferSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the FlashTransfer
+     */
+    omit?: FlashTransferOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: FlashTransferInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -45542,6 +48163,20 @@ export namespace Prisma {
   };
 
   export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+  export const PushSubscriptionScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    endpoint: 'endpoint',
+    p256dh: 'p256dh',
+    auth: 'auth',
+    user_agent: 'user_agent',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type PushSubscriptionScalarFieldEnum = (typeof PushSubscriptionScalarFieldEnum)[keyof typeof PushSubscriptionScalarFieldEnum]
 
 
   export const PersonalAccessTokenScalarFieldEnum: {
@@ -45860,6 +48495,26 @@ export namespace Prisma {
   export type UserOnboardingScalarFieldEnum = (typeof UserOnboardingScalarFieldEnum)[keyof typeof UserOnboardingScalarFieldEnum]
 
 
+  export const FlashTransferScalarFieldEnum: {
+    id: 'id',
+    user_id: 'user_id',
+    amount: 'amount',
+    currency: 'currency',
+    network: 'network',
+    to_address: 'to_address',
+    tx_hash: 'tx_hash',
+    block_number: 'block_number',
+    status: 'status',
+    is_test: 'is_test',
+    warning_seen: 'warning_seen',
+    expires_at: 'expires_at',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type FlashTransferScalarFieldEnum = (typeof FlashTransferScalarFieldEnum)[keyof typeof FlashTransferScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -46145,6 +48800,20 @@ export namespace Prisma {
    * Reference to a field of type 'LoanRepaymentStatus[]'
    */
   export type ListEnumLoanRepaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'LoanRepaymentStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'FlashTransferStatus'
+   */
+  export type EnumFlashTransferStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlashTransferStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'FlashTransferStatus[]'
+   */
+  export type ListEnumFlashTransferStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'FlashTransferStatus[]'>
     
 
 
@@ -47442,6 +50111,78 @@ export namespace Prisma {
     image_url?: StringNullableWithAggregatesFilter<"Notification"> | string | null
   }
 
+  export type PushSubscriptionWhereInput = {
+    AND?: PushSubscriptionWhereInput | PushSubscriptionWhereInput[]
+    OR?: PushSubscriptionWhereInput[]
+    NOT?: PushSubscriptionWhereInput | PushSubscriptionWhereInput[]
+    id?: BigIntFilter<"PushSubscription"> | bigint | number
+    user_id?: BigIntFilter<"PushSubscription"> | bigint | number
+    endpoint?: StringFilter<"PushSubscription"> | string
+    p256dh?: StringFilter<"PushSubscription"> | string
+    auth?: StringFilter<"PushSubscription"> | string
+    user_agent?: StringNullableFilter<"PushSubscription"> | string | null
+    created_at?: DateTimeNullableFilter<"PushSubscription"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"PushSubscription"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type PushSubscriptionOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    endpoint?: SortOrder
+    p256dh?: SortOrder
+    auth?: SortOrder
+    user_agent?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type PushSubscriptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    endpoint?: string
+    AND?: PushSubscriptionWhereInput | PushSubscriptionWhereInput[]
+    OR?: PushSubscriptionWhereInput[]
+    NOT?: PushSubscriptionWhereInput | PushSubscriptionWhereInput[]
+    user_id?: BigIntFilter<"PushSubscription"> | bigint | number
+    p256dh?: StringFilter<"PushSubscription"> | string
+    auth?: StringFilter<"PushSubscription"> | string
+    user_agent?: StringNullableFilter<"PushSubscription"> | string | null
+    created_at?: DateTimeNullableFilter<"PushSubscription"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"PushSubscription"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "endpoint">
+
+  export type PushSubscriptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    endpoint?: SortOrder
+    p256dh?: SortOrder
+    auth?: SortOrder
+    user_agent?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: PushSubscriptionCountOrderByAggregateInput
+    _avg?: PushSubscriptionAvgOrderByAggregateInput
+    _max?: PushSubscriptionMaxOrderByAggregateInput
+    _min?: PushSubscriptionMinOrderByAggregateInput
+    _sum?: PushSubscriptionSumOrderByAggregateInput
+  }
+
+  export type PushSubscriptionScalarWhereWithAggregatesInput = {
+    AND?: PushSubscriptionScalarWhereWithAggregatesInput | PushSubscriptionScalarWhereWithAggregatesInput[]
+    OR?: PushSubscriptionScalarWhereWithAggregatesInput[]
+    NOT?: PushSubscriptionScalarWhereWithAggregatesInput | PushSubscriptionScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"PushSubscription"> | bigint | number
+    user_id?: BigIntWithAggregatesFilter<"PushSubscription"> | bigint | number
+    endpoint?: StringWithAggregatesFilter<"PushSubscription"> | string
+    p256dh?: StringWithAggregatesFilter<"PushSubscription"> | string
+    auth?: StringWithAggregatesFilter<"PushSubscription"> | string
+    user_agent?: StringNullableWithAggregatesFilter<"PushSubscription"> | string | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"PushSubscription"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"PushSubscription"> | Date | string | null
+  }
+
   export type PersonalAccessTokenWhereInput = {
     AND?: PersonalAccessTokenWhereInput | PersonalAccessTokenWhereInput[]
     OR?: PersonalAccessTokenWhereInput[]
@@ -48390,6 +51131,7 @@ export namespace Prisma {
     userOnboarding?: XOR<UserOnboardingNullableScalarRelationFilter, UserOnboardingWhereInput> | null
     sentNotifications?: NotificationListRelationFilter
     notifications?: NotificationListRelationFilter
+    pushSubscriptions?: PushSubscriptionListRelationFilter
     adminSupportMessages?: SupportTicketMessageListRelationFilter
     userSupportMessages?: SupportTicketMessageListRelationFilter
     supportTickets?: SupportTicketListRelationFilter
@@ -48399,6 +51141,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalListRelationFilter
     withdrawals?: WithdrawalListRelationFilter
     referral_commissions?: ReferralCommissionListRelationFilter
+    flashTransfers?: FlashTransferListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -48431,6 +51174,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingOrderByWithRelationInput
     sentNotifications?: NotificationOrderByRelationAggregateInput
     notifications?: NotificationOrderByRelationAggregateInput
+    pushSubscriptions?: PushSubscriptionOrderByRelationAggregateInput
     adminSupportMessages?: SupportTicketMessageOrderByRelationAggregateInput
     userSupportMessages?: SupportTicketMessageOrderByRelationAggregateInput
     supportTickets?: SupportTicketOrderByRelationAggregateInput
@@ -48440,6 +51184,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalOrderByRelationAggregateInput
     withdrawals?: WithdrawalOrderByRelationAggregateInput
     referral_commissions?: ReferralCommissionOrderByRelationAggregateInput
+    flashTransfers?: FlashTransferOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -48475,6 +51220,7 @@ export namespace Prisma {
     userOnboarding?: XOR<UserOnboardingNullableScalarRelationFilter, UserOnboardingWhereInput> | null
     sentNotifications?: NotificationListRelationFilter
     notifications?: NotificationListRelationFilter
+    pushSubscriptions?: PushSubscriptionListRelationFilter
     adminSupportMessages?: SupportTicketMessageListRelationFilter
     userSupportMessages?: SupportTicketMessageListRelationFilter
     supportTickets?: SupportTicketListRelationFilter
@@ -48484,6 +51230,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalListRelationFilter
     withdrawals?: WithdrawalListRelationFilter
     referral_commissions?: ReferralCommissionListRelationFilter
+    flashTransfers?: FlashTransferListRelationFilter
   }, "id" | "email" | "phone">
 
   export type UserOrderByWithAggregationInput = {
@@ -49177,6 +51924,108 @@ export namespace Prisma {
     investment_goal?: StringNullableWithAggregatesFilter<"UserOnboarding"> | string | null
     created_at?: DateTimeNullableWithAggregatesFilter<"UserOnboarding"> | Date | string | null
     updated_at?: DateTimeNullableWithAggregatesFilter<"UserOnboarding"> | Date | string | null
+  }
+
+  export type FlashTransferWhereInput = {
+    AND?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    OR?: FlashTransferWhereInput[]
+    NOT?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    user_id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringFilter<"FlashTransfer"> | string
+    network?: StringFilter<"FlashTransfer"> | string
+    to_address?: StringFilter<"FlashTransfer"> | string
+    tx_hash?: StringFilter<"FlashTransfer"> | string
+    block_number?: StringFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type FlashTransferOrderByWithRelationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type FlashTransferWhereUniqueInput = Prisma.AtLeast<{
+    id?: bigint | number
+    tx_hash?: string
+    AND?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    OR?: FlashTransferWhereInput[]
+    NOT?: FlashTransferWhereInput | FlashTransferWhereInput[]
+    user_id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringFilter<"FlashTransfer"> | string
+    network?: StringFilter<"FlashTransfer"> | string
+    to_address?: StringFilter<"FlashTransfer"> | string
+    block_number?: StringFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "tx_hash">
+
+  export type FlashTransferOrderByWithAggregationInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrderInput | SortOrder
+    created_at?: SortOrderInput | SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: FlashTransferCountOrderByAggregateInput
+    _avg?: FlashTransferAvgOrderByAggregateInput
+    _max?: FlashTransferMaxOrderByAggregateInput
+    _min?: FlashTransferMinOrderByAggregateInput
+    _sum?: FlashTransferSumOrderByAggregateInput
+  }
+
+  export type FlashTransferScalarWhereWithAggregatesInput = {
+    AND?: FlashTransferScalarWhereWithAggregatesInput | FlashTransferScalarWhereWithAggregatesInput[]
+    OR?: FlashTransferScalarWhereWithAggregatesInput[]
+    NOT?: FlashTransferScalarWhereWithAggregatesInput | FlashTransferScalarWhereWithAggregatesInput[]
+    id?: BigIntWithAggregatesFilter<"FlashTransfer"> | bigint | number
+    user_id?: BigIntWithAggregatesFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalWithAggregatesFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    network?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    to_address?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    tx_hash?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    block_number?: StringWithAggregatesFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusWithAggregatesFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolWithAggregatesFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolWithAggregatesFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableWithAggregatesFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableWithAggregatesFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableWithAggregatesFilter<"FlashTransfer"> | Date | string | null
   }
 
   export type ArbitrageHostingCreateInput = {
@@ -50582,6 +53431,82 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PushSubscriptionCreateInput = {
+    id?: bigint | number
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    user: UserCreateNestedOneWithoutPushSubscriptionsInput
+  }
+
+  export type PushSubscriptionUncheckedCreateInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type PushSubscriptionUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput
+  }
+
+  export type PushSubscriptionUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PushSubscriptionCreateManyInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type PushSubscriptionUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PushSubscriptionUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type PersonalAccessTokenCreateInput = {
     id?: bigint | number
     tokenable_type: string
@@ -51628,6 +54553,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -51637,6 +54563,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -51669,6 +54596,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -51678,6 +54606,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -51710,6 +54639,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -51719,6 +54649,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -51751,6 +54682,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -51760,6 +54692,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -52524,6 +55457,124 @@ export namespace Prisma {
     annual_income?: NullableStringFieldUpdateOperationsInput | string | null
     employment_status?: NullableStringFieldUpdateOperationsInput | string | null
     investment_goal?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferCreateInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    user: UserCreateNestedOneWithoutFlashTransfersInput
+  }
+
+  export type FlashTransferUncheckedCreateInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutFlashTransfersNestedInput
+  }
+
+  export type FlashTransferUncheckedUpdateInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferCreateManyInput = {
+    id?: bigint | number
+    user_id: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferUpdateManyMutationInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUncheckedUpdateManyInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    user_id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -53758,6 +56809,49 @@ export namespace Prisma {
     admin_id?: SortOrder
   }
 
+  export type PushSubscriptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    endpoint?: SortOrder
+    p256dh?: SortOrder
+    auth?: SortOrder
+    user_agent?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PushSubscriptionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type PushSubscriptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    endpoint?: SortOrder
+    p256dh?: SortOrder
+    auth?: SortOrder
+    user_agent?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PushSubscriptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    endpoint?: SortOrder
+    p256dh?: SortOrder
+    auth?: SortOrder
+    user_agent?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type PushSubscriptionSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+  }
+
   export type PersonalAccessTokenCountOrderByAggregateInput = {
     id?: SortOrder
     tokenable_type?: SortOrder
@@ -54556,6 +57650,12 @@ export namespace Prisma {
     none?: NotificationWhereInput
   }
 
+  export type PushSubscriptionListRelationFilter = {
+    every?: PushSubscriptionWhereInput
+    some?: PushSubscriptionWhereInput
+    none?: PushSubscriptionWhereInput
+  }
+
   export type SupportTicketListRelationFilter = {
     every?: SupportTicketWhereInput
     some?: SupportTicketWhereInput
@@ -54572,6 +57672,12 @@ export namespace Prisma {
     every?: WithdrawalWhereInput
     some?: WithdrawalWhereInput
     none?: WithdrawalWhereInput
+  }
+
+  export type FlashTransferListRelationFilter = {
+    every?: FlashTransferWhereInput
+    some?: FlashTransferWhereInput
+    none?: FlashTransferWhereInput
   }
 
   export type AccountBalanceOrderByRelationAggregateInput = {
@@ -54606,6 +57712,10 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type PushSubscriptionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type SupportTicketOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -54615,6 +57725,10 @@ export namespace Prisma {
   }
 
   export type WithdrawalOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type FlashTransferOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -55176,6 +58290,86 @@ export namespace Prisma {
     user_id?: SortOrder
   }
 
+  export type EnumFlashTransferStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusFilter<$PrismaModel> | $Enums.FlashTransferStatus
+  }
+
+  export type FlashTransferCountOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashTransferAvgOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type FlashTransferMaxOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashTransferMinOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    network?: SortOrder
+    to_address?: SortOrder
+    tx_hash?: SortOrder
+    block_number?: SortOrder
+    status?: SortOrder
+    is_test?: SortOrder
+    warning_seen?: SortOrder
+    expires_at?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type FlashTransferSumOrderByAggregateInput = {
+    id?: SortOrder
+    user_id?: SortOrder
+    amount?: SortOrder
+  }
+
+  export type EnumFlashTransferStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusWithAggregatesFilter<$PrismaModel> | $Enums.FlashTransferStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+    _max?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+  }
+
   export type ArbitrageProductCreateNestedOneWithoutHostingsInput = {
     create?: XOR<ArbitrageProductCreateWithoutHostingsInput, ArbitrageProductUncheckedCreateWithoutHostingsInput>
     connectOrCreate?: ArbitrageProductCreateOrConnectWithoutHostingsInput
@@ -55576,6 +58770,20 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutNotificationsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutNotificationsInput, UserUpdateWithoutNotificationsInput>, UserUncheckedUpdateWithoutNotificationsInput>
+  }
+
+  export type UserCreateNestedOneWithoutPushSubscriptionsInput = {
+    create?: XOR<UserCreateWithoutPushSubscriptionsInput, UserUncheckedCreateWithoutPushSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPushSubscriptionsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutPushSubscriptionsNestedInput = {
+    create?: XOR<UserCreateWithoutPushSubscriptionsInput, UserUncheckedCreateWithoutPushSubscriptionsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutPushSubscriptionsInput
+    upsert?: UserUpsertWithoutPushSubscriptionsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPushSubscriptionsInput, UserUpdateWithoutPushSubscriptionsInput>, UserUncheckedUpdateWithoutPushSubscriptionsInput>
   }
 
   export type UserCreateNestedOneWithoutProfilesInput = {
@@ -56198,6 +59406,13 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type PushSubscriptionCreateNestedManyWithoutUserInput = {
+    create?: XOR<PushSubscriptionCreateWithoutUserInput, PushSubscriptionUncheckedCreateWithoutUserInput> | PushSubscriptionCreateWithoutUserInput[] | PushSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PushSubscriptionCreateOrConnectWithoutUserInput | PushSubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: PushSubscriptionCreateManyUserInputEnvelope
+    connect?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+  }
+
   export type SupportTicketMessageCreateNestedManyWithoutAdminInput = {
     create?: XOR<SupportTicketMessageCreateWithoutAdminInput, SupportTicketMessageUncheckedCreateWithoutAdminInput> | SupportTicketMessageCreateWithoutAdminInput[] | SupportTicketMessageUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: SupportTicketMessageCreateOrConnectWithoutAdminInput | SupportTicketMessageCreateOrConnectWithoutAdminInput[]
@@ -56259,6 +59474,13 @@ export namespace Prisma {
     connectOrCreate?: ReferralCommissionCreateOrConnectWithoutReferred_userInput | ReferralCommissionCreateOrConnectWithoutReferred_userInput[]
     createMany?: ReferralCommissionCreateManyReferred_userInputEnvelope
     connect?: ReferralCommissionWhereUniqueInput | ReferralCommissionWhereUniqueInput[]
+  }
+
+  export type FlashTransferCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
   }
 
   export type AccountBalanceUncheckedCreateNestedManyWithoutUserInput = {
@@ -56379,6 +59601,13 @@ export namespace Prisma {
     connect?: NotificationWhereUniqueInput | NotificationWhereUniqueInput[]
   }
 
+  export type PushSubscriptionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PushSubscriptionCreateWithoutUserInput, PushSubscriptionUncheckedCreateWithoutUserInput> | PushSubscriptionCreateWithoutUserInput[] | PushSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PushSubscriptionCreateOrConnectWithoutUserInput | PushSubscriptionCreateOrConnectWithoutUserInput[]
+    createMany?: PushSubscriptionCreateManyUserInputEnvelope
+    connect?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+  }
+
   export type SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput = {
     create?: XOR<SupportTicketMessageCreateWithoutAdminInput, SupportTicketMessageUncheckedCreateWithoutAdminInput> | SupportTicketMessageCreateWithoutAdminInput[] | SupportTicketMessageUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: SupportTicketMessageCreateOrConnectWithoutAdminInput | SupportTicketMessageCreateOrConnectWithoutAdminInput[]
@@ -56440,6 +59669,13 @@ export namespace Prisma {
     connectOrCreate?: ReferralCommissionCreateOrConnectWithoutReferred_userInput | ReferralCommissionCreateOrConnectWithoutReferred_userInput[]
     createMany?: ReferralCommissionCreateManyReferred_userInputEnvelope
     connect?: ReferralCommissionWhereUniqueInput | ReferralCommissionWhereUniqueInput[]
+  }
+
+  export type FlashTransferUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
   }
 
   export type EnumUserRoleFieldUpdateOperationsInput = {
@@ -56684,6 +59920,20 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type PushSubscriptionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PushSubscriptionCreateWithoutUserInput, PushSubscriptionUncheckedCreateWithoutUserInput> | PushSubscriptionCreateWithoutUserInput[] | PushSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PushSubscriptionCreateOrConnectWithoutUserInput | PushSubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: PushSubscriptionUpsertWithWhereUniqueWithoutUserInput | PushSubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PushSubscriptionCreateManyUserInputEnvelope
+    set?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    disconnect?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    delete?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    connect?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    update?: PushSubscriptionUpdateWithWhereUniqueWithoutUserInput | PushSubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PushSubscriptionUpdateManyWithWhereWithoutUserInput | PushSubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PushSubscriptionScalarWhereInput | PushSubscriptionScalarWhereInput[]
+  }
+
   export type SupportTicketMessageUpdateManyWithoutAdminNestedInput = {
     create?: XOR<SupportTicketMessageCreateWithoutAdminInput, SupportTicketMessageUncheckedCreateWithoutAdminInput> | SupportTicketMessageCreateWithoutAdminInput[] | SupportTicketMessageUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: SupportTicketMessageCreateOrConnectWithoutAdminInput | SupportTicketMessageCreateOrConnectWithoutAdminInput[]
@@ -56808,6 +60058,20 @@ export namespace Prisma {
     update?: ReferralCommissionUpdateWithWhereUniqueWithoutReferred_userInput | ReferralCommissionUpdateWithWhereUniqueWithoutReferred_userInput[]
     updateMany?: ReferralCommissionUpdateManyWithWhereWithoutReferred_userInput | ReferralCommissionUpdateManyWithWhereWithoutReferred_userInput[]
     deleteMany?: ReferralCommissionScalarWhereInput | ReferralCommissionScalarWhereInput[]
+  }
+
+  export type FlashTransferUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    upsert?: FlashTransferUpsertWithWhereUniqueWithoutUserInput | FlashTransferUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    set?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    disconnect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    delete?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    update?: FlashTransferUpdateWithWhereUniqueWithoutUserInput | FlashTransferUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashTransferUpdateManyWithWhereWithoutUserInput | FlashTransferUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
   }
 
   export type AccountBalanceUncheckedUpdateManyWithoutUserNestedInput = {
@@ -57044,6 +60308,20 @@ export namespace Prisma {
     deleteMany?: NotificationScalarWhereInput | NotificationScalarWhereInput[]
   }
 
+  export type PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PushSubscriptionCreateWithoutUserInput, PushSubscriptionUncheckedCreateWithoutUserInput> | PushSubscriptionCreateWithoutUserInput[] | PushSubscriptionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PushSubscriptionCreateOrConnectWithoutUserInput | PushSubscriptionCreateOrConnectWithoutUserInput[]
+    upsert?: PushSubscriptionUpsertWithWhereUniqueWithoutUserInput | PushSubscriptionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PushSubscriptionCreateManyUserInputEnvelope
+    set?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    disconnect?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    delete?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    connect?: PushSubscriptionWhereUniqueInput | PushSubscriptionWhereUniqueInput[]
+    update?: PushSubscriptionUpdateWithWhereUniqueWithoutUserInput | PushSubscriptionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PushSubscriptionUpdateManyWithWhereWithoutUserInput | PushSubscriptionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PushSubscriptionScalarWhereInput | PushSubscriptionScalarWhereInput[]
+  }
+
   export type SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput = {
     create?: XOR<SupportTicketMessageCreateWithoutAdminInput, SupportTicketMessageUncheckedCreateWithoutAdminInput> | SupportTicketMessageCreateWithoutAdminInput[] | SupportTicketMessageUncheckedCreateWithoutAdminInput[]
     connectOrCreate?: SupportTicketMessageCreateOrConnectWithoutAdminInput | SupportTicketMessageCreateOrConnectWithoutAdminInput[]
@@ -57168,6 +60446,20 @@ export namespace Prisma {
     update?: ReferralCommissionUpdateWithWhereUniqueWithoutReferred_userInput | ReferralCommissionUpdateWithWhereUniqueWithoutReferred_userInput[]
     updateMany?: ReferralCommissionUpdateManyWithWhereWithoutReferred_userInput | ReferralCommissionUpdateManyWithWhereWithoutReferred_userInput[]
     deleteMany?: ReferralCommissionScalarWhereInput | ReferralCommissionScalarWhereInput[]
+  }
+
+  export type FlashTransferUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput> | FlashTransferCreateWithoutUserInput[] | FlashTransferUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: FlashTransferCreateOrConnectWithoutUserInput | FlashTransferCreateOrConnectWithoutUserInput[]
+    upsert?: FlashTransferUpsertWithWhereUniqueWithoutUserInput | FlashTransferUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: FlashTransferCreateManyUserInputEnvelope
+    set?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    disconnect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    delete?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    connect?: FlashTransferWhereUniqueInput | FlashTransferWhereUniqueInput[]
+    update?: FlashTransferUpdateWithWhereUniqueWithoutUserInput | FlashTransferUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: FlashTransferUpdateManyWithWhereWithoutUserInput | FlashTransferUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutProcessedWithdrawalsInput = {
@@ -57384,6 +60676,24 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutUserOnboardingInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutUserOnboardingInput, UserUpdateWithoutUserOnboardingInput>, UserUncheckedUpdateWithoutUserOnboardingInput>
+  }
+
+  export type UserCreateNestedOneWithoutFlashTransfersInput = {
+    create?: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFlashTransfersInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumFlashTransferStatusFieldUpdateOperationsInput = {
+    set?: $Enums.FlashTransferStatus
+  }
+
+  export type UserUpdateOneRequiredWithoutFlashTransfersNestedInput = {
+    create?: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+    connectOrCreate?: UserCreateOrConnectWithoutFlashTransfersInput
+    upsert?: UserUpsertWithoutFlashTransfersInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutFlashTransfersInput, UserUpdateWithoutFlashTransfersInput>, UserUncheckedUpdateWithoutFlashTransfersInput>
   }
 
   export type NestedBigIntFilter<$PrismaModel = never> = {
@@ -57916,6 +61226,23 @@ export namespace Prisma {
     _max?: NestedEnumLoanRepaymentStatusFilter<$PrismaModel>
   }
 
+  export type NestedEnumFlashTransferStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusFilter<$PrismaModel> | $Enums.FlashTransferStatus
+  }
+
+  export type NestedEnumFlashTransferStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.FlashTransferStatus | EnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.FlashTransferStatus[] | ListEnumFlashTransferStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumFlashTransferStatusWithAggregatesFilter<$PrismaModel> | $Enums.FlashTransferStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+    _max?: NestedEnumFlashTransferStatusFilter<$PrismaModel>
+  }
+
   export type ArbitrageProductCreateWithoutHostingsInput = {
     id?: bigint | number
     name: string
@@ -57978,6 +61305,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -57987,6 +61315,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutArbitrageHostingsInput = {
@@ -58018,6 +61347,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -58027,6 +61357,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutArbitrageHostingsInput = {
@@ -58113,6 +61444,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -58122,6 +61454,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutArbitrageHostingsInput = {
@@ -58153,6 +61486,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -58162,6 +61496,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ArbitrageHostingCreateWithoutProductInput = {
@@ -58265,6 +61600,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -58274,6 +61610,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssetsInput = {
@@ -58305,6 +61642,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -58314,6 +61652,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssetsInput = {
@@ -58361,6 +61700,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -58370,6 +61710,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssetsInput = {
@@ -58401,6 +61742,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -58410,6 +61752,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCreatedCryptoAddressesInput = {
@@ -58441,6 +61784,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -58450,6 +61794,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedCryptoAddressesInput = {
@@ -58481,6 +61826,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -58490,6 +61836,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedCryptoAddressesInput = {
@@ -58526,6 +61873,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -58535,6 +61883,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUpdatedCryptoAddressesInput = {
@@ -58566,6 +61915,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -58575,6 +61925,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUpdatedCryptoAddressesInput = {
@@ -58622,6 +61973,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -58631,6 +61983,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedCryptoAddressesInput = {
@@ -58662,6 +62015,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -58671,6 +62025,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutUpdatedCryptoAddressesInput = {
@@ -58713,6 +62068,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -58722,6 +62078,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUpdatedCryptoAddressesInput = {
@@ -58753,6 +62110,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -58762,6 +62120,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProcessedDepositsInput = {
@@ -58793,6 +62152,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -58802,6 +62162,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedDepositsInput = {
@@ -58833,6 +62194,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -58842,6 +62204,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedDepositsInput = {
@@ -58878,6 +62241,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -58887,6 +62251,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutDepositsInput = {
@@ -58918,6 +62283,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -58927,6 +62293,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutDepositsInput = {
@@ -59006,6 +62373,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -59015,6 +62383,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedDepositsInput = {
@@ -59046,6 +62415,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -59055,6 +62425,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutDepositsInput = {
@@ -59097,6 +62468,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -59106,6 +62478,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDepositsInput = {
@@ -59137,6 +62510,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -59146,6 +62520,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ReferralCommissionUpsertWithWhereUniqueWithoutDepositInput = {
@@ -59208,6 +62583,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -59217,6 +62593,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedKycSubmissionsInput = {
@@ -59248,6 +62625,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -59257,6 +62635,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedKycSubmissionsInput = {
@@ -59293,6 +62672,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -59302,6 +62682,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutKycSubmissionsInput = {
@@ -59333,6 +62714,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -59342,6 +62724,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutKycSubmissionsInput = {
@@ -59389,6 +62772,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -59398,6 +62782,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedKycSubmissionsInput = {
@@ -59429,6 +62814,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -59438,6 +62824,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutKycSubmissionsInput = {
@@ -59480,6 +62867,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -59489,6 +62877,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutKycSubmissionsInput = {
@@ -59520,6 +62909,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -59529,6 +62919,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MiningProductCreateWithoutHostingsInput = {
@@ -59609,6 +63000,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -59618,6 +63010,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutMiningHostingsInput = {
@@ -59649,6 +63042,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -59658,6 +63052,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutMiningHostingsInput = {
@@ -59760,6 +63155,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -59769,6 +63165,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutMiningHostingsInput = {
@@ -59800,6 +63197,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -59809,6 +63207,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type MiningHostingCreateWithoutProductInput = {
@@ -59912,6 +63311,7 @@ export namespace Prisma {
     profiles?: ProfileCreateNestedManyWithoutUserInput
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -59921,6 +63321,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSentNotificationsInput = {
@@ -59952,6 +63353,7 @@ export namespace Prisma {
     profiles?: ProfileUncheckedCreateNestedManyWithoutUserInput
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -59961,6 +63363,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSentNotificationsInput = {
@@ -59997,6 +63400,7 @@ export namespace Prisma {
     profiles?: ProfileCreateNestedManyWithoutUserInput
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -60006,6 +63410,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -60037,6 +63442,7 @@ export namespace Prisma {
     profiles?: ProfileUncheckedCreateNestedManyWithoutUserInput
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -60046,6 +63452,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -60093,6 +63500,7 @@ export namespace Prisma {
     profiles?: ProfileUpdateManyWithoutUserNestedInput
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -60102,6 +63510,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSentNotificationsInput = {
@@ -60133,6 +63542,7 @@ export namespace Prisma {
     profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -60142,6 +63552,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutNotificationsInput = {
@@ -60184,6 +63595,7 @@ export namespace Prisma {
     profiles?: ProfileUpdateManyWithoutUserNestedInput
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -60193,6 +63605,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -60224,6 +63637,7 @@ export namespace Prisma {
     profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -60233,6 +63647,191 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutPushSubscriptionsInput = {
+    id?: bigint | number
+    name: string
+    email?: string | null
+    phone?: string | null
+    email_verified_at?: Date | string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    remember_token?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    balance?: Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceCreateNestedManyWithoutUserInput
+    arbitrageHostings?: ArbitrageHostingCreateNestedManyWithoutUserInput
+    assets?: AssetCreateNestedManyWithoutUserInput
+    createdCryptoAddresses?: CryptoAddressCreateNestedManyWithoutCreatorInput
+    updatedCryptoAddresses?: CryptoAddressCreateNestedManyWithoutUpdaterInput
+    processedDeposits?: DepositCreateNestedManyWithoutProcessorInput
+    deposits?: DepositCreateNestedManyWithoutUserInput
+    processedKycSubmissions?: KycSubmissionCreateNestedManyWithoutProcessorInput
+    kycSubmissions?: KycSubmissionCreateNestedManyWithoutUserInput
+    processedLoanRepayments?: LoanRepaymentCreateNestedManyWithoutProcessorInput
+    processedLoans?: LoanCreateNestedManyWithoutProcessorInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    miningHostings?: MiningHostingCreateNestedManyWithoutUserInput
+    profiles?: ProfileCreateNestedManyWithoutUserInput
+    userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
+    sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
+    userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    closedTrades?: TradeCreateNestedManyWithoutCloserInput
+    trades?: TradeCreateNestedManyWithoutUserInput
+    transactions?: TransactionCreateNestedManyWithoutUserInput
+    processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
+    withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
+    referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutPushSubscriptionsInput = {
+    id?: bigint | number
+    name: string
+    email?: string | null
+    phone?: string | null
+    email_verified_at?: Date | string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    remember_token?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    balance?: Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUncheckedCreateNestedManyWithoutUserInput
+    arbitrageHostings?: ArbitrageHostingUncheckedCreateNestedManyWithoutUserInput
+    assets?: AssetUncheckedCreateNestedManyWithoutUserInput
+    createdCryptoAddresses?: CryptoAddressUncheckedCreateNestedManyWithoutCreatorInput
+    updatedCryptoAddresses?: CryptoAddressUncheckedCreateNestedManyWithoutUpdaterInput
+    processedDeposits?: DepositUncheckedCreateNestedManyWithoutProcessorInput
+    deposits?: DepositUncheckedCreateNestedManyWithoutUserInput
+    processedKycSubmissions?: KycSubmissionUncheckedCreateNestedManyWithoutProcessorInput
+    kycSubmissions?: KycSubmissionUncheckedCreateNestedManyWithoutUserInput
+    processedLoanRepayments?: LoanRepaymentUncheckedCreateNestedManyWithoutProcessorInput
+    processedLoans?: LoanUncheckedCreateNestedManyWithoutProcessorInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    miningHostings?: MiningHostingUncheckedCreateNestedManyWithoutUserInput
+    profiles?: ProfileUncheckedCreateNestedManyWithoutUserInput
+    userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
+    sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
+    userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    closedTrades?: TradeUncheckedCreateNestedManyWithoutCloserInput
+    trades?: TradeUncheckedCreateNestedManyWithoutUserInput
+    transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
+    processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
+    withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
+    referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutPushSubscriptionsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutPushSubscriptionsInput, UserUncheckedCreateWithoutPushSubscriptionsInput>
+  }
+
+  export type UserUpsertWithoutPushSubscriptionsInput = {
+    update: XOR<UserUpdateWithoutPushSubscriptionsInput, UserUncheckedUpdateWithoutPushSubscriptionsInput>
+    create: XOR<UserCreateWithoutPushSubscriptionsInput, UserUncheckedCreateWithoutPushSubscriptionsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutPushSubscriptionsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutPushSubscriptionsInput, UserUncheckedUpdateWithoutPushSubscriptionsInput>
+  }
+
+  export type UserUpdateWithoutPushSubscriptionsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    remember_token?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUpdateManyWithoutUserNestedInput
+    arbitrageHostings?: ArbitrageHostingUpdateManyWithoutUserNestedInput
+    assets?: AssetUpdateManyWithoutUserNestedInput
+    createdCryptoAddresses?: CryptoAddressUpdateManyWithoutCreatorNestedInput
+    updatedCryptoAddresses?: CryptoAddressUpdateManyWithoutUpdaterNestedInput
+    processedDeposits?: DepositUpdateManyWithoutProcessorNestedInput
+    deposits?: DepositUpdateManyWithoutUserNestedInput
+    processedKycSubmissions?: KycSubmissionUpdateManyWithoutProcessorNestedInput
+    kycSubmissions?: KycSubmissionUpdateManyWithoutUserNestedInput
+    processedLoanRepayments?: LoanRepaymentUpdateManyWithoutProcessorNestedInput
+    processedLoans?: LoanUpdateManyWithoutProcessorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    miningHostings?: MiningHostingUpdateManyWithoutUserNestedInput
+    profiles?: ProfileUpdateManyWithoutUserNestedInput
+    userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
+    sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
+    userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    closedTrades?: TradeUpdateManyWithoutCloserNestedInput
+    trades?: TradeUpdateManyWithoutUserNestedInput
+    transactions?: TransactionUpdateManyWithoutUserNestedInput
+    processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
+    withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
+    referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutPushSubscriptionsInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    remember_token?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUncheckedUpdateManyWithoutUserNestedInput
+    arbitrageHostings?: ArbitrageHostingUncheckedUpdateManyWithoutUserNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutUserNestedInput
+    createdCryptoAddresses?: CryptoAddressUncheckedUpdateManyWithoutCreatorNestedInput
+    updatedCryptoAddresses?: CryptoAddressUncheckedUpdateManyWithoutUpdaterNestedInput
+    processedDeposits?: DepositUncheckedUpdateManyWithoutProcessorNestedInput
+    deposits?: DepositUncheckedUpdateManyWithoutUserNestedInput
+    processedKycSubmissions?: KycSubmissionUncheckedUpdateManyWithoutProcessorNestedInput
+    kycSubmissions?: KycSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    processedLoanRepayments?: LoanRepaymentUncheckedUpdateManyWithoutProcessorNestedInput
+    processedLoans?: LoanUncheckedUpdateManyWithoutProcessorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    miningHostings?: MiningHostingUncheckedUpdateManyWithoutUserNestedInput
+    profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
+    userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
+    sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
+    userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    closedTrades?: TradeUncheckedUpdateManyWithoutCloserNestedInput
+    trades?: TradeUncheckedUpdateManyWithoutUserNestedInput
+    transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
+    processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
+    withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
+    referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutProfilesInput = {
@@ -60264,6 +63863,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -60273,6 +63873,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProfilesInput = {
@@ -60304,6 +63905,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -60313,6 +63915,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProfilesInput = {
@@ -60511,6 +64114,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -60520,6 +64124,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProfilesInput = {
@@ -60551,6 +64156,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -60560,6 +64166,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileUpsertWithoutReferred_profilesInput = {
@@ -60715,6 +64322,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     closedTrades?: TradeCreateNestedManyWithoutCloserInput
@@ -60723,6 +64331,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAdminSupportMessagesInput = {
@@ -60755,6 +64364,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     closedTrades?: TradeUncheckedCreateNestedManyWithoutCloserInput
@@ -60763,6 +64373,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAdminSupportMessagesInput = {
@@ -60831,6 +64442,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
     closedTrades?: TradeCreateNestedManyWithoutCloserInput
@@ -60839,6 +64451,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserSupportMessagesInput = {
@@ -60871,6 +64484,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
     closedTrades?: TradeUncheckedCreateNestedManyWithoutCloserInput
@@ -60879,6 +64493,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserSupportMessagesInput = {
@@ -60927,6 +64542,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     closedTrades?: TradeUpdateManyWithoutCloserNestedInput
@@ -60935,6 +64551,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAdminSupportMessagesInput = {
@@ -60967,6 +64584,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     closedTrades?: TradeUncheckedUpdateManyWithoutCloserNestedInput
@@ -60975,6 +64593,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SupportTicketUpsertWithoutMessagesInput = {
@@ -61055,6 +64674,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
     closedTrades?: TradeUpdateManyWithoutCloserNestedInput
@@ -61063,6 +64683,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserSupportMessagesInput = {
@@ -61095,6 +64716,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
     closedTrades?: TradeUncheckedUpdateManyWithoutCloserNestedInput
@@ -61103,6 +64725,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type SupportTicketMessageCreateWithoutTicketInput = {
@@ -61167,6 +64790,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     closedTrades?: TradeCreateNestedManyWithoutCloserInput
@@ -61175,6 +64799,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSupportTicketsInput = {
@@ -61207,6 +64832,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     closedTrades?: TradeUncheckedCreateNestedManyWithoutCloserInput
@@ -61215,6 +64841,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSupportTicketsInput = {
@@ -61294,6 +64921,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     closedTrades?: TradeUpdateManyWithoutCloserNestedInput
@@ -61302,6 +64930,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSupportTicketsInput = {
@@ -61334,6 +64963,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     closedTrades?: TradeUncheckedUpdateManyWithoutCloserNestedInput
@@ -61342,6 +64972,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TradeCreateWithoutContractsInput = {
@@ -61838,6 +65469,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -61846,6 +65478,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutClosedTradesInput = {
@@ -61878,6 +65511,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -61886,6 +65520,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutClosedTradesInput = {
@@ -61923,6 +65558,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -61931,6 +65567,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTradesInput = {
@@ -61963,6 +65600,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -61971,6 +65609,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTradesInput = {
@@ -62144,6 +65783,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -62152,6 +65792,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutClosedTradesInput = {
@@ -62184,6 +65825,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -62192,6 +65834,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutTradesInput = {
@@ -62235,6 +65878,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -62243,6 +65887,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTradesInput = {
@@ -62275,6 +65920,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -62283,6 +65929,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type TransactionUpsertWithWhereUniqueWithoutTradeInput = {
@@ -62406,6 +66053,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -62414,6 +66062,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutTransactionsInput = {
@@ -62446,6 +66095,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -62454,6 +66104,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutTransactionsInput = {
@@ -62567,6 +66218,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -62575,6 +66227,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutTransactionsInput = {
@@ -62607,6 +66260,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -62615,6 +66269,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountBalanceCreateWithoutUserInput = {
@@ -63316,6 +66971,36 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type PushSubscriptionCreateWithoutUserInput = {
+    id?: bigint | number
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type PushSubscriptionUncheckedCreateWithoutUserInput = {
+    id?: bigint | number
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type PushSubscriptionCreateOrConnectWithoutUserInput = {
+    where: PushSubscriptionWhereUniqueInput
+    create: XOR<PushSubscriptionCreateWithoutUserInput, PushSubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PushSubscriptionCreateManyUserInputEnvelope = {
+    data: PushSubscriptionCreateManyUserInput | PushSubscriptionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SupportTicketMessageCreateWithoutAdminInput = {
     id?: bigint | number
     message: string
@@ -63699,6 +67384,48 @@ export namespace Prisma {
 
   export type ReferralCommissionCreateManyReferred_userInputEnvelope = {
     data: ReferralCommissionCreateManyReferred_userInput | ReferralCommissionCreateManyReferred_userInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type FlashTransferCreateWithoutUserInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferUncheckedCreateWithoutUserInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
+  export type FlashTransferCreateOrConnectWithoutUserInput = {
+    where: FlashTransferWhereUniqueInput
+    create: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput>
+  }
+
+  export type FlashTransferCreateManyUserInputEnvelope = {
+    data: FlashTransferCreateManyUserInput | FlashTransferCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -64137,6 +67864,36 @@ export namespace Prisma {
     data: XOR<NotificationUpdateManyMutationInput, NotificationUncheckedUpdateManyWithoutUserInput>
   }
 
+  export type PushSubscriptionUpsertWithWhereUniqueWithoutUserInput = {
+    where: PushSubscriptionWhereUniqueInput
+    update: XOR<PushSubscriptionUpdateWithoutUserInput, PushSubscriptionUncheckedUpdateWithoutUserInput>
+    create: XOR<PushSubscriptionCreateWithoutUserInput, PushSubscriptionUncheckedCreateWithoutUserInput>
+  }
+
+  export type PushSubscriptionUpdateWithWhereUniqueWithoutUserInput = {
+    where: PushSubscriptionWhereUniqueInput
+    data: XOR<PushSubscriptionUpdateWithoutUserInput, PushSubscriptionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PushSubscriptionUpdateManyWithWhereWithoutUserInput = {
+    where: PushSubscriptionScalarWhereInput
+    data: XOR<PushSubscriptionUpdateManyMutationInput, PushSubscriptionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PushSubscriptionScalarWhereInput = {
+    AND?: PushSubscriptionScalarWhereInput | PushSubscriptionScalarWhereInput[]
+    OR?: PushSubscriptionScalarWhereInput[]
+    NOT?: PushSubscriptionScalarWhereInput | PushSubscriptionScalarWhereInput[]
+    id?: BigIntFilter<"PushSubscription"> | bigint | number
+    user_id?: BigIntFilter<"PushSubscription"> | bigint | number
+    endpoint?: StringFilter<"PushSubscription"> | string
+    p256dh?: StringFilter<"PushSubscription"> | string
+    auth?: StringFilter<"PushSubscription"> | string
+    user_agent?: StringNullableFilter<"PushSubscription"> | string | null
+    created_at?: DateTimeNullableFilter<"PushSubscription"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"PushSubscription"> | Date | string | null
+  }
+
   export type SupportTicketMessageUpsertWithWhereUniqueWithoutAdminInput = {
     where: SupportTicketMessageWhereUniqueInput
     update: XOR<SupportTicketMessageUpdateWithoutAdminInput, SupportTicketMessageUncheckedUpdateWithoutAdminInput>
@@ -64346,6 +68103,42 @@ export namespace Prisma {
     data: XOR<ReferralCommissionUpdateManyMutationInput, ReferralCommissionUncheckedUpdateManyWithoutReferred_userInput>
   }
 
+  export type FlashTransferUpsertWithWhereUniqueWithoutUserInput = {
+    where: FlashTransferWhereUniqueInput
+    update: XOR<FlashTransferUpdateWithoutUserInput, FlashTransferUncheckedUpdateWithoutUserInput>
+    create: XOR<FlashTransferCreateWithoutUserInput, FlashTransferUncheckedCreateWithoutUserInput>
+  }
+
+  export type FlashTransferUpdateWithWhereUniqueWithoutUserInput = {
+    where: FlashTransferWhereUniqueInput
+    data: XOR<FlashTransferUpdateWithoutUserInput, FlashTransferUncheckedUpdateWithoutUserInput>
+  }
+
+  export type FlashTransferUpdateManyWithWhereWithoutUserInput = {
+    where: FlashTransferScalarWhereInput
+    data: XOR<FlashTransferUpdateManyMutationInput, FlashTransferUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type FlashTransferScalarWhereInput = {
+    AND?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
+    OR?: FlashTransferScalarWhereInput[]
+    NOT?: FlashTransferScalarWhereInput | FlashTransferScalarWhereInput[]
+    id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    user_id?: BigIntFilter<"FlashTransfer"> | bigint | number
+    amount?: DecimalFilter<"FlashTransfer"> | Decimal | DecimalJsLike | number | string
+    currency?: StringFilter<"FlashTransfer"> | string
+    network?: StringFilter<"FlashTransfer"> | string
+    to_address?: StringFilter<"FlashTransfer"> | string
+    tx_hash?: StringFilter<"FlashTransfer"> | string
+    block_number?: StringFilter<"FlashTransfer"> | string
+    status?: EnumFlashTransferStatusFilter<"FlashTransfer"> | $Enums.FlashTransferStatus
+    is_test?: BoolFilter<"FlashTransfer"> | boolean
+    warning_seen?: BoolFilter<"FlashTransfer"> | boolean
+    expires_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    created_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+    updated_at?: DateTimeNullableFilter<"FlashTransfer"> | Date | string | null
+  }
+
   export type UserCreateWithoutProcessedWithdrawalsInput = {
     id?: bigint | number
     name: string
@@ -64376,6 +68169,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -64384,6 +68178,7 @@ export namespace Prisma {
     transactions?: TransactionCreateNestedManyWithoutUserInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedWithdrawalsInput = {
@@ -64416,6 +68211,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -64424,6 +68220,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedWithdrawalsInput = {
@@ -64461,6 +68258,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -64469,6 +68267,7 @@ export namespace Prisma {
     transactions?: TransactionCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutWithdrawalsInput = {
@@ -64501,6 +68300,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -64509,6 +68309,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutWithdrawalsInput = {
@@ -64557,6 +68358,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -64565,6 +68367,7 @@ export namespace Prisma {
     transactions?: TransactionUpdateManyWithoutUserNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedWithdrawalsInput = {
@@ -64597,6 +68400,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -64605,6 +68409,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutWithdrawalsInput = {
@@ -64648,6 +68453,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -64656,6 +68462,7 @@ export namespace Prisma {
     transactions?: TransactionUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutWithdrawalsInput = {
@@ -64688,6 +68495,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -64696,6 +68504,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LoanRepaymentCreateWithoutLoanInput = {
@@ -64761,6 +68570,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -64770,6 +68580,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedLoansInput = {
@@ -64801,6 +68612,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -64810,6 +68622,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedLoansInput = {
@@ -64846,6 +68659,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -64855,6 +68669,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutLoansInput = {
@@ -64886,6 +68701,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -64895,6 +68711,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutLoansInput = {
@@ -64958,6 +68775,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -64967,6 +68785,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedLoansInput = {
@@ -64998,6 +68817,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -65007,6 +68827,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserUpsertWithoutLoansInput = {
@@ -65049,6 +68870,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -65058,6 +68880,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutLoansInput = {
@@ -65089,6 +68912,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -65098,6 +68922,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type LoanCreateWithoutRepaymentsInput = {
@@ -65182,6 +69007,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -65191,6 +69017,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProcessedLoanRepaymentsInput = {
@@ -65222,6 +69049,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -65231,6 +69059,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProcessedLoanRepaymentsInput = {
@@ -65337,6 +69166,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -65346,6 +69176,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProcessedLoanRepaymentsInput = {
@@ -65377,6 +69208,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -65386,6 +69218,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountBalancesInput = {
@@ -65417,6 +69250,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -65426,6 +69260,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountBalancesInput = {
@@ -65457,6 +69292,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -65466,6 +69302,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountBalancesInput = {
@@ -65513,6 +69350,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -65522,6 +69360,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountBalancesInput = {
@@ -65553,6 +69392,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -65562,6 +69402,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ProfileCreateWithoutReferral_commissionsInput = {
@@ -65651,6 +69492,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -65659,6 +69501,7 @@ export namespace Prisma {
     transactions?: TransactionCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReferral_commissionsInput = {
@@ -65691,6 +69534,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -65699,6 +69543,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReferral_commissionsInput = {
@@ -65851,6 +69696,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -65859,6 +69705,7 @@ export namespace Prisma {
     transactions?: TransactionUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReferral_commissionsInput = {
@@ -65891,6 +69738,7 @@ export namespace Prisma {
     userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -65899,6 +69747,7 @@ export namespace Prisma {
     transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
     processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type DepositUpsertWithoutReferral_commissionsInput = {
@@ -65977,6 +69826,7 @@ export namespace Prisma {
     profiles?: ProfileCreateNestedManyWithoutUserInput
     sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
     notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
@@ -65986,6 +69836,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutUserOnboardingInput = {
@@ -66017,6 +69868,7 @@ export namespace Prisma {
     profiles?: ProfileUncheckedCreateNestedManyWithoutUserInput
     sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
     notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
     adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
     userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
     supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
@@ -66026,6 +69878,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
     withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
     referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+    flashTransfers?: FlashTransferUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutUserOnboardingInput = {
@@ -66073,6 +69926,7 @@ export namespace Prisma {
     profiles?: ProfileUpdateManyWithoutUserNestedInput
     sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
@@ -66082,6 +69936,7 @@ export namespace Prisma {
     processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
     withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
     referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUserOnboardingInput = {
@@ -66113,6 +69968,192 @@ export namespace Prisma {
     profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
     sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
     notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
+    adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
+    userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
+    closedTrades?: TradeUncheckedUpdateManyWithoutCloserNestedInput
+    trades?: TradeUncheckedUpdateManyWithoutUserNestedInput
+    transactions?: TransactionUncheckedUpdateManyWithoutUserNestedInput
+    processedWithdrawals?: WithdrawalUncheckedUpdateManyWithoutProcessorNestedInput
+    withdrawals?: WithdrawalUncheckedUpdateManyWithoutUserNestedInput
+    referral_commissions?: ReferralCommissionUncheckedUpdateManyWithoutReferred_userNestedInput
+    flashTransfers?: FlashTransferUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutFlashTransfersInput = {
+    id?: bigint | number
+    name: string
+    email?: string | null
+    phone?: string | null
+    email_verified_at?: Date | string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    remember_token?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    balance?: Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceCreateNestedManyWithoutUserInput
+    arbitrageHostings?: ArbitrageHostingCreateNestedManyWithoutUserInput
+    assets?: AssetCreateNestedManyWithoutUserInput
+    createdCryptoAddresses?: CryptoAddressCreateNestedManyWithoutCreatorInput
+    updatedCryptoAddresses?: CryptoAddressCreateNestedManyWithoutUpdaterInput
+    processedDeposits?: DepositCreateNestedManyWithoutProcessorInput
+    deposits?: DepositCreateNestedManyWithoutUserInput
+    processedKycSubmissions?: KycSubmissionCreateNestedManyWithoutProcessorInput
+    kycSubmissions?: KycSubmissionCreateNestedManyWithoutUserInput
+    processedLoanRepayments?: LoanRepaymentCreateNestedManyWithoutProcessorInput
+    processedLoans?: LoanCreateNestedManyWithoutProcessorInput
+    loans?: LoanCreateNestedManyWithoutUserInput
+    miningHostings?: MiningHostingCreateNestedManyWithoutUserInput
+    profiles?: ProfileCreateNestedManyWithoutUserInput
+    userOnboarding?: UserOnboardingCreateNestedOneWithoutUserInput
+    sentNotifications?: NotificationCreateNestedManyWithoutAdminInput
+    notifications?: NotificationCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionCreateNestedManyWithoutUserInput
+    adminSupportMessages?: SupportTicketMessageCreateNestedManyWithoutAdminInput
+    userSupportMessages?: SupportTicketMessageCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketCreateNestedManyWithoutUserInput
+    closedTrades?: TradeCreateNestedManyWithoutCloserInput
+    trades?: TradeCreateNestedManyWithoutUserInput
+    transactions?: TransactionCreateNestedManyWithoutUserInput
+    processedWithdrawals?: WithdrawalCreateNestedManyWithoutProcessorInput
+    withdrawals?: WithdrawalCreateNestedManyWithoutUserInput
+    referral_commissions?: ReferralCommissionCreateNestedManyWithoutReferred_userInput
+  }
+
+  export type UserUncheckedCreateWithoutFlashTransfersInput = {
+    id?: bigint | number
+    name: string
+    email?: string | null
+    phone?: string | null
+    email_verified_at?: Date | string | null
+    password: string
+    role?: $Enums.UserRole
+    status?: $Enums.UserStatus
+    remember_token?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+    balance?: Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUncheckedCreateNestedManyWithoutUserInput
+    arbitrageHostings?: ArbitrageHostingUncheckedCreateNestedManyWithoutUserInput
+    assets?: AssetUncheckedCreateNestedManyWithoutUserInput
+    createdCryptoAddresses?: CryptoAddressUncheckedCreateNestedManyWithoutCreatorInput
+    updatedCryptoAddresses?: CryptoAddressUncheckedCreateNestedManyWithoutUpdaterInput
+    processedDeposits?: DepositUncheckedCreateNestedManyWithoutProcessorInput
+    deposits?: DepositUncheckedCreateNestedManyWithoutUserInput
+    processedKycSubmissions?: KycSubmissionUncheckedCreateNestedManyWithoutProcessorInput
+    kycSubmissions?: KycSubmissionUncheckedCreateNestedManyWithoutUserInput
+    processedLoanRepayments?: LoanRepaymentUncheckedCreateNestedManyWithoutProcessorInput
+    processedLoans?: LoanUncheckedCreateNestedManyWithoutProcessorInput
+    loans?: LoanUncheckedCreateNestedManyWithoutUserInput
+    miningHostings?: MiningHostingUncheckedCreateNestedManyWithoutUserInput
+    profiles?: ProfileUncheckedCreateNestedManyWithoutUserInput
+    userOnboarding?: UserOnboardingUncheckedCreateNestedOneWithoutUserInput
+    sentNotifications?: NotificationUncheckedCreateNestedManyWithoutAdminInput
+    notifications?: NotificationUncheckedCreateNestedManyWithoutUserInput
+    pushSubscriptions?: PushSubscriptionUncheckedCreateNestedManyWithoutUserInput
+    adminSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutAdminInput
+    userSupportMessages?: SupportTicketMessageUncheckedCreateNestedManyWithoutUserInput
+    supportTickets?: SupportTicketUncheckedCreateNestedManyWithoutUserInput
+    closedTrades?: TradeUncheckedCreateNestedManyWithoutCloserInput
+    trades?: TradeUncheckedCreateNestedManyWithoutUserInput
+    transactions?: TransactionUncheckedCreateNestedManyWithoutUserInput
+    processedWithdrawals?: WithdrawalUncheckedCreateNestedManyWithoutProcessorInput
+    withdrawals?: WithdrawalUncheckedCreateNestedManyWithoutUserInput
+    referral_commissions?: ReferralCommissionUncheckedCreateNestedManyWithoutReferred_userInput
+  }
+
+  export type UserCreateOrConnectWithoutFlashTransfersInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+  }
+
+  export type UserUpsertWithoutFlashTransfersInput = {
+    update: XOR<UserUpdateWithoutFlashTransfersInput, UserUncheckedUpdateWithoutFlashTransfersInput>
+    create: XOR<UserCreateWithoutFlashTransfersInput, UserUncheckedCreateWithoutFlashTransfersInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutFlashTransfersInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutFlashTransfersInput, UserUncheckedUpdateWithoutFlashTransfersInput>
+  }
+
+  export type UserUpdateWithoutFlashTransfersInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    remember_token?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUpdateManyWithoutUserNestedInput
+    arbitrageHostings?: ArbitrageHostingUpdateManyWithoutUserNestedInput
+    assets?: AssetUpdateManyWithoutUserNestedInput
+    createdCryptoAddresses?: CryptoAddressUpdateManyWithoutCreatorNestedInput
+    updatedCryptoAddresses?: CryptoAddressUpdateManyWithoutUpdaterNestedInput
+    processedDeposits?: DepositUpdateManyWithoutProcessorNestedInput
+    deposits?: DepositUpdateManyWithoutUserNestedInput
+    processedKycSubmissions?: KycSubmissionUpdateManyWithoutProcessorNestedInput
+    kycSubmissions?: KycSubmissionUpdateManyWithoutUserNestedInput
+    processedLoanRepayments?: LoanRepaymentUpdateManyWithoutProcessorNestedInput
+    processedLoans?: LoanUpdateManyWithoutProcessorNestedInput
+    loans?: LoanUpdateManyWithoutUserNestedInput
+    miningHostings?: MiningHostingUpdateManyWithoutUserNestedInput
+    profiles?: ProfileUpdateManyWithoutUserNestedInput
+    userOnboarding?: UserOnboardingUpdateOneWithoutUserNestedInput
+    sentNotifications?: NotificationUpdateManyWithoutAdminNestedInput
+    notifications?: NotificationUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUpdateManyWithoutUserNestedInput
+    adminSupportMessages?: SupportTicketMessageUpdateManyWithoutAdminNestedInput
+    userSupportMessages?: SupportTicketMessageUpdateManyWithoutUserNestedInput
+    supportTickets?: SupportTicketUpdateManyWithoutUserNestedInput
+    closedTrades?: TradeUpdateManyWithoutCloserNestedInput
+    trades?: TradeUpdateManyWithoutUserNestedInput
+    transactions?: TransactionUpdateManyWithoutUserNestedInput
+    processedWithdrawals?: WithdrawalUpdateManyWithoutProcessorNestedInput
+    withdrawals?: WithdrawalUpdateManyWithoutUserNestedInput
+    referral_commissions?: ReferralCommissionUpdateManyWithoutReferred_userNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutFlashTransfersInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    name?: StringFieldUpdateOperationsInput | string
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    email_verified_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    password?: StringFieldUpdateOperationsInput | string
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    status?: EnumUserStatusFieldUpdateOperationsInput | $Enums.UserStatus
+    remember_token?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    accountBalances?: AccountBalanceUncheckedUpdateManyWithoutUserNestedInput
+    arbitrageHostings?: ArbitrageHostingUncheckedUpdateManyWithoutUserNestedInput
+    assets?: AssetUncheckedUpdateManyWithoutUserNestedInput
+    createdCryptoAddresses?: CryptoAddressUncheckedUpdateManyWithoutCreatorNestedInput
+    updatedCryptoAddresses?: CryptoAddressUncheckedUpdateManyWithoutUpdaterNestedInput
+    processedDeposits?: DepositUncheckedUpdateManyWithoutProcessorNestedInput
+    deposits?: DepositUncheckedUpdateManyWithoutUserNestedInput
+    processedKycSubmissions?: KycSubmissionUncheckedUpdateManyWithoutProcessorNestedInput
+    kycSubmissions?: KycSubmissionUncheckedUpdateManyWithoutUserNestedInput
+    processedLoanRepayments?: LoanRepaymentUncheckedUpdateManyWithoutProcessorNestedInput
+    processedLoans?: LoanUncheckedUpdateManyWithoutProcessorNestedInput
+    loans?: LoanUncheckedUpdateManyWithoutUserNestedInput
+    miningHostings?: MiningHostingUncheckedUpdateManyWithoutUserNestedInput
+    profiles?: ProfileUncheckedUpdateManyWithoutUserNestedInput
+    userOnboarding?: UserOnboardingUncheckedUpdateOneWithoutUserNestedInput
+    sentNotifications?: NotificationUncheckedUpdateManyWithoutAdminNestedInput
+    notifications?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+    pushSubscriptions?: PushSubscriptionUncheckedUpdateManyWithoutUserNestedInput
     adminSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutAdminNestedInput
     userSupportMessages?: SupportTicketMessageUncheckedUpdateManyWithoutUserNestedInput
     supportTickets?: SupportTicketUncheckedUpdateManyWithoutUserNestedInput
@@ -66891,6 +70932,16 @@ export namespace Prisma {
     image_url?: string | null
   }
 
+  export type PushSubscriptionCreateManyUserInput = {
+    id?: bigint | number
+    endpoint: string
+    p256dh: string
+    auth: string
+    user_agent?: string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
+  }
+
   export type SupportTicketMessageCreateManyAdminInput = {
     id?: bigint | number
     ticket_id: bigint | number
@@ -67028,6 +71079,22 @@ export namespace Prisma {
     status?: string
     paid_at?: Date | string | null
     created_at?: Date | string | null
+  }
+
+  export type FlashTransferCreateManyUserInput = {
+    id?: bigint | number
+    amount: Decimal | DecimalJsLike | number | string
+    currency?: string
+    network: string
+    to_address: string
+    tx_hash: string
+    block_number: string
+    status?: $Enums.FlashTransferStatus
+    is_test?: boolean
+    warning_seen?: boolean
+    expires_at?: Date | string | null
+    created_at?: Date | string | null
+    updated_at?: Date | string | null
   }
 
   export type AccountBalanceUpdateWithoutUserInput = {
@@ -67795,6 +71862,36 @@ export namespace Prisma {
     image_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type PushSubscriptionUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PushSubscriptionUncheckedUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type PushSubscriptionUncheckedUpdateManyWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    endpoint?: StringFieldUpdateOperationsInput | string
+    p256dh?: StringFieldUpdateOperationsInput | string
+    auth?: StringFieldUpdateOperationsInput | string
+    user_agent?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type SupportTicketMessageUpdateWithoutAdminInput = {
     id?: BigIntFieldUpdateOperationsInput | bigint | number
     message?: StringFieldUpdateOperationsInput | string
@@ -68228,6 +72325,54 @@ export namespace Prisma {
     status?: StringFieldUpdateOperationsInput | string
     paid_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUncheckedUpdateWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type FlashTransferUncheckedUpdateManyWithoutUserInput = {
+    id?: BigIntFieldUpdateOperationsInput | bigint | number
+    amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    currency?: StringFieldUpdateOperationsInput | string
+    network?: StringFieldUpdateOperationsInput | string
+    to_address?: StringFieldUpdateOperationsInput | string
+    tx_hash?: StringFieldUpdateOperationsInput | string
+    block_number?: StringFieldUpdateOperationsInput | string
+    status?: EnumFlashTransferStatusFieldUpdateOperationsInput | $Enums.FlashTransferStatus
+    is_test?: BoolFieldUpdateOperationsInput | boolean
+    warning_seen?: BoolFieldUpdateOperationsInput | boolean
+    expires_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type LoanRepaymentCreateManyLoanInput = {

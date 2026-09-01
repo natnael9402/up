@@ -12,8 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createNotificationForUser = exports.markAllNotificationsAsRead = exports.markNotificationAsRead = exports.getUnreadNotificationCount = exports.listUserNotifications = void 0;
+exports.deliverPushForNotification = exports.createNotificationForUser = exports.markAllNotificationsAsRead = exports.markNotificationAsRead = exports.getUnreadNotificationCount = exports.listUserNotifications = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
+const push_service_1 = require("./push.service");
 const serializeNotification = (notification) => {
     var _a, _b, _c, _d;
     return (Object.assign(Object.assign({}, notification), { id: (_a = notification.id) === null || _a === void 0 ? void 0 : _a.toString(), user_id: (_b = notification.user_id) === null || _b === void 0 ? void 0 : _b.toString(), admin_id: (_d = (_c = notification.admin_id) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : null }));
@@ -93,7 +94,7 @@ const markAllNotificationsAsRead = (userId) => __awaiter(void 0, void 0, void 0,
 });
 exports.markAllNotificationsAsRead = markAllNotificationsAsRead;
 const createNotificationForUser = (input) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     const user = yield prisma_1.default.user.findUnique({
         where: { id: input.userId },
         select: { id: true },
@@ -110,6 +111,42 @@ const createNotificationForUser = (input) => __awaiter(void 0, void 0, void 0, f
             image_url: (_a = input.imageUrl) !== null && _a !== void 0 ? _a : null,
         },
     });
+    (0, exports.deliverPushForNotification)(input.userId, {
+        title: input.title,
+        message: input.message,
+        imageUrl: (_b = input.imageUrl) !== null && _b !== void 0 ? _b : null,
+    });
     return serializeNotification(notification);
 });
 exports.createNotificationForUser = createNotificationForUser;
+const deliverPushForNotification = (userId, notification) => __awaiter(void 0, void 0, void 0, function* () {
+    let subscriptions = [];
+    try {
+        subscriptions = yield prisma_1.default.pushSubscription.findMany({
+            where: { user_id: userId },
+        });
+    }
+    catch (error) {
+        return;
+    }
+    if (subscriptions.length === 0) {
+        return;
+    }
+    const results = yield Promise.all(subscriptions.map((sub) => __awaiter(void 0, void 0, void 0, function* () {
+        const result = yield (0, push_service_1.sendPushNotification)(sub, notification);
+        return { sub, result };
+    })));
+    for (const { sub, result } of results) {
+        if (!result.success && (result.statusCode === 404 || result.statusCode === 410)) {
+            try {
+                yield prisma_1.default.pushSubscription.deleteMany({
+                    where: { id: sub.id },
+                });
+            }
+            catch (_error) {
+                // best effort cleanup
+            }
+        }
+    }
+});
+exports.deliverPushForNotification = deliverPushForNotification;
