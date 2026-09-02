@@ -1,9 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { config } from '../lib/config';
 import { storage } from '../lib/storage';
 import { useToast } from '../contexts/ToastContext';
+import { PwaInstallPrompt } from './PwaInstallPrompt';
+
+const INSTALL_BANNER_KEY = 'uphold_install_prompt_dismissed';
 
 function isStandaloneMode(): boolean {
   if (typeof window === 'undefined') return false;
@@ -16,10 +19,30 @@ function isIOS(): boolean {
   return /iPad|iPhone|iPod/.test(navigator.userAgent);
 }
 
+function getIOSBrowser(): 'safari' | 'other' | 'unknown' {
+  if (typeof navigator === 'undefined') return 'unknown';
+  if (/Safari/.test(navigator.userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS/i.test(navigator.userAgent)) {
+    return 'safari';
+  }
+  if (/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent)) return 'other';
+  return 'unknown';
+}
+
 export function NotificationPermissionPrompt() {
   const toast = useToast();
-  const doneRef = useRef(false);
   const toastShownRef = useRef(false);
+  const [showInstall, setShowInstall] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    if (!('serviceWorker' in navigator)) return false;
+    if (!isIOS()) return false;
+    if (isStandaloneMode()) return false;
+    try {
+      if (localStorage.getItem(INSTALL_BANNER_KEY) === '1') return false;
+    } catch {
+      /* ignore */
+    }
+    return true;
+  });
 
   const ensureSubscription = useCallback(async (): Promise<boolean> => {
     try {
@@ -74,53 +97,67 @@ export function NotificationPermissionPrompt() {
       await ensureSubscription();
       toast.success('Notifications enabled');
     } else if (permission === 'denied') {
-      if (isIOS()) {
-        toast.info('Notifications are blocked. Remove UPHOLD from your Home Screen, then re-add and try again.');
-      } else {
-        toast.info('Notifications are blocked. Enable them in your browser settings to stay updated.');
-      }
+      toast.info('Notifications are blocked. Enable them in your settings to stay updated.');
     }
   }, [ensureSubscription, toast]);
 
+  const handleInstallDismiss = useCallback(() => {
+    localStorage.setItem(INSTALL_BANNER_KEY, '1');
+    setShowInstall(false);
+  }, []);
+
   useEffect(() => {
-    if (doneRef.current) return;
     if (typeof window === 'undefined') return;
     if (!('serviceWorker' in navigator)) return;
 
-    doneRef.current = true;
+    const ios = isIOS();
+    const standalone = isStandaloneMode();
 
-    const iosTab = isIOS() && !isStandaloneMode();
-
-    if (iosTab) {
+    // iOS installed PWA (standalone): offer real push permission.
+    if (ios && standalone) {
+      if (!('Notification' in window) || !('PushManager' in window)) return;
+      if (Notification.permission === 'granted') {
+        ensureSubscription();
+        return;
+      }
       if (toastShownRef.current) return;
       toastShownRef.current = true;
-      toast.info('Add UPHOLD to your Home Screen (Share → Add to Home Screen) to get notifications.', {
-        label: 'How to',
-        onClick: () => {
-          window.open('https://support.apple.com/guide/iphone/bookmark-webpages-iph3f43e34d2/ios', '_blank');
-        },
+      toast.info('Get real-time alerts from Uphold.', {
+        label: 'Allow notifications',
+        onClick: promptPermission,
       });
       return;
     }
 
-    if (!('Notification' in window)) return;
-    if (!('PushManager' in window)) return;
+    // iOS Safari tab (not installed): the install guide is rendered from state.
+    if (ios && !standalone) {
+      return;
+    }
 
+    // Android / desktop: standard push permission flow.
+    if (!('Notification' in window) || !('PushManager' in window)) return;
     if (Notification.permission === 'granted') {
       ensureSubscription();
       return;
     }
-
     if (toastShownRef.current) return;
     toastShownRef.current = true;
-
     toast.info('Get real-time alerts from Uphold.', {
       label: 'Allow notifications',
       onClick: promptPermission,
     });
   }, [ensureSubscription, promptPermission, toast]);
 
-  return null;
+  const showInstallModal = showInstall && !isStandaloneMode();
+  const iosBrowser = showInstallModal ? getIOSBrowser() : 'unknown';
+
+  return (
+    <>
+      {showInstallModal && (
+        <PwaInstallPrompt open browser={iosBrowser} onClose={handleInstallDismiss} />
+      )}
+    </>
+  );
 }
 
 function urlBase64ToUint8Array(base64String: string): Uint8Array {
