@@ -42,9 +42,9 @@ const iconFor = (variant: ToastVariant) => {
 const colorFor = (variant: ToastVariant) => {
   switch (variant) {
     case 'success': return 'bg-green-500 text-white border-green-400/40 shadow-lg shadow-green-500/30';
-    case 'error': return 'border-destructive/40 text-destructive';
-    case 'warning': return 'border-warning/40 text-warning';
-    default: return 'border-border text-foreground';
+    case 'error': return 'bg-surface border-destructive/40 text-destructive';
+    case 'warning': return 'bg-surface border-warning/40 text-warning';
+    default: return 'bg-surface border-border text-foreground';
   }
 };
 
@@ -91,7 +91,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
                 )}
               >
                 <div className={cn('flex items-center gap-3', t.action && 'w-full')}>
-                  <Icon className={cn('w-5 h-5 shrink-0', t.variant === 'success' ? 'shrink-0' : 'shrink-0')} />
+                  <Icon className="w-5 h-5 shrink-0" />
                   <span className="text-sm font-medium flex-1 text-left">{t.message}</span>
                   <button onClick={() => remove(t.id)} className="opacity-60 hover:opacity-100 shrink-0">
                     <X className="w-4 h-4" />

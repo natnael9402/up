@@ -5,6 +5,17 @@ import { config } from '../lib/config';
 import { storage } from '../lib/storage';
 import { useToast } from '../contexts/ToastContext';
 
+function isStandaloneMode(): boolean {
+  if (typeof window === 'undefined') return false;
+  if (window.matchMedia('(display-mode: standalone)').matches) return true;
+  return (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
+}
+
+function isIOS(): boolean {
+  if (typeof navigator === 'undefined') return false;
+  return /iPad|iPhone|iPod/.test(navigator.userAgent);
+}
+
 export function NotificationPermissionPrompt() {
   const toast = useToast();
   const doneRef = useRef(false);
@@ -55,26 +66,45 @@ export function NotificationPermissionPrompt() {
   }, []);
 
   const promptPermission = useCallback(async () => {
-    if (Notification.permission === 'granted') {
-      await ensureSubscription();
-      toast.success('Notifications enabled');
-      return;
+    let permission = Notification.permission;
+    if (permission === 'default') {
+      permission = await Notification.requestPermission();
     }
-    const permission = await Notification.requestPermission();
     if (permission === 'granted') {
       await ensureSubscription();
       toast.success('Notifications enabled');
+    } else if (permission === 'denied') {
+      if (isIOS()) {
+        toast.info('Notifications are blocked. Remove UPHOLD from your Home Screen, then re-add and try again.');
+      } else {
+        toast.info('Notifications are blocked. Enable them in your browser settings to stay updated.');
+      }
     }
   }, [ensureSubscription, toast]);
 
   useEffect(() => {
     if (doneRef.current) return;
     if (typeof window === 'undefined') return;
-    if (!('Notification' in window)) return;
     if (!('serviceWorker' in navigator)) return;
-    if (!('PushManager' in window)) return;
 
     doneRef.current = true;
+
+    const iosTab = isIOS() && !isStandaloneMode();
+
+    if (iosTab) {
+      if (toastShownRef.current) return;
+      toastShownRef.current = true;
+      toast.info('Add UPHOLD to your Home Screen (Share → Add to Home Screen) to get notifications.', {
+        label: 'How to',
+        onClick: () => {
+          window.open('https://support.apple.com/guide/iphone/bookmark-webpages-iph3f43e34d2/ios', '_blank');
+        },
+      });
+      return;
+    }
+
+    if (!('Notification' in window)) return;
+    if (!('PushManager' in window)) return;
 
     if (Notification.permission === 'granted') {
       ensureSubscription();
