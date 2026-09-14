@@ -19,7 +19,7 @@ import { TradeSuccessModal } from './components/TradeSuccessModal';
 import { DepositModal } from '../../shared/components/DepositModal';
 import { ChartSkeleton } from '../../shared/components/ui/ChartSkeleton';
 import { cn, formatCurrency } from '../../shared/lib/utils';
-import { OPTION_TRADE_RULES, TIME_INTERVALS, type AssetOption, type TradeDirection, type TradeDuration } from './logic/tradeMath';
+import { OPTION_TRADE_RULES, TIME_INTERVALS, TRADE_FEE_RATE, type AssetOption, type TradeDirection, type TradeDuration } from './logic/tradeMath';
 import type { TradeBalances } from './hooks/useTradeBalances';
 
 export function TradeOptionPage() {
@@ -141,7 +141,8 @@ export function TradeOptionPage() {
 
     const cached = queryClient.getQueryData<TradeBalances>(['trades', 'balances']);
     const fastTradeBal = cached?.fastTradeBalance ?? 0;
-    const needed = amount - fastTradeBal;
+    const required = amount * (1 + TRADE_FEE_RATE);
+    const needed = required - fastTradeBal;
     if (needed > 0) {
       setLoadTradeIntent(type);
       setDepositAmount(needed);
@@ -268,7 +269,7 @@ export function TradeOptionPage() {
         }}
         targetAccount="fast_trade"
         currentBalance={balances.data?.fastTradeBalance ?? 0}
-        requiredAmount={Number(amount)}
+        requiredAmount={Number(amount) * (1 + TRADE_FEE_RATE)}
       />
 
       <DepositModal

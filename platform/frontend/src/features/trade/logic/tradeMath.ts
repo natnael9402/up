@@ -24,6 +24,8 @@ export interface AssetOption {
   type: 'crypto' | 'stock' | 'metal';
 }
 
+export const TRADE_FEE_RATE = 0.02;
+
 // Must match /ol OPTION_TRADE_RULES or the option trade is rejected.
 export const DURATIONS = [30, 60, 90, 180, 300, 450] as const;
 export type TradeDuration = (typeof DURATIONS)[number];

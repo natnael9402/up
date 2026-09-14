@@ -43,6 +43,18 @@ function TradeControlsBase({ amount, duration, placingDirection, balance, accoun
   const inRange = currentRule && amount >= currentRule.minCapital && amount <= currentRule.maxCapital;
   const estProfit = inRange ? profitFor(amount, duration) : 0;
 
+  const handleAmountChange = (raw: string) => {
+    const parsed = Number(raw);
+    let value: number;
+    if (raw === '' || Number.isNaN(parsed)) {
+      value = 0;
+    } else {
+      value = currentRule ? Math.min(parsed, currentRule.maxCapital) : parsed;
+    }
+    setInternal(String(value === 0 && raw === '' ? '' : value));
+    onAmountChange(value);
+  };
+
   return (
     <div className="flex flex-col space-y-3">
       {/* Balance */}
@@ -81,10 +93,8 @@ function TradeControlsBase({ amount, duration, placingDirection, balance, accoun
             type="number"
             inputMode="decimal"
             value={internal}
-            onChange={(e) => {
-              setInternal(e.target.value);
-              onAmountChange(Number(e.target.value));
-            }}
+            max={currentRule ? currentRule.maxCapital : undefined}
+            onChange={(e) => handleAmountChange(e.target.value)}
             className="bg-transparent text-lg font-black text-foreground outline-none w-full tracking-tight placeholder-white/10"
             placeholder="0"
           />
