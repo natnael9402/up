@@ -245,13 +245,18 @@ export async function terminateMiningHosting(id: number) {
   return unwrap(await res.json());
 }
 
-export async function getPendingVerifications() {
-  const res = await fetch(`${API_URL}/kyc-submissions?status=pending`, { headers: getAuthHeader() });
-  if (!res.ok) throw new Error('Failed to fetch pending verifications');
+export async function getKycSubmissions(status?: 'pending' | 'approved' | 'rejected') {
+  const query = status ? `?status=${status}` : '';
+  const res = await fetch(`${API_URL}/kyc-submissions${query}`, { headers: getAuthHeader() });
+  if (!res.ok) throw new Error('Failed to fetch KYC submissions');
   const raw = await res.json();
   const data = unwrap(raw);
   const submissions = data?.submissions?.data ?? data?.submissions ?? data?.data ?? data ?? [];
   return Array.isArray(submissions) ? submissions : [];
+}
+
+export async function getPendingVerifications() {
+  return getKycSubmissions('pending');
 }
 
 export async function approveVerification(id: number) {

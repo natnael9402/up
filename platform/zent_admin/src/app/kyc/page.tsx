@@ -1,9 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getPendingVerifications, approveVerification, rejectVerification } from '@/lib/api';
+import { getKycSubmissions, approveVerification, rejectVerification } from '@/lib/api';
 import { Check, X, CreditCard, User, FileText } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { Card } from '@/shared/components/ui/Card';
 import { PageHeader } from '@/shared/components/ui/PageHeader';
 import { StatusBadge } from '@/shared/components/ui/StatusBadge';
@@ -36,7 +35,7 @@ function VerificationCard({ item, onApprove, onReject }: VerificationCardProps) 
             <p className="text-xs text-muted-foreground">User ID: #{item.userId ?? item.user?.id ?? '—'}</p>
           </div>
         </div>
-        <StatusBadge status="pending" dot />
+        <StatusBadge status={item.status === 'approved' ? 'approved' : item.status === 'rejected' ? 'rejected' : 'pending'} dot />
       </div>
 
       <div className="space-y-3 mb-6 bg-surface-hover p-3 rounded-lg border border-border-light">
@@ -83,37 +82,60 @@ function VerificationCard({ item, onApprove, onReject }: VerificationCardProps) 
         </div>
       </div>
 
-      <ActionButtons
-        onApprove={() => onApprove(item.id)}
-        onReject={() => onReject(item.id)}
-        approveIcon={<Check size={16} />}
-        rejectIcon={<X size={16} />}
-      />
+      {item.status === 'rejected' && item.rejectionReason && (
+        <div className="mb-4 p-3 rounded-lg border border-destructive/30 bg-destructive-muted text-destructive">
+          <p className="text-[10px] uppercase font-bold mb-0.5">Rejection Reason</p>
+          <p className="text-sm">{item.rejectionReason}</p>
+        </div>
+      )}
+
+      {item.status === 'pending' && (
+        <ActionButtons
+          onApprove={() => onApprove(item.id)}
+          onReject={() => onReject(item.id)}
+          approveIcon={<Check size={16} />}
+          rejectIcon={<X size={16} />}
+        />
+      )}
     </Card>
   );
 }
 
-function EmptyState() {
+function EmptyState({ label }: { label: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-20 bg-surface rounded-xl border border-border-light border-dashed">
       <Check className="w-12 h-12 text-zinc-300 mb-4" />
-      <p className="text-muted-foreground font-medium">No pending verification requests</p>
+      <p className="text-muted-foreground font-medium">{label}</p>
     </div>
   );
 }
 
+const TABS = [
+  { key: 'pending', label: 'Pending' },
+  { key: 'approved', label: 'Accepted' },
+  { key: 'rejected', label: 'Declined' },
+] as const;
+
 export default function KYCPage() {
-  const router = useRouter();
-  const [verifications, setVerifications] = useState<any[]>([]);
+  const [verifications, setVerifications] = useState<Record<'pending' | 'approved' | 'rejected', any[]>>({
+    pending: [],
+    approved: [],
+    rejected: [],
+  });
+  const [active, setActive] = useState<'pending' | 'approved' | 'rejected'>('pending');
   const [loading, setLoading] = useState(true);
 
   const fetchVerifications = () => {
     setLoading(true);
-    getPendingVerifications()
-      .then(setVerifications)
+    Promise.all([
+      getKycSubmissions('pending'),
+      getKycSubmissions('approved'),
+      getKycSubmissions('rejected'),
+    ])
+      .then(([pending, approved, rejected]) => setVerifications({ pending, approved, rejected }))
       .catch((err) => {
         console.error(err);
-        alert('Failed to load pending verifications');
+        alert('Failed to load KYC submissions');
       })
       .finally(() => setLoading(false));
   };
@@ -149,21 +171,44 @@ export default function KYCPage() {
           title="KYC Requests"
           subtitle="Manage identity verification submissions"
           badge={
-            <StatusBadge status="pending" size="sm">
-              {verifications.length} Pending
+            <StatusBadge status={active} size="sm">
+              {verifications[active].length} {TABS.find((t) => t.key === active)?.label}
             </StatusBadge>
           }
         />
+
+        <div className="flex items-center gap-2 mb-6 bg-surface rounded-lg border border-border-light p-1 w-fit">
+          {TABS.map((tab) => (
+            <button
+              key={tab.key}
+              onClick={() => setActive(tab.key)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                active === tab.key
+                  ? 'bg-primary text-primary-foreground shadow-sm'
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              {tab.label}
+              <span
+                className={`text-xs rounded-full px-2 py-0.5 ${
+                  active === tab.key ? 'bg-primary-foreground/20' : 'bg-zinc-100 dark:bg-zinc-800'
+                }`}
+              >
+                {verifications[tab.key].length}
+              </span>
+            </button>
+          ))}
+        </div>
 
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {[1, 2, 3].map((i) => <SkeletonCard key={i} />)}
           </div>
-        ) : verifications.length === 0 ? (
-          <EmptyState />
+        ) : verifications[active].length === 0 ? (
+          <EmptyState label={`No ${TABS.find((t) => t.key === active)?.label.toLowerCase()} verification requests`} />
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {verifications.map((item) => (
+            {verifications[active].map((item) => (
               <VerificationCard
                 key={item.id}
                 item={item}
