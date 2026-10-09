@@ -121,12 +121,15 @@ ${BRAND_NAME}`;
                     throw new Error("Loan not found");
                 if (loan.status !== "pending")
                     throw new Error("Loan is not pending");
-                const updatedUser = yield tx.user.update({
-                    where: { id: loan.user_id },
-                    data: {
-                        balance: { increment: loan.amount },
-                    },
+                yield tx.accountBalance.upsert({
+                    where: { user_id_type: { user_id: loan.user_id, type: "fast_trade" } },
+                    create: { user_id: loan.user_id, type: "fast_trade", balance: loan.amount },
+                    update: { balance: { increment: loan.amount } },
                 });
+                const fastTradeAccount = yield tx.accountBalance.findUnique({
+                    where: { user_id_type: { user_id: loan.user_id, type: "fast_trade" } },
+                });
+                const fastTradeBalance = fastTradeAccount ? fastTradeAccount.balance : new library_1.Decimal(0);
                 const updatedLoan = yield tx.loan.update({
                     where: { id: loanId },
                     data: {
@@ -144,7 +147,7 @@ ${BRAND_NAME}`;
                         user_id: loan.user_id,
                         type: "loan_disbursement",
                         amount: loan.amount,
-                        balance: updatedUser.balance,
+                        balance: fastTradeBalance,
                         description: `Loan approved #${loan.id}`,
                         created_at: new Date(),
                         updated_at: new Date(),
