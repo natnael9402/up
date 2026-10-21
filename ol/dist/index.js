@@ -28,6 +28,7 @@ const admin_1 = __importDefault(require("./admin"));
 const transaction_routes_1 = __importDefault(require("./transaction/transaction.routes"));
 const deposit_routes_1 = __importDefault(require("./deposit/deposit.routes"));
 const trade_routes_1 = __importDefault(require("./trade/trade.routes"));
+const trade_scheduler_1 = __importDefault(require("./trade/jobs/trade.scheduler"));
 const trade_admin_routes_1 = __importDefault(require("./trade/trade.admin.routes"));
 const asset_routes_1 = __importDefault(require("./asset/asset.routes"));
 const support_ticket_routes_1 = __importDefault(require("./support/support-ticket.routes"));
@@ -196,6 +197,7 @@ app.use("/api/blob", blob_upload_route_1.default);
 app.use(error_handler_middleware_1.errorHandler);
 const loanScheduler = new loan_scheduler_1.LoanScheduler();
 loanScheduler.start();
+trade_scheduler_1.default.start();
 app.listen(port, () => {
     logger_1.logger.info("Server started", {
         port,

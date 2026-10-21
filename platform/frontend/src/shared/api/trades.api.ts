@@ -29,8 +29,13 @@ export const tradesApi = {
     leverage: number;
     take_profit?: number;
     stop_loss?: number;
+    take_profit_amount?: number;
+    stop_loss_amount?: number;
     market_type?: 'crypto' | 'metals' | 'stocks';
   }) => http.post<{ trade: any }>('/trades/contract', params),
+
+  closeContract: (id: number, outcome: 'WIN' | 'LOSS') =>
+    http.post<{ trade: any }>(`/trades/${id}/close`, { outcome }),
 
   // Trade history & management
   getUserTrades: (filters?: Record<string, string | number | undefined>) =>

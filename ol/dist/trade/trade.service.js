@@ -40,6 +40,30 @@ const tradeInclude = {
 const CONTRACT_LEVERAGE_OPTIONS = [2, 5, 10, 20, 50, 100, 125];
 const TRANSACTION_FEE_RATE = new library_1.Decimal("0.02");
 const MIN_OPTION_TRADE_AMOUNT = 100;
+const FORCED_WIN_MIN_PERCENT = new library_1.Decimal("0.2");
+const FORCED_WIN_MAX_PERCENT = new library_1.Decimal("1");
+// User-initiated "Take Profit" closes pay a realistic profit in this band
+// when the trade has no profitable take-profit level of its own.
+const CONTRACT_USER_WIN_MIN_PROFIT = new library_1.Decimal("500");
+const CONTRACT_USER_WIN_MAX_PROFIT = new library_1.Decimal("1500");
+const FORCED_CONTRACT_MIN_HOLD_SECONDS = (() => {
+    const raw = Number(process.env.CONTRACT_FORCED_MIN_HOLD_SECONDS);
+    if (Number.isFinite(raw) && raw >= 0) {
+        return Math.floor(raw);
+    }
+    return 60;
+})();
+// Contracts live for this long, then close automatically with the outcome
+// matching the live PnL at expiry. Admin-forced outcomes resolve at the
+// same deadline (capped by CONTRACT_FORCED_MIN_HOLD_SECONDS when it is
+// shorter).
+const CONTRACT_DURATION_SECONDS = (() => {
+    const raw = Number(process.env.CONTRACT_DURATION_SECONDS);
+    if (Number.isFinite(raw) && raw >= 5) {
+        return Math.floor(raw);
+    }
+    return 60;
+})();
 class TradeService {
     constructor(marketData = market_data_service_1.default, marketService = market_service_1.default, stockData = stock_service_1.default) {
         this.marketData = marketData;
@@ -146,10 +170,36 @@ class TradeService {
             const leverage = new library_1.Decimal(payload.leverage);
             const quantity = amount.mul(leverage).div(entryPrice);
             const liquidationPrice = this.calculateLiquidationPrice(entryPrice, payload.direction, leverage);
-            const takeProfit = payload.takeProfit
-                ? new library_1.Decimal(payload.takeProfit)
-                : null;
-            const stopLoss = payload.stopLoss ? new library_1.Decimal(payload.stopLoss) : null;
+            // Dollar-based take profit / stop loss ("min profit" / "max loss").
+            // Converted into price levels using the formula:
+            //   pnl$ = amount x percentMove x leverage / 100
+            // Dollar values take precedence over the legacy price-based values.
+            let takeProfit;
+            let stopLoss;
+            if (payload.takeProfitAmount) {
+                const percentMove = new library_1.Decimal(payload.takeProfitAmount)
+                    .mul(100)
+                    .div(amount.mul(leverage));
+                takeProfit =
+                    payload.direction === "buy"
+                        ? entryPrice.mul(new library_1.Decimal(1).add(percentMove.div(100)))
+                        : entryPrice.mul(new library_1.Decimal(1).sub(percentMove.div(100)));
+            }
+            if (payload.stopLossAmount) {
+                const percentMove = new library_1.Decimal(payload.stopLossAmount)
+                    .mul(100)
+                    .div(amount.mul(leverage));
+                stopLoss =
+                    payload.direction === "buy"
+                        ? entryPrice.mul(new library_1.Decimal(1).sub(percentMove.div(100)))
+                        : entryPrice.mul(new library_1.Decimal(1).add(percentMove.div(100)));
+            }
+            if (!takeProfit && payload.takeProfit) {
+                takeProfit = new library_1.Decimal(payload.takeProfit);
+            }
+            if (!stopLoss && payload.stopLoss) {
+                stopLoss = new library_1.Decimal(payload.stopLoss);
+            }
             const trade = yield prisma_1.default.$transaction((tx) => __awaiter(this, void 0, void 0, function* () {
                 const currentAccount = yield tx.accountBalance.findUnique({
                     where: { user_id_type: { user_id: userId, type: "trading" } },
@@ -779,25 +829,65 @@ class TradeService {
             return finalResult;
         });
     }
+    /** Contracts auto-close after this many seconds (UI countdown matches). */
+    getContractExpirySeconds() {
+        return CONTRACT_DURATION_SECONDS;
+    }
     evaluateContractTrade(tradeId) {
         return __awaiter(this, void 0, void 0, function* () {
             const evaluation = yield this.evaluateTradeForAutomation(tradeId);
             if (!evaluation) {
                 return { shouldContinue: false };
             }
-            const { trade, finalResult, currentPrice } = evaluation;
+            const { trade, finalResult, overridden, currentPrice } = evaluation;
             if (trade.type !== "contract") {
                 return { shouldContinue: false };
             }
             if (finalResult) {
+                const effectiveHold = Math.min(FORCED_CONTRACT_MIN_HOLD_SECONDS, CONTRACT_DURATION_SECONDS);
+                if (overridden && effectiveHold > 0) {
+                    const openedAt = new Date(trade.opened_at).getTime();
+                    const holdSeconds = (Date.now() - openedAt) / 1000;
+                    const remainingSeconds = effectiveHold - holdSeconds;
+                    if (remainingSeconds > 0) {
+                        logger_1.logger.debug("Contract trade held for forced outcome", {
+                            tradeId: tradeId.toString(),
+                            result: finalResult,
+                            remainingSeconds,
+                        });
+                        return {
+                            shouldContinue: true,
+                            interval: Math.min(Math.max(remainingSeconds, 1), 5),
+                        };
+                    }
+                }
                 yield this.resolveTrade(trade.id, finalResult, undefined, currentPrice);
                 return { shouldContinue: false, resolved: true };
             }
             if (!currentPrice) {
                 return { shouldContinue: false };
             }
+            // Auto-expiry: once the contract's duration elapses it closes at
+            // the live market price and the resulting PnL decides the outcome.
+            const expiryOpenedAt = new Date(trade.opened_at).getTime();
+            const expiryElapsed = (Date.now() - expiryOpenedAt) / 1000;
+            const secondsToExpiry = CONTRACT_DURATION_SECONDS - expiryElapsed;
+            if (secondsToExpiry <= 0) {
+                const expiryPnl = this.calculatePnl(trade, "won", currentPrice);
+                const expiryResult = expiryPnl.gt(0) ? "won" : "lost";
+                logger_1.logger.info("Contract reached auto-expiry", {
+                    tradeId: tradeId.toString(),
+                    result: expiryResult,
+                    pnl: expiryPnl.toFixed(2),
+                });
+                yield this.resolveTrade(trade.id, expiryResult, undefined, currentPrice);
+                return { shouldContinue: false, resolved: true };
+            }
             const interval = this.determineContractCheckInterval(trade, currentPrice);
-            return { shouldContinue: true, interval };
+            return {
+                shouldContinue: true,
+                interval: Math.max(1, Math.min(interval, secondsToExpiry)),
+            };
         });
     }
     resolveTrade(tradeId, requestedResult, adminId, exitPrice) {
@@ -824,13 +914,22 @@ class TradeService {
                 const overriddenResult = this.mapProfileTradeStatus(profile === null || profile === void 0 ? void 0 : profile.trade_status);
                 const finalResult = (overriddenResult !== null && overriddenResult !== void 0 ? overriddenResult : requestedResult);
                 const marketType = trade.market_type || this.normalizeMarketTypeBySymbol(trade.symbol);
-                let priceResult;
-                if (exitPrice === undefined) {
-                    priceResult = yield this.getSymbolAndPrice(trade.symbol, marketType);
-                } else {
-                    priceResult = { price: exitPrice };
+                const isForcedOutcome = overriddenResult !== null && overriddenResult !== undefined;
+                let syntheticExitPrice = null;
+                if (isForcedOutcome && trade.type === "contract") {
+                    syntheticExitPrice = this.synthesizeContractExitPrice(trade, finalResult);
                 }
-                const { price: finalExitPrice } = priceResult;
+                let finalExitPrice;
+                if (syntheticExitPrice !== null && syntheticExitPrice !== undefined) {
+                    finalExitPrice = syntheticExitPrice;
+                }
+                else if (exitPrice === undefined) {
+                    const priceResult = yield this.getSymbolAndPrice(trade.symbol, marketType);
+                    finalExitPrice = priceResult.price;
+                }
+                else {
+                    finalExitPrice = exitPrice;
+                }
                 const pnl = this.calculatePnl(trade, finalResult, finalExitPrice);
                 yield tx.trade.update({
                     where: { id: tradeId },
@@ -1180,11 +1279,15 @@ class TradeService {
         return "crypto";
     }
     normalizeMarketTypeBySymbol(symbol) {
-        if (typeof symbol === "string" &&
-            ["XAUUSD", "XAGUSD", "XPTUSD", "XPDUSD", "CRUDE_OIL"].includes(symbol.toUpperCase())) {
+        // Strip the quote suffix so shapes like "XAUUSD/USD" classify correctly
+        // (mirrors normalizeMarketType which already does this).
+        const sym = typeof symbol === "string"
+            ? symbol.replace(/\/USD(T)?$/i, "").trim().toUpperCase()
+            : "";
+        if (["XAUUSD", "XAGUSD", "XPTUSD", "XPDUSD", "CRUDE_OIL", "XAU", "XAG", "XPT", "XPD"].includes(sym)) {
             return "metals";
         }
-        if (typeof symbol === "string" &&
+        if (sym &&
             [
                 "AAPL", "MSFT", "AMZN", "GOOGL", "TSLA", "NVDA", "META", "NFLX",
                 "AMD", "INTC", "BABA", "BA", "DIS", "V", "JPM", "GS", "PYPL", "SQ",
@@ -1192,10 +1295,38 @@ class TradeService {
                 "DKNG", "PLTR", "SOFI", "NIO", "RIVN", "MARA", "RIOT", "HOOD",
                 "RBLX", "ABNB", "NET", "CRWD", "ZS", "DDOG", "SNOW", "NOW",
                 "ISRG", "PFE", "JNJ", "LLY", "ABBV", "AMGN", "GILD",
-            ].includes(symbol.toUpperCase())) {
+            ].includes(sym)) {
             return "stocks";
         }
         return "crypto";
+    }
+    /**
+     * Final safety net: the most recent price any trade on this symbol was
+     * opened/closed at. Used when every external feed fails so placement
+     * never hard-fails for a symbol that has traded before.
+     */
+    getLastKnownPriceFromTrades(cleanSymbol) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const last = yield prisma_1.default.trade.findFirst({
+                    where: {
+                        symbol: { contains: cleanSymbol },
+                        type: { in: ["option", "contract", "stock"] },
+                    },
+                    orderBy: { id: "desc" },
+                    select: { exit_price: true, entry_price: true },
+                });
+                if (!last) {
+                    return null;
+                }
+                const price = last.exit_price || last.entry_price;
+                return price && price.gt(0) ? price : null;
+            }
+            catch (e) {
+                logger_1.logger.warn(`Last-known price lookup failed for ${cleanSymbol}: ${e.message}`);
+                return null;
+            }
+        });
     }
     getSymbolAndPrice(symbol, marketType) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -1252,6 +1383,11 @@ class TradeService {
                     setCache(price);
                     return { symbol: cleanSymbol, price };
                 }
+                const lastKnown = yield this.getLastKnownPriceFromTrades(cleanSymbol);
+                if (lastKnown) {
+                    setCache(lastKnown);
+                    return { symbol: cleanSymbol, price: lastKnown };
+                }
                 throw new Error(`Unable to fetch metal price for ${cleanSymbol}`);
             }
 
@@ -1293,6 +1429,11 @@ class TradeService {
                     setCache(price);
                     return { symbol: cleanSymbol, price };
                 }
+                const lastKnownStockPrice = yield this.getLastKnownPriceFromTrades(cleanSymbol);
+                if (lastKnownStockPrice) {
+                    setCache(lastKnownStockPrice);
+                    return { symbol: cleanSymbol, price: lastKnownStockPrice };
+                }
                 throw new Error(`Unable to fetch stock price for ${cleanSymbol}`);
             }
 
@@ -1321,6 +1462,17 @@ class TradeService {
                 const price = new library_1.Decimal(CRYPTO_PRICES[normalizedSymbol]);
                 setCache(price);
                 return { symbol: normalizedSymbol, price };
+            }
+            // Last resort: a misrouted metal/stock symbol must resolve through
+            // its own market path instead of failing on a crypto lookup.
+            const retryMarketType = this.normalizeMarketTypeBySymbol(cleanSymbol);
+            if (retryMarketType !== "crypto") {
+                return yield this.getSymbolAndPrice(cleanSymbol, retryMarketType);
+            }
+            const lastKnownPrice = yield this.getLastKnownPriceFromTrades(normalizedSymbol);
+            if (lastKnownPrice) {
+                setCache(lastKnownPrice);
+                return { symbol: normalizedSymbol, price: lastKnownPrice };
             }
             throw new Error(`Unable to fetch market price for ${symbol}`);
         });
@@ -1367,6 +1519,7 @@ class TradeService {
             return {
                 trade,
                 finalResult: overriddenResult !== null && overriddenResult !== void 0 ? overriddenResult : computedResult,
+                overridden: overriddenResult !== null && overriddenResult !== undefined,
                 currentPrice,
             };
         });
@@ -1500,6 +1653,137 @@ class TradeService {
         const positivePnl = pnl.gt(0) ? pnl : new library_1.Decimal(0);
         return trade.amount.add(positivePnl);
     }
+    synthesizeContractExitPrice(trade, forcedResult) {
+        const entryPrice = trade.entry_price;
+        if (!entryPrice || entryPrice.eq(0)) {
+            return null;
+        }
+        const contract = trade.contracts && trade.contracts[0];
+        if (forcedResult === "won") {
+            if (contract && contract.take_profit) {
+                const percentChange = contract.take_profit
+                    .sub(entryPrice)
+                    .div(entryPrice)
+                    .mul(100);
+                if (trade.direction === "sell") {
+                    percentChange = percentChange.neg();
+                }
+                if (percentChange.gt(0)) {
+                    logger_1.logger.info("Forced contract win resolved at take profit", {
+                        tradeId: trade.id.toString(),
+                    });
+                    return contract.take_profit;
+                }
+            }
+            const percentRange = FORCED_WIN_MAX_PERCENT.sub(FORCED_WIN_MIN_PERCENT);
+            const favorablePercent = FORCED_WIN_MIN_PERCENT.add(percentRange.mul(Math.random()));
+            const favorableMultiplier = trade.direction === "buy"
+                ? new library_1.Decimal(1).add(favorablePercent.div(100))
+                : new library_1.Decimal(1).sub(favorablePercent.div(100));
+            return entryPrice.mul(favorableMultiplier);
+        }
+        if (contract && contract.stop_loss) {
+            return contract.stop_loss;
+        }
+        return null;
+    }
+    /**
+     * Exit price for a user-initiated contract close (Take Profit / Stop Loss
+     * buttons on the active-trade panel). Mirrors synthesizeContractExitPrice
+     * but guarantees the payout band the platform promises:
+     *  - "won": exit at the client's take-profit when that locks in at least
+     *    the minimum promised profit; otherwise back-compute a favorable exit
+     *    price from a realistic profit between $500 and $1500.
+     *  - "lost": exit at the client's stop-loss when it implies a loss,
+     *    otherwise null (resolveTrade then uses the live market price).
+     */
+    synthesizeUserCloseExitPrice(trade, result) {
+        const entryPrice = trade.entry_price;
+        if (!entryPrice || entryPrice.eq(0)) {
+            return null;
+        }
+        const contract = trade.contracts && trade.contracts[0];
+        const leverage = new library_1.Decimal((contract && contract.leverage !== undefined && contract.leverage !== null) ? contract.leverage : 1);
+        // Exact same math calculatePnl uses for contract wins, so the exit
+        // price below credits precisely the intended profit.
+        const impliedPercent = (price) => {
+            let percentChange = price.sub(entryPrice).div(entryPrice).mul(100);
+            if (trade.direction === "sell") {
+                percentChange = percentChange.neg();
+            }
+            return trade.amount.mul(percentChange).mul(leverage).div(100);
+        };
+        if (result === "won") {
+            if (contract && contract.take_profit) {
+                const impliedProfit = impliedPercent(contract.take_profit);
+                if (impliedProfit.gt(0) &&
+                    impliedProfit.gte(CONTRACT_USER_WIN_MIN_PROFIT)) {
+                    logger_1.logger.info("User take-profit close honored at configured take profit", {
+                        tradeId: trade.id.toString(),
+                        profit: impliedProfit.toFixed(2),
+                    });
+                    return contract.take_profit;
+                }
+            }
+            // No usable take-profit on the trade: choose a realistic profit
+            // between $500 and $1500 and derive the favorable exit price.
+            const profit = CONTRACT_USER_WIN_MIN_PROFIT.add(CONTRACT_USER_WIN_MAX_PROFIT.sub(CONTRACT_USER_WIN_MIN_PROFIT).mul(Math.random())).toDecimalPlaces(2);
+            const favorablePercent = profit.mul(100).div(trade.amount.mul(leverage));
+            const favorableMultiplier = trade.direction === "buy"
+                ? new library_1.Decimal(1).add(favorablePercent.div(100))
+                : new library_1.Decimal(1).sub(favorablePercent.div(100));
+            logger_1.logger.info("User take-profit close synthesized with realistic profit", {
+                tradeId: trade.id.toString(),
+                profit: profit.toFixed(2),
+            });
+            return entryPrice.mul(favorableMultiplier);
+        }
+        if (contract && contract.stop_loss) {
+            const impliedPercentRaw = contract.stop_loss
+                .sub(entryPrice)
+                .div(entryPrice)
+                .mul(100);
+            const directionAdjusted = trade.direction === "sell"
+                ? impliedPercentRaw.neg()
+                : impliedPercentRaw;
+            if (directionAdjusted.lt(0)) {
+                return contract.stop_loss;
+            }
+        }
+        return null;
+    }
+    /**
+     * User-facing contract close from the Take Profit / Stop Loss buttons.
+     * Only the owner of an open contract trade can close it, and the outcome
+     * is applied immediately through the shared resolution pipeline (same
+     * crediting, notifications and bookkeeping as every other resolution).
+     */
+    closeContractTrade(userId, tradeId, outcome) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const requestedResult = outcome === "WIN"
+                ? "won"
+                : outcome === "LOSS"
+                    ? "lost"
+                    : null;
+            if (!requestedResult) {
+                throw new Error("Invalid close outcome");
+            }
+            const trade = yield prisma_1.default.trade.findFirst({
+                where: {
+                    id: tradeId,
+                    user_id: userId,
+                    type: "contract",
+                    status: "open",
+                },
+                include: tradeInclude,
+            });
+            if (!trade) {
+                throw new Error("Open contract trade not found");
+            }
+            const exitPrice = this.synthesizeUserCloseExitPrice(trade, requestedResult);
+            return yield this.resolveTrade(trade.id, requestedResult, null, exitPrice !== null && exitPrice !== void 0 ? exitPrice : undefined);
+        });
+    }
     ensureSufficientBalance(balance, required) {
         if (balance.lt(required)) {
             throw new Error(`Insufficient balance. Required: ${required.toFixed(2)}, Available: ${balance.toFixed(2)}`);
@@ -1539,6 +1823,23 @@ class TradeService {
         }
         if (!["buy", "sell"].includes(payload.direction)) {
             throw new Error("Invalid trade direction");
+        }
+        if (payload.takeProfitAmount !== undefined &&
+            payload.takeProfitAmount !== null) {
+            if (!Number.isFinite(payload.takeProfitAmount) ||
+                payload.takeProfitAmount <= 0) {
+                throw new Error("Minimum profit must be greater than 0");
+            }
+        }
+        if (payload.stopLossAmount !== undefined &&
+            payload.stopLossAmount !== null) {
+            if (!Number.isFinite(payload.stopLossAmount) ||
+                payload.stopLossAmount <= 0) {
+                throw new Error("Maximum loss must be greater than 0");
+            }
+            if (payload.stopLossAmount > payload.amount) {
+                throw new Error("Maximum loss cannot exceed the trade amount");
+            }
         }
         const required = new library_1.Decimal(payload.amount).add(new library_1.Decimal(payload.amount).mul(TRANSACTION_FEE_RATE));
         this.ensureSufficientBalance(balance, required);

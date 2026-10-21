@@ -63,11 +63,17 @@ class TradeController {
                         ? Number(req.body.take_profit)
                         : undefined,
                     stopLoss: req.body.stop_loss ? Number(req.body.stop_loss) : undefined,
+                    takeProfitAmount: req.body.take_profit_amount
+                        ? Number(req.body.take_profit_amount)
+                        : undefined,
+                    stopLossAmount: req.body.stop_loss_amount
+                        ? Number(req.body.stop_loss_amount)
+                        : undefined,
                     marketType: typeof req.body.market_type === "string"
                         ? req.body.market_type
                         : undefined,
                 });
-                trade_scheduler_1.default.scheduleContractCheck(BigInt(trade.id), 15);
+                trade_scheduler_1.default.scheduleContractCheck(BigInt(trade.id), Math.min(15, Math.max(1, this.service.getContractExpirySeconds() - 2)));
                 return res.status(201).json({
                     message: "Contract trade created successfully",
                     trade,
@@ -332,6 +338,30 @@ class TradeController {
                 }
                 return res.json({
                     message: "Trade canceled successfully",
+                    trade,
+                });
+            }
+            catch (error) {
+                return res.status(400).json({ error: error.message });
+            }
+        });
+    }
+    /**
+     * POST /:id/close { outcome: "WIN" | "LOSS" } maps to the platform's
+     * "Take Profit" / "Stop Loss" buttons.
+     */
+    closeTrade(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            try {
+                if (!((_a = req.user) === null || _a === void 0 ? void 0 : _a.id)) {
+                    return res.status(401).json({ error: "Unauthorized" });
+                }
+                const tradeId = BigInt(req.params.id);
+                const trade = yield this.service.closeContractTrade(BigInt(req.user.id), tradeId, req.body.outcome);
+                trade_scheduler_1.default.clearContractCheck(BigInt(trade.id));
+                return res.json({
+                    message: "Trade closed successfully",
                     trade,
                 });
             }

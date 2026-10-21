@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.stockExchangeValidator = exports.stockSearchValidator = exports.marketPriceParamValidator = exports.tradeIdParamValidator = exports.tradeFiltersValidator = exports.stockTradeValidator = exports.spotTradeValidator = exports.contractTradeValidator = exports.optionTradeValidator = void 0;
+exports.stockExchangeValidator = exports.stockSearchValidator = exports.marketPriceParamValidator = exports.tradeIdParamValidator = exports.tradeCloseValidator = exports.tradeFiltersValidator = exports.stockTradeValidator = exports.spotTradeValidator = exports.contractTradeValidator = exports.optionTradeValidator = void 0;
 const express_validator_1 = require("express-validator");
 const trade_rules_1 = require("../utils/trade-rules");
 const OPTION_DURATIONS = Object.keys(trade_rules_1.OPTION_TRADE_RULES).map(Number);
@@ -26,7 +26,21 @@ exports.contractTradeValidator = [
         .withMessage("Invalid leverage option"),
     (0, express_validator_1.body)("take_profit").optional().isFloat({ min: 0 }),
     (0, express_validator_1.body)("stop_loss").optional().isFloat({ min: 0 }),
+    (0, express_validator_1.body)("take_profit_amount")
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("take_profit_amount must be a positive number"),
+    (0, express_validator_1.body)("stop_loss_amount")
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("stop_loss_amount must be a positive number"),
     (0, express_validator_1.body)("market_type").optional().isIn(MARKET_TYPES),
+];
+exports.tradeCloseValidator = [
+    (0, express_validator_1.param)("id").isInt({ gt: 0 }).withMessage("Invalid trade id"),
+    (0, express_validator_1.body)("outcome")
+        .isIn(["WIN", "LOSS"])
+        .withMessage("outcome must be either WIN or LOSS"),
 ];
 exports.spotTradeValidator = [
     (0, express_validator_1.body)("symbol").isString().trim().notEmpty(),

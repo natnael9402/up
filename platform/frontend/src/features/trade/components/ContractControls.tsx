@@ -1,7 +1,7 @@
 'use client';
 
 import { memo, useState, useCallback, useEffect, useRef } from 'react';
-import { TrendingDown, TrendingUp, Loader2, Eye, EyeOff, RefreshCw } from 'lucide-react';
+import { TrendingDown, TrendingUp, Loader2, Eye, EyeOff, RefreshCw, Timer } from 'lucide-react';
 import { tradesApi } from '../../../shared/api';
 import { useToast } from '../../../shared/contexts/ToastContext';
 import { formatCurrency, cn } from '../../../shared/lib/utils';
@@ -9,13 +9,15 @@ import { TransferApprovalModal } from './TransferApprovalModal';
 import type { AssetOption } from '../logic/tradeMath';
 
 const LEVERAGE_OPTIONS = [2, 5, 10, 20, 50, 100, 125];
+/** Contracts auto-close after this duration — must match backend default. */
+const CONTRACT_DURATION_SECONDS = 60;
 
 interface Props {
   asset: AssetOption | null;
   balance: number;
   accountLabel?: string;
   currentPrice: number;
-  onComplete: (result: { symbol: string; amount: string; profit: number; direction: 'buy' | 'sell' }) => void;
+  onComplete: (result: { symbol: string; amount: string; profit: number; direction: 'buy' | 'sell'; result?: 'won' | 'lost' | null }) => void;
   onRefresh?: () => Promise<void>;
   isRefreshing?: boolean;
 }
@@ -28,19 +30,22 @@ interface ContractPosition {
   leverage: number;
   entryPrice: number;
   liquidationPrice: number | null;
-  takeProfit: number | null;
-  stopLoss: number | null;
+  minProfit: number | null;
+  maxLoss: number | null;
+  openedAt: number;
 }
 
 function ContractControlsBase({ asset, balance, accountLabel = 'Balance', currentPrice, onComplete, onRefresh, isRefreshing }: Props) {
   const [showBalance, setShowBalance] = useState(false);
   const [amount, setAmount] = useState('100');
   const [leverage, setLeverage] = useState(10);
-  const [takeProfit, setTakeProfit] = useState('');
-  const [stopLoss, setStopLoss] = useState('');
+  const [minProfit, setMinProfit] = useState('');
+  const [maxLoss, setMaxLoss] = useState('');
   const [placingDirection, setPlacingDirection] = useState<'buy' | 'sell' | null>(null);
+  const [closingOutcome, setClosingOutcome] = useState<'WIN' | 'LOSS' | null>(null);
   const [position, setPosition] = useState<ContractPosition | null>(null);
-  const pollingRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pollingRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [countdownTick, setCountdownTick] = useState(0);
   const [showApprovalModal, setShowApprovalModal] = useState(false);
   const pendingDirectionRef = useRef<'buy' | 'sell' | null>(null);
   const toast = useToast();
@@ -50,7 +55,7 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
 
   const stopPolling = useCallback(() => {
     if (pollingRef.current) {
-      clearInterval(pollingRef.current);
+      clearTimeout(pollingRef.current);
       pollingRef.current = null;
     }
   }, []);
@@ -69,6 +74,20 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
       toast.error('Select an asset first');
       return;
     }
+    const tp = minProfit ? Number(minProfit) : undefined;
+    const sl = maxLoss ? Number(maxLoss) : undefined;
+    if (tp !== undefined && (!Number.isFinite(tp) || tp <= 0)) {
+      toast.error('Min profit must be greater than $0');
+      return;
+    }
+    if (sl !== undefined && (!Number.isFinite(sl) || sl <= 0)) {
+      toast.error('Max loss must be greater than $0');
+      return;
+    }
+    if (sl !== undefined && sl > amt) {
+      toast.error('Max loss cannot exceed the margin amount');
+      return;
+    }
     if (amt > balance) {
       pendingDirectionRef.current = dir;
       setShowApprovalModal(true);
@@ -81,8 +100,8 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
         direction: dir,
         amount: amt,
         leverage,
-        take_profit: takeProfit ? Number(takeProfit) : undefined,
-        stop_loss: stopLoss ? Number(stopLoss) : undefined,
+        take_profit_amount: tp,
+        stop_loss_amount: sl,
       });
       const trade = res.trade;
       setPosition({
@@ -93,30 +112,42 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
         leverage,
         entryPrice: Number(trade.entry_price),
         liquidationPrice: trade.contract?.liquidation_price ? Number(trade.contract.liquidation_price) : null,
-        takeProfit: takeProfit ? Number(takeProfit) : null,
-        stopLoss: stopLoss ? Number(stopLoss) : null,
+        minProfit: tp ?? null,
+        maxLoss: sl ?? null,
+        openedAt: typeof trade.opened_at === 'string' ? Date.parse(trade.opened_at) || Date.now() : Date.now(),
       });
     } catch (err) {
       toast.error((err as Error).message ?? 'Contract trade failed');
     } finally {
       setPlacingDirection(null);
     }
-  }, [amount, symbol, leverage, takeProfit, stopLoss, toast]);
+  }, [amount, symbol, leverage, minProfit, maxLoss, balance, toast]);
 
   const handleApproved = useCallback(async () => {
     const dir = pendingDirectionRef.current;
     if (!dir) return;
     pendingDirectionRef.current = null;
     setShowApprovalModal(false);
+    const amt = Number(amount);
+    const tp = minProfit ? Number(minProfit) : undefined;
+    const sl = maxLoss ? Number(maxLoss) : undefined;
+    if (!amt || amt < 10) {
+      toast.error('Minimum amount is $10');
+      return;
+    }
+    if (sl !== undefined && sl > amt) {
+      toast.error('Max loss cannot exceed the margin amount');
+      return;
+    }
     setPlacingDirection(dir);
     try {
       const res = await tradesApi.createContract({
         symbol,
         direction: dir,
-        amount: Number(amount),
+        amount: amt,
         leverage,
-        take_profit: takeProfit ? Number(takeProfit) : undefined,
-        stop_loss: stopLoss ? Number(stopLoss) : undefined,
+        take_profit_amount: tp,
+        stop_loss_amount: sl,
       });
       const trade = res.trade;
       setPosition({
@@ -127,19 +158,45 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
         leverage,
         entryPrice: Number(trade.entry_price),
         liquidationPrice: trade.contract?.liquidation_price ? Number(trade.contract.liquidation_price) : null,
-        takeProfit: takeProfit ? Number(takeProfit) : null,
-        stopLoss: stopLoss ? Number(stopLoss) : null,
+        minProfit: tp ?? null,
+        maxLoss: sl ?? null,
+        openedAt: typeof trade.opened_at === 'string' ? Date.parse(trade.opened_at) || Date.now() : Date.now(),
       });
     } catch (err) {
       toast.error((err as Error).message ?? 'Contract trade failed');
     } finally {
       setPlacingDirection(null);
     }
-  }, [amount, symbol, leverage, takeProfit, stopLoss, toast]);
+  }, [amount, symbol, leverage, minProfit, maxLoss, toast]);
+
+  const handleClose = useCallback(async (outcome: 'WIN' | 'LOSS') => {
+    if (!position || closingOutcome !== null) return;
+    setClosingOutcome(outcome);
+    try {
+      const res = await tradesApi.closeContract(position.id, outcome);
+      stopPolling();
+      const trade = res.trade;
+      onComplete({
+        symbol: trade.symbol,
+        amount: String(position.amount),
+        profit: Number(trade.pnl ?? 0),
+        direction: position.direction,
+        result: trade.result ?? (outcome === 'WIN' ? 'won' : 'lost'),
+      });
+      onRefresh?.();
+      setPosition(null);
+    } catch (err) {
+      toast.error((err as Error).message ?? 'Failed to close trade');
+    } finally {
+      setClosingOutcome(null);
+    }
+  }, [position, closingOutcome, stopPolling, onComplete, onRefresh, toast]);
 
   useEffect(() => {
     if (!position) return;
-    pollingRef.current = setInterval(async () => {
+    let cancelled = false;
+    const poll = async () => {
+      if (cancelled) return;
       try {
         const res = await tradesApi.getTrade(position.id);
         const trade = res.trade;
@@ -151,22 +208,47 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
             amount: String(position.amount),
             profit: pnl,
             direction: position.direction,
+            result: trade.result ?? null,
           });
           setPosition(null);
+          return;
         }
       } catch {
         // polling errors silently ignored
       }
-    }, 5000);
-    return stopPolling;
+      const remaining = position.openedAt + CONTRACT_DURATION_SECONDS * 1000 - Date.now();
+      if (!cancelled) {
+        pollingRef.current = setTimeout(() => { void poll(); }, remaining <= 10000 ? 1000 : 5000);
+      }
+    };
+    const first = setTimeout(() => { void poll(); }, 4000);
+    pollingRef.current = first;
+    return () => {
+      cancelled = true;
+      clearTimeout(first);
+      stopPolling();
+    };
   }, [position, stopPolling, onComplete]);
 
+  // Drives the 1-second countdown display while a position is open.
+  useEffect(() => {
+    if (!position) return;
+    const tick = setInterval(() => setCountdownTick((v) => v + 1), 500);
+    return () => clearInterval(tick);
+  }, [position]);
+
   if (position) {
-    const pnl = position.direction === 'buy'
-      ? (currentPrice - position.entryPrice) * position.leverage
-      : (position.entryPrice - currentPrice) * position.leverage;
-    const pnlPercent = position.entryPrice > 0 ? (pnl / (position.amount || 1)) * 100 : 0;
+    const rawMove = position.direction === 'buy'
+      ? (currentPrice - position.entryPrice)
+      : (position.entryPrice - currentPrice);
+    // Matches the backend pnl math exactly: margin x %move x leverage.
+    const pnl = position.entryPrice > 0 ? (rawMove / position.entryPrice) * position.amount * position.leverage : 0;
+    const pnlPercent = position.amount > 0 ? (pnl / position.amount) * 100 : 0;
     const isPositive = pnl >= 0;
+    const countdownRemaining = Math.ceil((position.openedAt + CONTRACT_DURATION_SECONDS * 1000 - Date.now()) / 1000);
+    void countdownTick; // re-render driver only
+    const countdownProgress = Math.max(0, Math.min(100, ((position.openedAt + CONTRACT_DURATION_SECONDS * 1000 - Date.now()) / (CONTRACT_DURATION_SECONDS * 1000)) * 100));
+    const countdownUrgent = countdownRemaining <= 10 && countdownRemaining > 0;
 
     return (
       <div className="h-full flex flex-col py-6">
@@ -213,13 +295,62 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
           </div>
         </div>
 
-        {(position.takeProfit || position.stopLoss) && (
+        {(position.minProfit || position.maxLoss) && (
           <div className="mt-2 text-[10px] text-center text-muted-foreground font-bold">
-            {position.takeProfit ? `TP: $${formatCurrency(position.takeProfit)}` : ''}
-            {position.takeProfit && position.stopLoss ? ' · ' : ''}
-            {position.stopLoss ? `SL: $${formatCurrency(position.stopLoss)}` : ''}
+            {position.minProfit ? `Min Profit: $${formatCurrency(position.minProfit)}` : ''}
+            {position.minProfit && position.maxLoss ? ' · ' : ''}
+            {position.maxLoss ? `Max Loss: $${formatCurrency(position.maxLoss)}` : ''}
           </div>
         )}
+
+        <div className="mt-3 relative overflow-hidden rounded-full border border-border-light bg-surface/80 px-3 py-1.5">
+          <div
+            className={cn(
+              'absolute inset-y-0 left-0 transition-all duration-1000 ease-linear',
+              countdownUrgent ? 'bg-destructive/20' : 'bg-primary/20'
+            )}
+            style={{ width: `${countdownProgress}%` }}
+          />
+          <div className="relative z-10 flex items-center justify-between">
+            <span className="inline-flex items-center gap-1.5 text-[9px] font-black uppercase tracking-widest text-muted-foreground">
+              <Timer size={12} className={countdownUrgent ? 'text-destructive' : ''} />
+              {countdownRemaining <= 0 ? 'Closing' : countdownUrgent ? 'Almost done' : `Auto-close · ${CONTRACT_DURATION_SECONDS}s`}
+            </span>
+            <span className={cn(
+              'font-mono text-[13px] font-black tabular-nums',
+              countdownUrgent ? 'text-destructive animate-pulse' : 'text-foreground'
+            )}>
+              {String(Math.floor(Math.max(0, countdownRemaining) / 60)).padStart(2, '0')}:{String(Math.max(0, countdownRemaining) % 60).padStart(2, '0')}
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-3 grid grid-cols-2 gap-2">
+          <button
+            disabled={closingOutcome !== null}
+            onClick={() => handleClose('WIN')}
+            className="relative overflow-hidden flex items-center justify-center gap-1.5 rounded-[14px] bg-gradient-to-b from-[#10b981] to-[#059669] px-3 py-2.5 shadow-[0_5px_15px_rgba(16,185,129,0.3)] active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none"
+          >
+            {closingOutcome === 'WIN'
+              ? <Loader2 className="w-4 h-4 animate-spin text-black" strokeWidth={3.5} />
+              : <TrendingUp className="w-4 h-4 text-black drop-shadow-sm" strokeWidth={3.5} />}
+            <span className="text-[12px] font-black tracking-wider text-black drop-shadow-sm">
+              {closingOutcome === 'WIN' ? 'Closing...' : 'Take Profit'}
+            </span>
+          </button>
+          <button
+            disabled={closingOutcome !== null}
+            onClick={() => handleClose('LOSS')}
+            className="relative overflow-hidden flex items-center justify-center gap-1.5 rounded-[14px] bg-gradient-to-b from-[#ef4444] to-[#dc2626] px-3 py-2.5 shadow-[0_5px_15px_rgba(239,68,68,0.3)] active:scale-95 transition-all disabled:opacity-50 disabled:pointer-events-none"
+          >
+            {closingOutcome === 'LOSS'
+              ? <Loader2 className="w-4 h-4 animate-spin text-white" strokeWidth={3.5} />
+              : <TrendingDown className="w-4 h-4 text-white drop-shadow-sm" strokeWidth={3.5} />}
+            <span className="text-[12px] font-black tracking-wider text-white drop-shadow-sm">
+              {closingOutcome === 'LOSS' ? 'Closing...' : 'Stop Loss'}
+            </span>
+          </button>
+        </div>
       </div>
     );
   }
@@ -242,7 +373,7 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
           </button>
           {onRefresh && (
             <button
-              onClick={onRefresh}
+              onClick={() => void onRefresh()}
               disabled={isRefreshing}
               className="text-muted-foreground hover:text-foreground transition-colors disabled:pointer-events-none"
             >
@@ -291,28 +422,36 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
 
       <div className="flex gap-2">
         <div className="flex-1 relative bg-surface/80 border border-white/10 rounded-[14px] p-2 backdrop-blur-2xl shadow-sm">
-          <label className="text-[9px] font-black tracking-widest text-muted-foreground uppercase block mb-0.5">Take Profit</label>
+          <label className="text-[9px] font-black tracking-widest text-muted-foreground uppercase block mb-0.5">Min Profit ($)</label>
           <input
             type="number"
             inputMode="decimal"
-            value={takeProfit}
-            onChange={(e) => setTakeProfit(e.target.value)}
+            min="0"
+            value={minProfit}
+            onChange={(e) => setMinProfit(e.target.value)}
             className="bg-transparent text-sm font-black text-foreground outline-none w-full tracking-tight placeholder-white/10"
             placeholder="Optional"
           />
         </div>
         <div className="flex-1 relative bg-surface/80 border border-white/10 rounded-[14px] p-2 backdrop-blur-2xl shadow-sm">
-          <label className="text-[9px] font-black tracking-widest text-muted-foreground uppercase block mb-0.5">Stop Loss</label>
+          <label className="text-[9px] font-black tracking-widest text-muted-foreground uppercase block mb-0.5">Max Loss ($)</label>
           <input
             type="number"
             inputMode="decimal"
-            value={stopLoss}
-            onChange={(e) => setStopLoss(e.target.value)}
+            min="0"
+            value={maxLoss}
+            onChange={(e) => setMaxLoss(e.target.value)}
             className="bg-transparent text-sm font-black text-foreground outline-none w-full tracking-tight placeholder-white/10"
             placeholder="Optional"
           />
         </div>
       </div>
+
+      {(minProfit || maxLoss) && (
+        <div className="text-[9px] text-center text-muted-foreground font-bold px-1">
+          Auto-closes at expiry (60s) or when your {minProfit ? `profit hits $${minProfit}` : ''}{(minProfit && maxLoss) ? ' or ' : ''}{maxLoss ? `loss reaches $${maxLoss}` : ''}
+        </div>
+      )}
 
       <div className="grid grid-cols-2 gap-2">
         <button
