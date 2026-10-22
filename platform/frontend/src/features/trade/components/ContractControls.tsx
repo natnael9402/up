@@ -10,7 +10,7 @@ import type { AssetOption } from '../logic/tradeMath';
 
 const LEVERAGE_OPTIONS = [2, 5, 10, 20, 50, 100, 125];
 /** Contracts auto-close after this duration — must match backend default. */
-const CONTRACT_DURATION_SECONDS = 60;
+const CONTRACT_DURATION_SECONDS = 45;
 
 interface Props {
   asset: AssetOption | null;
@@ -449,7 +449,7 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
 
       {(minProfit || maxLoss) && (
         <div className="text-[9px] text-center text-muted-foreground font-bold px-1">
-          Auto-closes at expiry (60s) or when your {minProfit ? `profit hits $${minProfit}` : ''}{(minProfit && maxLoss) ? ' or ' : ''}{maxLoss ? `loss reaches $${maxLoss}` : ''}
+          Auto-closes at expiry (45s) or when your {minProfit ? `profit hits $${minProfit}` : ''}{(minProfit && maxLoss) ? ' or ' : ''}{maxLoss ? `loss reaches $${maxLoss}` : ''}
         </div>
       )}
 

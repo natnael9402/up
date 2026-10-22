@@ -62,7 +62,7 @@ const CONTRACT_DURATION_SECONDS = (() => {
     if (Number.isFinite(raw) && raw >= 5) {
         return Math.floor(raw);
     }
-    return 60;
+    return 45;
 })();
 class TradeService {
     constructor(marketData = market_data_service_1.default, marketService = market_service_1.default, stockData = stock_service_1.default) {
