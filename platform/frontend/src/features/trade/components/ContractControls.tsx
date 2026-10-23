@@ -9,8 +9,8 @@ import { TransferApprovalModal } from './TransferApprovalModal';
 import type { AssetOption } from '../logic/tradeMath';
 
 const LEVERAGE_OPTIONS = [2, 5, 10, 20, 50, 100, 125];
-/** Contracts auto-close after this duration — must match backend default. */
-const CONTRACT_DURATION_SECONDS = 45;
+/** Contracts auto-close after this duration — must match backend (hard-coded 60s). */
+const CONTRACT_DURATION_SECONDS = 60;
 
 interface Props {
   asset: AssetOption | null;
@@ -194,8 +194,10 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
   useEffect(() => {
     if (!position) return;
     let cancelled = false;
+    let inFlight = false;
     const poll = async () => {
-      if (cancelled) return;
+      if (cancelled || inFlight) return;
+      inFlight = true;
       try {
         const res = await tradesApi.getTrade(position.id);
         const trade = res.trade;
@@ -212,8 +214,18 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
           setPosition(null);
           return;
         }
+        // Re-anchor the poll deadline to the server's clock. Wallet/WebView
+        // browsers (and phones with skewed clocks) otherwise keep a stale
+        // opened_at and can lag on clearing the panel after auto-close.
+        const serverOpenedAt = typeof trade.opened_at === 'string' ? Date.parse(trade.opened_at) : NaN;
+        if (Number.isFinite(serverOpenedAt) && Math.abs(serverOpenedAt - position.openedAt) > 2000) {
+          setPosition({ ...position, openedAt: serverOpenedAt });
+          return;
+        }
       } catch {
         // polling errors silently ignored
+      } finally {
+        inFlight = false;
       }
       const remaining = position.openedAt + CONTRACT_DURATION_SECONDS * 1000 - Date.now();
       if (!cancelled) {
@@ -222,9 +234,17 @@ function ContractControlsBase({ asset, balance, accountLabel = 'Balance', curren
     };
     const first = setTimeout(() => { void poll(); }, 4000);
     pollingRef.current = first;
+    // Wallet/WebView browsers pause JS timers while backgrounded or when
+    // the screen locks. On refocus, reconcile immediately: poll right away
+    // so the panel clears the moment the trade result is known.
+    const handleVisibilityChange = () => {
+      if (!document.hidden) void poll();
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
     return () => {
       cancelled = true;
       clearTimeout(first);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       stopPolling();
     };
   }, [position, stopPolling, onComplete]);
