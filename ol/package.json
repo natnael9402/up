@@ -35,7 +35,8 @@
     "rss-parser": "^3.13.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
-    "web-push": "^3.6.7"
+    "web-push": "^3.6.7",
+    "ws": "^7.5.13"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",

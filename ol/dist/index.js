@@ -29,6 +29,9 @@ const transaction_routes_1 = __importDefault(require("./transaction/transaction.
 const deposit_routes_1 = __importDefault(require("./deposit/deposit.routes"));
 const trade_routes_1 = __importDefault(require("./trade/trade.routes"));
 const trade_scheduler_1 = __importDefault(require("./trade/jobs/trade.scheduler"));
+const trade_service_1 = __importDefault(require("./trade/trade.service"));
+const trade_hub_1 = require("./realtime/trade-hub");
+const http_1 = __importDefault(require("http"));
 const trade_admin_routes_1 = __importDefault(require("./trade/trade.admin.routes"));
 const asset_routes_1 = __importDefault(require("./asset/asset.routes"));
 const support_ticket_routes_1 = __importDefault(require("./support/support-ticket.routes"));
@@ -160,6 +163,19 @@ app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.de
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
+// Contract runtime probe: lets you verify the live build really closes
+// contracts at 60s and exposes the realtime/watchdog wiring.
+app.get("/api/health/contract-runtime", (req, res) => {
+    res.json({
+        contractDurationSeconds: trade_service_1.default.getContractExpirySeconds(),
+        forcedHoldSeconds: trade_service_1.default.getContractExpirySeconds(),
+        websocket: trade_hub_1.getStats(),
+        websocketPath: "/ws/trades",
+        watchdog: true,
+        serverTime: new Date().toISOString(),
+        uptimeSeconds: Math.round(process.uptime()),
+    });
+});
 const authRateLimiter = rateLimit({ windowMs: 60 * 1000, max: 20, standardHeaders: true, legacyHeaders: false, message: "Too many requests, please try again later" });
 const kycRateLimiter = rateLimit({ windowMs: 60 * 1000, max: 5, standardHeaders: true, legacyHeaders: false, message: "Too many KYC submissions, please try again later" });
 app.use("/api/register", authRateLimiter);
@@ -198,10 +214,15 @@ app.use(error_handler_middleware_1.errorHandler);
 const loanScheduler = new loan_scheduler_1.LoanScheduler();
 loanScheduler.start();
 trade_scheduler_1.default.start();
-app.listen(port, () => {
+const httpServer = http_1.default.createServer(app);
+trade_hub_1.init(httpServer, {
+    evaluateContract: (tradeId) => trade_service_1.default.evaluateContractTrade(tradeId),
+});
+httpServer.listen(port, () => {
     logger_1.logger.info("Server started", {
         port,
         docs: `http://localhost:${port}/api-docs`,
+        websocket: "/ws/trades",
     });
 });
 process.on("beforeExit", () => __awaiter(void 0, void 0, void 0, function* () {
