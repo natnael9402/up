@@ -28,10 +28,6 @@ const admin_1 = __importDefault(require("./admin"));
 const transaction_routes_1 = __importDefault(require("./transaction/transaction.routes"));
 const deposit_routes_1 = __importDefault(require("./deposit/deposit.routes"));
 const trade_routes_1 = __importDefault(require("./trade/trade.routes"));
-const trade_scheduler_1 = __importDefault(require("./trade/jobs/trade.scheduler"));
-const trade_service_1 = __importDefault(require("./trade/trade.service"));
-const trade_hub_1 = require("./realtime/trade-hub");
-const http_1 = __importDefault(require("http"));
 const trade_admin_routes_1 = __importDefault(require("./trade/trade.admin.routes"));
 const asset_routes_1 = __importDefault(require("./asset/asset.routes"));
 const support_ticket_routes_1 = __importDefault(require("./support/support-ticket.routes"));
@@ -44,14 +40,11 @@ const loan_admin_routes_1 = __importDefault(require("./loan/loan.admin.routes"))
 const notification_routes_1 = __importDefault(require("./notification/notification.routes"));
 const admin_alert_service_1 = require("./notification/admin-alert.service");
 const activity_routes_1 = __importDefault(require("./activity/activity.routes"));
-const push_routes_1 = __importDefault(require("./notification/push.routes"));
 const news_routes_1 = __importDefault(require("./news/news.routes"));
 const onboarding_routes_1 = __importDefault(require("./onboarding/onboarding.routes"));
 const referral_routes_1 = __importDefault(require("./referral/referral.routes"));
 const transfer_routes_1 = __importDefault(require("./transfer/transfer.routes"));
 const load_routes_1 = __importDefault(require("./transfer/load.routes"));
-const flash_transfer_routes_1 = __importDefault(require("./flash-transfer/flash-transfer.routes"));
-const blob_upload_route_1 = __importDefault(require("./utils/blob-upload-route"));
 const multer_1 = __importDefault(require("multer"));
 const prisma_1 = __importDefault(require("./prisma"));
 const request_logger_middleware_1 = require("./middleware/request-logger.middleware");
@@ -59,6 +52,10 @@ const error_handler_middleware_1 = require("./middleware/error-handler.middlewar
 const logger_1 = require("./utils/logger");
 const rateLimit = require("express-rate-limit");
 const loan_scheduler_1 = require("./loan/jobs/loan.scheduler");
+const trade_scheduler_1 = __importDefault(require("./trade/jobs/trade.scheduler"));
+const trade_service_1 = __importDefault(require("./trade/trade.service"));
+const trade_hub_1 = require("./realtime/trade-hub");
+const http_1 = __importDefault(require("http"));
 const app = (0, express_1.default)();
 const port = 4000;
 const defaultAllowedOrigins = ((_a = process.env.ALLOWED_ORIGINS) === null || _a === void 0 ? void 0 : _a.split(",").filter((origin) => Boolean(origin))) || [];
@@ -81,7 +78,7 @@ app.use((0, cors_1.default)(corsOptions));
 // app.options("*", cors(corsOptions));
 app.set("etag", false);
 app.use((req, res, next) => {
-    if (req.method === "GET" && (/^\/api\/profile\/with-user-data/.test(req.path) || /^\/api\/profile\/me/.test(req.path))) {
+    if (req.method === "GET" && /^\/api\/profile\/with-user-data/.test(req.path)) {
         res.setHeader("Cache-Control", "private, max-age=30");
     } else {
         res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
@@ -116,13 +113,10 @@ app.use(express_1.default.urlencoded({ extended: true, limit: "1mb" }));
 app.use(express_1.default.json({ limit: "1mb" }));
 // app.use(responseFormatter);
 app.use(request_logger_middleware_1.requestLogger);
-// Safe global BigInt serialization: keep small values as numbers (backward
-// compatible with existing clients), fall back to strings only when a value
-// exceeds Number.MAX_SAFE_INTEGER and would otherwise lose precision.
+// Add this to the entry point of your application
 // @ts-ignore
 BigInt.prototype.toJSON = function () {
-    const value = Number(this.toString());
-    return Number.isSafeInteger(value) ? value : this.toString();
+    return Number(this.toString());
 };
 const swaggerOptions = {
     swaggerDefinition: {
@@ -162,36 +156,34 @@ const swaggerOptions = {
 };
 const swaggerDocs = (0, swagger_jsdoc_1.default)(swaggerOptions);
 app.use("/api-docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swaggerDocs));
+const uploadsDir = require("path").join(process.cwd(), "uploads");
+require("fs").mkdirSync(uploadsDir, { recursive: true });
+app.use("/uploads", express_1.default.static(uploadsDir));
 app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 // Contract runtime probe: lets you verify the live build really closes
 // contracts at 60s and exposes the realtime/watchdog wiring.
 app.get("/api/health/contract-runtime", (req, res) => {
-    let adminAlerts = null;
-    try {
-        const alerts = admin_alert_service_1.getStats();
-        adminAlerts = {
-            enabled: alerts.enabled,
-            recipients: alerts.recipients,
-            sent: alerts.sent,
-            failed: alerts.failed,
-            lastError: alerts.lastError,
-            polling: alerts.polling,
-        };
-    }
-    catch (e) {
-        adminAlerts = { enabled: false };
-    }
     res.json({
         contractDurationSeconds: trade_service_1.default.getContractExpirySeconds(),
         forcedHoldSeconds: trade_service_1.default.getContractExpirySeconds(),
         websocket: trade_hub_1.getStats(),
         websocketPath: "/ws/trades",
         watchdog: true,
+        adminAlerts: (() => {
+            const alerts = admin_alert_service_1.getStats();
+            return {
+                enabled: alerts.enabled,
+                recipients: alerts.recipients,
+                sent: alerts.sent,
+                failed: alerts.failed,
+                lastError: alerts.lastError,
+                polling: alerts.polling,
+            };
+        })(),
         serverTime: new Date().toISOString(),
         uptimeSeconds: Math.round(process.uptime()),
-        adminAlerts,
     });
 });
 const authRateLimiter = rateLimit({ windowMs: 60 * 1000, max: 20, standardHeaders: true, legacyHeaders: false, message: "Too many requests, please try again later" });
@@ -220,25 +212,17 @@ app.use("/api/loans", loan_routes_1.default);
 app.use("/api/admin/loans", loan_admin_routes_1.default);
 app.use("/api/notifications", notification_routes_1.default);
 app.use("/api/activity", activity_routes_1.default);
-app.use("/api/push", push_routes_1.default);
 app.use("/api/news", news_routes_1.default);
 app.use("/api/onboarding", onboarding_routes_1.default);
 app.use("/api/referral", referral_routes_1.default);
 app.use("/api/transfer", transfer_routes_1.default);
 app.use("/api/trading-balance", load_routes_1.default);
 app.use("/api/transfer", load_routes_1.default);
-app.use("/api/flash-transfers", flash_transfer_routes_1.default);
-app.use("/api/blob", blob_upload_route_1.default);
 app.use(error_handler_middleware_1.errorHandler);
 const loanScheduler = new loan_scheduler_1.LoanScheduler();
 loanScheduler.start();
 trade_scheduler_1.default.start();
-try {
-    admin_alert_service_1.init();
-}
-catch (e) {
-    // ignore
-}
+admin_alert_service_1.init();
 const httpServer = http_1.default.createServer(app);
 trade_hub_1.init(httpServer, {
     evaluateContract: (tradeId) => trade_service_1.default.evaluateContractTrade(tradeId),
