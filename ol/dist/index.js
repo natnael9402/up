@@ -75,7 +75,7 @@ const corsOptions = {
     ],
 };
 app.use((0, cors_1.default)(corsOptions));
-// app.options("*", cors(corsOptions));
+app.options("*", (0, cors_1.default)(corsOptions));
 app.set("etag", false);
 app.use((req, res, next) => {
     if (req.method === "GET" && (/^\/api\/profile\/with-user-data/.test(req.path) || /^\/api\/profile\/me/.test(req.path))) {
