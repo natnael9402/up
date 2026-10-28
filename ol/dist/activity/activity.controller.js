@@ -5,21 +5,13 @@
  * Both frontends call POST /api/activity/app-open once per session so the admin
  * team knows who entered Paxora or Paxora Premium (and on which device).
  */
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P) {
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(value); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(value); } catch (e) { reject(e); } }
-        function resolve(value) {
-            if (value && value instanceof Promise) {
-                value.then(fulfilled, rejected);
-                return value;
-            }
-            value = new P(function (resolve) {
-                value.then(fulfilled, rejected);
-            });
-        }
-        resolve(value);
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
 var __importDefault = (this && this.__importDefault) || function (mod) {

