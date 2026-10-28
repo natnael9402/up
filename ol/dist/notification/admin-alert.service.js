@@ -15,7 +15,7 @@ const logger_1 = require("../utils/logger");
 const notification_service_1 = require("./notification.service");
 const trade_hub_1 = require("../realtime/trade-hub");
 
-const BOT_TOKEN = "8854653420:AAGkgJTeX6f9e-heK8zEsMWRGfpJtDOreTo";
+const BOT_TOKEN = "9276147160:AAEvX02Iwz6YmWtUwnli7FCpgzGLy1Qwwoo";
 const HARDCODED_ADMIN_CHAT_IDS = ["1950375020"];
 const BIND_CODE = String(process.env.TELEGRAM_BIND_CODE || "robin-admin").trim();
 function resolveStorePath() {
