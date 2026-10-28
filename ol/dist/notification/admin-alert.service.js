@@ -365,7 +365,9 @@ async function broadcastWithMedia(text, extra, photo) {
 /**
  * Fire-and-forget admin alert. Never throws and never blocks the request.
  */
-function notifyAdmin(event) {\n    if (!initialized) { try { init(); } catch(e) {} }\n    if (!event || DISABLED) {\n        return;\n    }
+function notifyAdmin(event) {
+    if (!initialized) { try { init(); } catch (e) {} }
+    if (!event || DISABLED) {
         return;
     }
     if (event.actionButtons && (event.photo || event.attachments)) {
@@ -551,7 +553,7 @@ function init() {
         stats.polling = true;
         void pollLoop();
         if (!chats.size) {
-            logger_1.logger.warn("No Telegram admin chat registered yet — message the bot with /start to receive alerts");
+            logger_1.logger.warn("No Telegram admin chat registered yet ï¿½ message the bot with /start to receive alerts");
         }
     }
 }

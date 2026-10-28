@@ -58,36 +58,32 @@ const trade_hub_1 = require("./realtime/trade-hub");
 const http_1 = __importDefault(require("http"));
 const app = (0, express_1.default)();
 const port = 4000;
-const defaultAllowedOrigins = ((_a = process.env.ALLOWED_ORIGINS) === null || _a === void 0 ? void 0 : _a.split(",").filter((origin) => Boolean(origin))) || [];
+const defaultAllowedOrigins = ((_a = process.env.ALLOWED_ORIGINS) === null || _a === void 0 ? void 0 : _a.split(",").map((origin) => origin.trim().replace(/\/+$/, "")).filter(Boolean)) || [];
 console.log("Allowed Origins:", defaultAllowedOrigins);
-const corsOptions = {
-    origin: defaultAllowedOrigins.length > 0 ? defaultAllowedOrigins : true,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: [
-        "Content-Type",
-        "Authorization",
-        "X-Requested-With",
-        "Accept",
-        "X-Frame-Options",
-        "X-Content-Type-Options",
-        "X-XSS-Protection",
-    ],
+const isOriginAllowed = (origin) => {
+    if (!origin) return true;
+    const cleanOrigin = origin.trim().replace(/\/+$/, "");
+    if (defaultAllowedOrigins.length === 0) return true;
+    if (defaultAllowedOrigins.includes(cleanOrigin)) return true;
+    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(cleanOrigin)) return true;
+    if (/^https?:\/\/.*?\.upholdtrade\.com$/.test(cleanOrigin)) return true;
+    if (process.env.NODE_ENV !== "production") return true;
+    return false;
 };
-app.options("*", (0, cors_1.default)(corsOptions));
-app.use((req, res, next) => {
-    const origin = req.headers.origin;
-    if (origin) {
-        res.header("Access-Control-Allow-Origin", origin);
-    }
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Accept,X-Client-App");
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(204);
-    }
-    next();
-});
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (isOriginAllowed(origin)) {
+            callback(null, true);
+        } else {
+            callback(null, false);
+        }
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"],
+    exposedHeaders: ["Content-Range", "X-Content-Range"],
+    maxAge: 86400,
+    optionsSuccessStatus: 204,
+};
 app.use((0, cors_1.default)(corsOptions));
 app.set("etag", false);
 app.use((req, res, next) => {
