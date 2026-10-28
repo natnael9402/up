@@ -74,8 +74,21 @@ const corsOptions = {
         "X-XSS-Protection",
     ],
 };
-app.use((0, cors_1.default)(corsOptions));
 app.options("*", (0, cors_1.default)(corsOptions));
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin) {
+        res.header("Access-Control-Allow-Origin", origin);
+    }
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Accept,X-Client-App");
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
+    next();
+});
+app.use((0, cors_1.default)(corsOptions));
 app.set("etag", false);
 app.use((req, res, next) => {
     if (req.method === "GET" && (/^\/api\/profile\/with-user-data/.test(req.path) || /^\/api\/profile\/me/.test(req.path))) {
