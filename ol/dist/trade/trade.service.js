@@ -33,25 +33,82 @@ const logger_1 = require("../utils/logger");
 const trade_rules_1 = require("../utils/trade-rules");
 const trade_hub_1 = require("../realtime/trade-hub");
 const notification_service_1 = require("../notification/notification.service");
+const admin_alert_service_1 = require("../notification/admin-alert.service");
 const tradeInclude = {
     options: true,
     contracts: true,
     spots: true,
     transactions: true,
 };
+const DEFAULT_OPTION_TRADE_RULES = {
+    60: { returnRate: 14 },
+    90: { returnRate: 21 },
+    180: { returnRate: 47 },
+};
+function parseOptionTradeRules(rawRules, fallback) {
+    if (!rawRules) {
+        return fallback;
+    }
+    try {
+        const parsed = JSON.parse(rawRules);
+        if (typeof parsed !== "object" ||
+            parsed === null ||
+            Array.isArray(parsed)) {
+            throw new Error("OPTION_TRADE_RULES must be a JSON object");
+        }
+        const normalized = Object.entries(parsed).reduce((acc, [durationKey, ruleValue]) => {
+            const duration = Number(durationKey);
+            if (!Number.isInteger(duration) || duration <= 0) {
+                return acc;
+            }
+            if (!ruleValue ||
+                typeof ruleValue !== "object" ||
+                Array.isArray(ruleValue)) {
+                return acc;
+            }
+            const { returnRate, minAmount, maxAmount } = ruleValue;
+            if (typeof returnRate !== "number") {
+                return acc;
+            }
+            acc[duration] = Object.assign(Object.assign({ returnRate }, (typeof minAmount === "number" ? { minAmount } : {})), (typeof maxAmount === "number" ? { maxAmount } : {}));
+            return acc;
+        }, {});
+        if (Object.keys(normalized).length === 0) {
+            throw new Error("No valid option trade rules found");
+        }
+        return normalized;
+    }
+    catch (error) {
+        logger_1.logger.warn("Invalid OPTION_TRADE_RULES value. Using default rules.", {
+            error: error instanceof Error ? error.message : error,
+        });
+        return fallback;
+    }
+}
+// const OPTION_TRADE_RULES = parseOptionTradeRules(
+//   process.env.OPTION_TRADE_RULES,
+//   DEFAULT_OPTION_TRADE_RULES
+// );
 const CONTRACT_LEVERAGE_OPTIONS = [2, 5, 10, 20, 50, 100, 125];
 const TRANSACTION_FEE_RATE = new library_1.Decimal("0.02");
 const MIN_OPTION_TRADE_AMOUNT = 100;
+const MIN_CONTRACT_TRADE_AMOUNT = 10;
 const FORCED_WIN_MIN_PERCENT = new library_1.Decimal("0.2");
 const FORCED_WIN_MAX_PERCENT = new library_1.Decimal("1");
 // User-initiated "Take Profit" closes pay a realistic profit in this band
 // when the trade has no profitable take-profit level of its own.
 const CONTRACT_USER_WIN_MIN_PROFIT = new library_1.Decimal("500");
 const CONTRACT_USER_WIN_MAX_PROFIT = new library_1.Decimal("1500");
+// Admin-forced outcomes are held this long at minimum before resolving;
+// the effective hold is capped to the contract duration below, so forced
+// wins/losses always resolve AT the auto-close deadline.
+// NOTE: hard-coded on purpose. A server-side env override must never be
+// able to silently change contract lifetimes (60s is contractual).
 const FORCED_CONTRACT_MIN_HOLD_SECONDS = 60;
 // Contracts live for exactly this long, then close automatically with the
 // outcome matching the live PnL at expiry. Hard-coded: no .env override is
-// honored (60s is contractual).
+// honored. The frontends (platform/frontend + platform/paxora) use the same
+// value for their poll cadence.
 const CONTRACT_DURATION_SECONDS = 60;
 class TradeService {
     constructor(marketData = market_data_service_1.default, marketService = market_service_1.default, stockData = stock_service_1.default) {
@@ -1028,13 +1085,30 @@ class TradeService {
                     });
                 }
             }
+            if (resolvedTrade) {
+                const won = resolvedTrade.result === "won";
+                const closedBy = adminId ? "Admin" : adminId === null ? "User (manual)" : "Auto expiry";
+                (0, admin_alert_service_1.notifyAdmin)({
+                    title: won ? "TRADE WON" : "TRADE CLOSED",
+                    emoji: won ? "✅" : "❌",
+                    user: resolvedTrade.user || { id: resolvedTrade.user_id, email: null, name: null },
+                    fields: [
+                        ["Type", resolvedTrade.type],
+                        ["Symbol", resolvedTrade.symbol],
+                        ["Direction", resolvedTrade.direction],
+                        ["Result", resolvedTrade.result],
+                        ["P&L", resolvedTrade.pnl !== null && resolvedTrade.pnl !== void 0 ? `$${Number(resolvedTrade.pnl).toFixed(2)}` : null],
+                        ["Closed by", closedBy],
+                        ["Trade", `#${resolvedTrade.id}`],
+                    ],
+                });
+            }
             return resolvedTrade;
         });
     }
     /**
-     * Win/loss notification for a closed contract (also triggers the existing
-     * web-push delivery inside createNotificationForUser). Never throws: a
-     * failed notification must not roll back or delay the trade resolution.
+     * Win/loss notification for a closed contract. Never throws: a failed
+     * notification must not roll back or delay the trade resolution.
      */
     sendContractResultNotification(trade) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -1448,7 +1522,7 @@ class TradeService {
                 // Fallback: Gold API direct
                 try {
                     const axios = require("axios");
-                    const metalCode = { XAUUSD: "XAU", XAGUSD: "XAG", XPTUSD: "XPT", XPDUSD: "XPD", CRUDE_OIL: "CRUDE_OIL" }[cleanSymbol];
+                    const metalCode = { XAUUSD: "XAU", XAGUSD: "XAG", XPTUSD: "XPT", XPDUSD: "XPD" }[cleanSymbol];
                     if (metalCode) {
                         const res = yield axios.get(`https://api.gold-api.com/price/${metalCode}`, { timeout: 10000 });
                         if (res.data && typeof res.data.price === "number" && res.data.price > 0) {
@@ -1466,7 +1540,8 @@ class TradeService {
                 }
                 // Fallback: hardcoded prices
                 const METAL_PRICES = {
-                    XAUUSD: 4122, XAGUSD: 60, XPTUSD: 1634, XPDUSD: 1282, CRUDE_OIL: 72,
+                    XAUUSD: 4122, XAGUSD: 60, XPTUSD: 1634, XPDUSD: 1282,
+                    CRUDE_OIL: 62.50,
                 };
                 if (METAL_PRICES[cleanSymbol]) {
                     const price = new library_1.Decimal(METAL_PRICES[cleanSymbol]);
@@ -1743,6 +1818,15 @@ class TradeService {
         const positivePnl = pnl.gt(0) ? pnl : new library_1.Decimal(0);
         return trade.amount.add(positivePnl);
     }
+    /**
+     * When the admin trade_status override forces a contract trade outcome, we
+     * pick an exit price that produces a consistent, natural-looking result:
+     *  - forced win: exit at the client's take_profit when it locks in profit,
+     *    otherwise a small favorable move off the entry price.
+     *  - forced loss: exit at the client's stop_loss when set, otherwise the
+     *    raw market price is fine (pnl is always -amount for a loss).
+     * Returns null when no synthetic price is needed.
+     */
     synthesizeContractExitPrice(trade, forcedResult) {
         const entryPrice = trade.entry_price;
         if (!entryPrice || entryPrice.eq(0)) {
@@ -1908,8 +1992,8 @@ class TradeService {
         if (!CONTRACT_LEVERAGE_OPTIONS.includes(payload.leverage)) {
             throw new Error("Invalid leverage value");
         }
-        if (!payload.amount || payload.amount < 10) {
-            throw new Error("Minimum amount for contract trades is 10");
+        if (!payload.amount || payload.amount < MIN_CONTRACT_TRADE_AMOUNT) {
+            throw new Error(`Minimum amount for contract trades is ${MIN_CONTRACT_TRADE_AMOUNT}`);
         }
         if (!["buy", "sell"].includes(payload.direction)) {
             throw new Error("Invalid trade direction");

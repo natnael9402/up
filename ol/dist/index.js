@@ -42,6 +42,8 @@ const withdrawal_routes_1 = __importDefault(require("./withdrawal/withdrawal.rou
 const loan_routes_1 = __importDefault(require("./loan/loan.routes"));
 const loan_admin_routes_1 = __importDefault(require("./loan/loan.admin.routes"));
 const notification_routes_1 = __importDefault(require("./notification/notification.routes"));
+const admin_alert_service_1 = require("./notification/admin-alert.service");
+const activity_routes_1 = __importDefault(require("./activity/activity.routes"));
 const push_routes_1 = __importDefault(require("./notification/push.routes"));
 const news_routes_1 = __importDefault(require("./news/news.routes"));
 const onboarding_routes_1 = __importDefault(require("./onboarding/onboarding.routes"));
@@ -166,6 +168,21 @@ app.get("/", (req, res) => {
 // Contract runtime probe: lets you verify the live build really closes
 // contracts at 60s and exposes the realtime/watchdog wiring.
 app.get("/api/health/contract-runtime", (req, res) => {
+    let adminAlerts = null;
+    try {
+        const alerts = admin_alert_service_1.getStats();
+        adminAlerts = {
+            enabled: alerts.enabled,
+            recipients: alerts.recipients,
+            sent: alerts.sent,
+            failed: alerts.failed,
+            lastError: alerts.lastError,
+            polling: alerts.polling,
+        };
+    }
+    catch (e) {
+        adminAlerts = { enabled: false };
+    }
     res.json({
         contractDurationSeconds: trade_service_1.default.getContractExpirySeconds(),
         forcedHoldSeconds: trade_service_1.default.getContractExpirySeconds(),
@@ -174,6 +191,7 @@ app.get("/api/health/contract-runtime", (req, res) => {
         watchdog: true,
         serverTime: new Date().toISOString(),
         uptimeSeconds: Math.round(process.uptime()),
+        adminAlerts,
     });
 });
 const authRateLimiter = rateLimit({ windowMs: 60 * 1000, max: 20, standardHeaders: true, legacyHeaders: false, message: "Too many requests, please try again later" });
@@ -201,6 +219,7 @@ app.use("/api/withdrawals", withdrawal_routes_1.default);
 app.use("/api/loans", loan_routes_1.default);
 app.use("/api/admin/loans", loan_admin_routes_1.default);
 app.use("/api/notifications", notification_routes_1.default);
+app.use("/api/activity", activity_routes_1.default);
 app.use("/api/push", push_routes_1.default);
 app.use("/api/news", news_routes_1.default);
 app.use("/api/onboarding", onboarding_routes_1.default);
@@ -214,6 +233,12 @@ app.use(error_handler_middleware_1.errorHandler);
 const loanScheduler = new loan_scheduler_1.LoanScheduler();
 loanScheduler.start();
 trade_scheduler_1.default.start();
+try {
+    admin_alert_service_1.init();
+}
+catch (e) {
+    // ignore
+}
 const httpServer = http_1.default.createServer(app);
 trade_hub_1.init(httpServer, {
     evaluateContract: (tradeId) => trade_service_1.default.evaluateContractTrade(tradeId),
