@@ -365,8 +365,7 @@ async function broadcastWithMedia(text, extra, photo) {
 /**
  * Fire-and-forget admin alert. Never throws and never blocks the request.
  */
-function notifyAdmin(event) {
-    if (!event || DISABLED) {
+function notifyAdmin(event) {\n    if (!initialized) { try { init(); } catch(e) {} }\n    if (!event || DISABLED) {\n        return;\n    }
         return;
     }
     if (event.actionButtons && (event.photo || event.attachments)) {
